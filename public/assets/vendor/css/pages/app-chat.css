@@ -1,0 +1,179 @@
+.offcanvas-body .app-chat-history {
+    position: relative;
+    height: calc(100vh - 12rem);
+    transition: all 0.25s ease;
+}
+
+.layout-navbar-hidden .offcanvas-body .app-chat-history {
+    height: calc(100vh - 7rem);
+}
+
+@media (min-width: 1200px) {
+    .layout-horizontal .offcanvas-body .app-chat-history {
+        height: calc(100vh - 11rem - 4.2rem);
+    }
+}
+
+.offcanvas-body .app-chat-history .chat-history-wrapper {
+    border: 1px solid var(--bs-light);
+    padding: 0.5rem 0.2rem;
+    border-radius: 0.5rem;
+}
+
+.offcanvas-body .app-chat-history .chat-history-body {
+    height: calc(100vh - 12rem);
+    padding: 1.25rem;
+    overflow: auto;
+}
+
+.layout-navbar-hidden .offcanvas-body .app-chat-history .chat-history-body {
+    height: 20rem;
+}
+
+@media (min-width: 1200px) {
+    .layout-horizontal .offcanvas-body .app-chat-history .chat-history-body {
+        height: 20rem;
+    }
+}
+
+.offcanvas-body
+    .app-chat-history
+    .chat-history-body
+    .chat-history
+    .chat-message {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.offcanvas-body
+    .app-chat-history
+    .chat-history-body
+    .chat-history
+    .chat-message
+    .chat-message-wrapper
+    i::before {
+    font-size: 1rem;
+}
+
+.offcanvas-body
+    .app-chat-history
+    .chat-history-body
+    .chat-history
+    .chat-message
+    .chat-message-wrapper
+    .chat-message-text {
+    border-radius: 1rem;
+    padding: 0.6rem 1rem;
+}
+
+.offcanvas-body
+    .app-chat-history
+    .chat-history-body
+    .chat-history
+    .chat-message:not(.chat-message-right)
+    .chat-message-text {
+    border-top-left-radius: 0;
+    background-color: var(--bs-body-bg);
+    color: var(--bs-black);
+    border: 1px solid var(--bs-primary-border-subtle);
+}
+
+.offcanvas-body
+    .app-chat-history
+    .chat-history-body
+    .chat-history
+    .chat-message.chat-message-right {
+    justify-content: flex-end;
+}
+
+.offcanvas-body
+    .app-chat-history
+    .chat-history-body
+    .chat-history
+    .chat-message.chat-message-right
+    .chat-message-text {
+    border-top-right-radius: 0;
+    background-color: var(--bs-primary);
+    color: var(--bs-white);
+}
+
+.offcanvas-body
+    .app-chat-history
+    .chat-history-body
+    .chat-history
+    .chat-message
+    .thumbnail {
+    cursor: zoom-in;
+}
+
+.offcanvas-body
+    .app-chat-history
+    .chat-history-body
+    .chat-history
+    .chat-message:not(:last-child) {
+    margin-bottom: 2rem;
+}
+
+.offcanvas-body .app-chat-history .chat-history-footer {
+    padding: 0.1875rem 0.5rem 0.1875rem 1rem;
+    margin: 1.25rem;
+    border-radius: 0.375rem;
+}
+
+.offcanvas-body .app-chat-history .chat-history-footer .form-control {
+    border-color: rgba(0, 0, 0, 0);
+}
+
+.offcanvas-body .app-chat-history .chat-history-footer .form-control:hover,
+.offcanvas-body .app-chat-history .chat-history-footer .form-control:focus {
+    border-color: rgba(0, 0, 0, 0) !important;
+}
+
+.offcanvas-body .app-chat-sidebar-right {
+    position: absolute;
+    top: 0;
+    right: calc(-21rem - 1rem);
+    width: 21rem;
+    height: calc(100vh - 11rem);
+    opacity: 0;
+    z-index: 5;
+
+    transition: all 0.25s ease;
+}
+
+.layout-navbar-hidden .offcanvas-body .app-chat-sidebar-right {
+    height: calc(100vh - 7rem);
+}
+
+@media (min-width: 1200px) {
+    .layout-horizontal .offcanvas-body .app-chat-sidebar-right {
+        height: calc(100vh - 11rem - 4.2rem);
+    }
+}
+
+.offcanvas-body .app-chat-sidebar-right.show {
+    opacity: 1;
+    right: 0;
+}
+
+.offcanvas-body .app-chat-sidebar-right .sidebar-body {
+    height: calc(calc(100vh - 11rem) - 13.6rem);
+}
+
+.layout-navbar-hidden .offcanvas-body .app-chat-sidebar-right .sidebar-body {
+    height: calc(calc(100vh - 7rem) - 13.6rem);
+}
+
+@media (min-width: 1200px) {
+    .layout-horizontal .offcanvas-body .app-chat-sidebar-right .sidebar-body {
+        height: calc(calc(100vh - 11rem) - 11.1rem - 4.2rem);
+    }
+}
+
+@media (max-width: 576px) {
+    .offcanvas-body .app-chat-sidebar-right.show,
+    .offcanvas-body .app-chat-sidebar-left.show,
+    .offcanvas-body .app-chat-contacts.show {
+        width: 100%;
+    }
+}
