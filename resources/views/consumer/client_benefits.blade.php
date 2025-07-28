@@ -71,53 +71,6 @@
                         </table>
                     </div>
                 </div>
-
-                <!-- Registration Process -->
-                <h2 class="text-center fw-bold mb-4">Consumer Registration Process</h2>
-                <div class="row g-4 text-center justify-content-center">
-                    @php
-                        $steps = [
-                            [
-                                'title' => 'Step 01',
-                                'desc' => 'Visit the website pmsuryaghar.gov.in',
-                                'icon' => 'fas fa-globe',
-                            ],
-                            [
-                                'title' => 'Step 02',
-                                'desc' => 'Click Apply Now → Login as Consumer',
-                                'icon' => 'fas fa-sign-in-alt',
-                            ],
-                            [
-                                'title' => 'Step 03',
-                                'desc' => 'Enter details → Read guidelines → Click verify',
-                                'icon' => 'fas fa-clipboard-check',
-                            ],
-                            ['title' => 'Step 04', 'desc' => 'Enter OTP received on mobile', 'icon' => 'fas fa-key'],
-                            [
-                                'title' => 'Step 05',
-                                'desc' => 'Fill registration form and click Save',
-                                'icon' => 'fas fa-edit',
-                            ],
-                            [
-                                'title' => 'Step 06',
-                                'desc' => 'Apply for subsidy through DISCOM/vendor',
-                                'icon' => 'fas fa-file-signature',
-                            ],
-                        ];
-                    @endphp
-
-                    @foreach ($steps as $step)
-                        <div class="col-sm-6 col-md-4 col-lg-2">
-                            <div class="p-3 border rounded-3 h-100 shadow-sm bg-white">
-                                <div class="mb-2 fs-2 text-primary">
-                                    <i class="{{ $step['icon'] }}"></i>
-                                </div>
-                                <h6 class="fw-semibold">{{ $step['title'] }}</h6>
-                                <p class="small text-muted">{{ $step['desc'] }}</p>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
             </div>
         </div>
     </div>

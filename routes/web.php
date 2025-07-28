@@ -47,6 +47,7 @@ Route::middleware(['CheckAuth'])->group(function () {
     Route::get('/applications/create', [ConsumerApplicationController::class, 'create'])->name('roles.create');
     Route::get('/My-documents', [ConsumerApplicationController::class, 'MydocumentsList'])->name('My-documents');
     Route::get('/customer/benefits', [DashboardController::class, 'benefits'])->name('customer.benefits');
+    Route::get('/My-applications/list', [ConsumerApplicationController::class, 'index'])->name('My-applications.list');
 
     // Role
     Route::get('/role', [RoleController::class, 'index'])->name('role.index');

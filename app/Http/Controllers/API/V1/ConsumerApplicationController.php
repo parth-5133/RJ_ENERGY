@@ -18,6 +18,27 @@ use Illuminate\Http\Request;
 
 class ConsumerApplicationController extends Controller
 {
+
+    public function index()
+    {
+        $currentUser = JWTUtils::getCurrentUserByUuid();
+
+        $applications = SolarProposal::where('user_id', $currentUser->id)->get();
+
+        return ApiResponse::success($applications, ResMessages::RETRIEVED_SUCCESS);
+    }
+
+    public function getDocumentsList()
+    {
+        $currentUser = JWTUtils::getCurrentUserByUuid();
+
+        $applications = SolarProposal::where('user_id', $currentUser->id)->first();
+
+        $documents = SolarDocument::where('proposal_id', $applications->id)->get();
+
+        return ApiResponse::success($documents, ResMessages::RETRIEVED_SUCCESS);
+    }
+
     public function create(StoreUpdateProposalRequest $request)
     {
         $currentUser = JWTUtils::getCurrentUserByUuid();
@@ -64,19 +85,55 @@ class ConsumerApplicationController extends Controller
             'self_declaration',
         ];
 
-        $documentData = ['proposal_id' => $proposal->id];
-
         foreach ($documentFields as $field) {
             if ($request->hasFile($field)) {
-                $documentData[$field] = $request->file($field)->store("solar_documents/{$proposal->id}", 'public');
+                $file = $request->file($field);
+                $path = $file->store("solar_documents/{$proposal->id}", 'public');
+                $originalName = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $fileId = uniqid();
+
+                SolarDocument::create([
+                    'proposal_id'       => $proposal->id,
+                    'relative_path'     => $path,
+                    'file_id'           => $fileId,
+                    'extension'         => $extension,
+                    'file_display_name' => ucfirst(str_replace('_', ' ', $field)),
+                ]);
             }
         }
 
-        SolarDocument::create($documentData);
-
         return ApiResponse::success(null, ResMessages::CREATED_SUCCESS);
     }
+    public function delete($id)
+    {
+        $proposal = SolarProposal::find($id);
+        $loan = SolarLoan::where('proposal_id', $id)->first();
+        $document = SolarDocument::where('proposal_id', $id)->first();
 
+        if ($proposal) {
+            $proposal->delete();
+            $loan->delete();
+            $document->delete();
+            return ApiResponse::success($proposal, ResMessages::DELETED_SUCCESS);
+        } else {
+            return ApiResponse::error($proposal, ResMessages::NOT_FOUND);
+        }
+    }
+
+
+    public function downloadDocument(Request $request)
+    {
+        $id = $request->id;
+        $document = SolarDocument::find($id);
+
+        if ($document) {
+            $fileUrl = asset("storage/{$document->relative_path}");
+            return ApiResponse::success($fileUrl, ResMessages::RETRIEVED_SUCCESS);
+        } else {
+            return ApiResponse::error($document, ResMessages::NOT_FOUND);
+        }
+    }
     public function gettApplictaionId()
     {
         $currentUser = JWTUtils::getCurrentUserByUuid();

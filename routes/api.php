@@ -71,6 +71,10 @@ Route::middleware(['jwt.verify'])->group(function () {
 
 
         Route::post('/applications/create', [ConsumerApplicationController::class, 'create'])->name('Proposal.create');
+        Route::get('/applications/list', [ConsumerApplicationController::class, 'index'])->name('Proposal.list');
+        Route::get('/applications/documents/list', [ConsumerApplicationController::class, 'getDocumentsList'])->name('Proposal.documents.list');
+        Route::post('/applications/delete/{id}', [ConsumerApplicationController::class, 'delete'])->name('Proposal.delete');
+        Route::get('/applications/download/document', [ConsumerApplicationController::class, 'downloadDocument'])->name('Proposal.download.document');
 
         // Role
         Route::get('/roles', [RoleController::class, 'index']);

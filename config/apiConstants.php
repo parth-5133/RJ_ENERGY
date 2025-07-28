@@ -32,8 +32,13 @@ return [
     ],
 
     'PROPOSAL_URLS' => [
+        'PROPOSAL_LIST' => env('APP_URL') . env('API_BASE_PATH') . '/applications/list',
         'PROPOSAL' => env('APP_URL') . env('API_BASE_PATH') . '/applications/create',
+        'PROPOSAL_DOCUMENTS_LIST' => env('APP_URL') . env('API_BASE_PATH') . '/applications/documents/list',
+        'PROPOSAL_DELETE' => env('APP_URL') . env('API_BASE_PATH') . '/applications/delete',
+        'PROPOSAL_DOWNLOAD_DOCUMENT' => env('APP_URL') . env('API_BASE_PATH') . '/applications/download/document',
     ],
+
 
     'API_URLS' => [
         'ROLES' => env('APP_URL') . env('API_BASE_PATH') . '/roles',

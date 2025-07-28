@@ -11,13 +11,11 @@ class SolarDocument extends Model
 
     protected $fillable = [
         'proposal_id',
-        'aadhaar_card',
-        'pan_card',
-        'electricity_bill',
-        'bank_proof',
-        'passport_photo',
-        'ownership_proof',
-        'site_photo',
-        'self_declaration'
+        'relative_path',
+        'file_id',
+        'extension',
+        'file_display_name',
+        'created_at',
+        'updated_at'
     ];
 }

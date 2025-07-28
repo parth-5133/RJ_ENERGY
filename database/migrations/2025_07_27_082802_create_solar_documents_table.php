@@ -14,14 +14,10 @@ return new class extends Migration
         Schema::create('solar_documents', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('proposal_id');
-            $table->string('aadhaar_card')->nullable();
-            $table->string('pan_card')->nullable();
-            $table->string('electricity_bill')->nullable();
-            $table->string('bank_proof')->nullable();
-            $table->string('passport_photo')->nullable();
-            $table->string('ownership_proof')->nullable();
-            $table->string('site_photo')->nullable();
-            $table->string('self_declaration')->nullable();
+            $table->string('relative_path');
+            $table->string('file_id');
+            $table->string('extension');
+            $table->string('file_display_name');
             $table->timestamps();
 
             $table->foreign('proposal_id')->references('id')->on('solar_proposals')->onDelete('cascade');

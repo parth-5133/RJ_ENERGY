@@ -16,10 +16,11 @@ return new class extends Migration
             $table->uuid('uuid')->unique();
             $table->foreignId('role_id')->nullable()->constrained('roles', 'id');
             $table->foreignId('company_id')->nullable()->constrained('companies', 'id');
-            $table->string('employee_id');
-            $table->string('first_name');
+            $table->string('aadhaar')->nullable();
+            $table->string('employee_id')->nullable();
+            $table->string('first_name')->nullable();
             $table->string('middle_name')->nullable();
-            $table->string('last_name');
+            $table->string('last_name')->nullable();
             $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

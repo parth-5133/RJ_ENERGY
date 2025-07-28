@@ -12,7 +12,7 @@
                 </a>
             </div>
             <div class="col-12 col-sm-6 col-md-3">
-                <a href="#" class="btn btn-primary w-100 py-3 fs-6 fw-semibold rounded-3 text-nowrap text-truncate">
+                <a href="{{ route('My-applications.list') }}" class="btn btn-primary w-100 py-3 fs-6 fw-semibold rounded-3 text-nowrap text-truncate">
                     My Applications →
                 </a>
             </div>
