@@ -32,7 +32,7 @@
                 <div class="col-xxl-5 col-md-6 mb-5 mb-xxl-0 text-xxl-start text-lg-center">
                     <h1 class="display-5 fw-bold ls-tight" style="color: #fff">
                         Welcome to <br>
-                        <span style="color: hsl(286, 100%, 73%)">RJ Energy !!</span>
+                        <span style="color: #29a8df">RJ Energy !!</span>
                     </h1>
                     <p class="mb-4 opacity-70" style="color: #fff">
                         Sign-in to access your dashboard

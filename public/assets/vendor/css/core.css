@@ -19,8 +19,8 @@
     --bs-gray-dark: rgba(46, 38, 61, 0.8);
     --bs-gray-25: rgba(46, 38, 61, 0.025);
     --bs-gray-50: rgba(46, 38, 61, 0.06);
-    --bs-primary: #891ab4;
-    --bs-secondary: #8a8d93;
+    --bs-primary: #29a8df;
+    --bs-secondary: #fbb04d;
     --bs-success: #56ca00;
     --bs-info: #16b1ff;
     --bs-warning: #ffb400;
@@ -7677,7 +7677,7 @@ fieldset:disabled .btn {
     display: flex;
     align-items: center;
     padding: var(--bs-offcanvas-padding-y) var(--bs-offcanvas-padding-x);
-    background-color: #f9eaff;
+    background-color: #e1f4fb;
     z-index: 2;
 }
 
@@ -16486,8 +16486,8 @@ button.list-group-item-gray.active {
 
 .card-header,
 .card-footer {
-    background-color: #f7e2ff;
-    border-color: rgba(46, 38, 61, 0.075);
+    background-color: #e1f4fb;
+    border-color: #e1f4fb;
 }
 
 .card hr {
@@ -44876,7 +44876,7 @@ session_time_out h3, session_time_out h3 a {
     }
 
     .journey-step.active:not(:last-child)::after {
-        background-color: #6f42c1;
+        background-color: #fbb04d;
     }
 
     .journey-number {
@@ -44893,7 +44893,7 @@ session_time_out h3, session_time_out h3 a {
     }
 
     .journey-step.active .journey-number {
-        background-color: #6f42c1;
+        background-color: #29a8df;
     }
 
     .journey-label {
@@ -44922,4 +44922,3 @@ session_time_out h3, session_time_out h3 a {
             font-size: 11px;
         }
     }
-    
