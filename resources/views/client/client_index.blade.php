@@ -8,25 +8,29 @@
                 </div>
                 @if ($permissions['canAdd'])
                     <button id="btnAdd" type="submit" class="btn btn-primary waves-effect waves-light"
-                        onClick="fnAddEdit(this, '{{ url('user/create') }}', 0, 'Add Client')">
-                        <span class="tf-icons mdi mdi-plus">&nbsp;</span>Add Client
+                        onClick="fnAddEdit(this, '{{ url('user/create') }}', 0, 'Add New Customer',true)">
+                        <span class="tf-icons mdi mdi-plus">&nbsp;</span>Adds New Customer
                     </button>
                 @endif
             </div>
             <div class="col-12 d-flex justify-content-between align-items-center">
-                <div class="col-12 d-flex align-items-center flex-nowrap px-5 py-4 justify-content-center justify-content-sm-end">
+                <div
+                    class="col-12 d-flex align-items-center flex-nowrap px-5 py-4 justify-content-center justify-content-sm-end">
                     <a href="javascript:void(0)"
-                        class="btn btn-sm btn-danger waves-effect waves-light mb-3 me-2 mb-xxl-0 mb-sm-0 rounded d-flex flex-wrap" id="btnPdf">
+                        class="btn btn-sm btn-danger waves-effect waves-light mb-3 me-2 mb-xxl-0 mb-sm-0 rounded d-flex flex-wrap"
+                        id="btnPdf">
                         <i class="mdi mdi-file-pdf-box me-1"></i> Export PDF
                     </a>
 
                     <a href="javascript:void(0)"
-                        class="btn btn-sm btn-info waves-effect waves-light mb-3 me-2 mb-xxl-0 mb-sm-0 rounded d-flex flex-wrap" id="btnCsv">
+                        class="btn btn-sm btn-info waves-effect waves-light mb-3 me-2 mb-xxl-0 mb-sm-0 rounded d-flex flex-wrap"
+                        id="btnCsv">
                         <i class="mdi mdi-file-delimited-outline me-1"></i> Export CSV
                     </a>
 
                     <a href="javascript:void(0)"
-                        class="btn btn-sm btn-success waves-effect waves-light mb-3 mb-xxl-0 mb-sm-0 rounded d-flex flex-wrap" id="btnExcel">
+                        class="btn btn-sm btn-success waves-effect waves-light mb-3 mb-xxl-0 mb-sm-0 rounded d-flex flex-wrap"
+                        id="btnExcel">
                         <i class="mdi mdi-file-excel-box me-1"></i> Export Excel
                     </a>
                 </div>

@@ -57,9 +57,8 @@ class DashboardController extends Controller
         }
 
         return match ($roleCode) {
-
             $this->clientRoleCode => view('dashboard.client_dashboard', compact('name', 'profileImg', 'selectedProjects', 'selectedTasks', 'applicationId')),
-            default => view('dashboard.employee_dashboard', compact('name', 'profileImg', 'selectedProjects', 'selectedTasks', 'birthdayData', 'employeesList')),
+            default => view('dashboard.employee_dashboard', compact('name', 'profileImg', 'birthdayData', 'employeesList')),
         };
     }
     public function getTotalProjects()

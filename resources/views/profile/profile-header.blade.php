@@ -26,19 +26,7 @@
                         class="d-flex align-items-md-center align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-5 flex-md-row flex-column gap-4">
                         <div class="user-profile-info">
                             <h4 class="text-primary mb-2 mt-lg-6">{{ $name ?? '' }}</h4>
-                            <ul
-                                class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-4">
-                                <li class="list-inline-item">
-                                    <i class="mdi mdi-briefcase-variant-outline mdi-24px me-1"></i>
-                                    <span class="fw-medium" id="job">{{ $job_title ?? '' }}</span>
-                                </li>
-                                <li class="list-inline-item">
-                                    <i class="mdi mdi-calendar-outline mdi-24px me-1"></i><span class="fw-medium">{{ $date_of_joining ?? '' }}
-                                    </span>
-                                </li>
-                            </ul>
                         </div>
-                        <div class="text-primary">Employee Code: <span>{{ $employee_id ?? '' }}</span></div>
                     </div>
                 </div>
             </div>
