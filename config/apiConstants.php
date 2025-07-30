@@ -9,6 +9,14 @@ return [
         'CHANNEL_PARTNERS_UPDATE' => env('APP_URL') . env('API_BASE_PATH') . '/channel-partners/update',
         'CHANNEL_PARTNERS_DELETE' => env('APP_URL') . env('API_BASE_PATH') . '/channel-partners/delete',
     ],
+    
+    'MANAGE_BANK_URLS' => [
+        'MANAGE_BANK' => env('APP_URL') . env('API_BASE_PATH') . '/manage-bank',
+        'MANAGE_BANK_STORE' => env('APP_URL') . env('API_BASE_PATH') . '/manage-bank/create',
+        'MANAGE_BANK_VIEW' => env('APP_URL') . env('API_BASE_PATH') . '/manage-bank/view',
+        'MANAGE_BANK_UPDATE' => env('APP_URL') . env('API_BASE_PATH') . '/manage-bank/update',
+        'MANAGE_BANK_DELETE' => env('APP_URL') . env('API_BASE_PATH') . '/manage-bank/delete',
+    ],
 
     'AUTH_URL' => [
 

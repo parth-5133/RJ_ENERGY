@@ -25,10 +25,8 @@ class ChannelPartnersController extends Controller
     }
     public function store(StoreChannelPartnerRequest $request)
     {
-        $currentUser = JWTUtils::getCurrentUserByUuid();
-
         $Data = $request->all();
-        $Data['created_by'] = $currentUser->id;
+        $Data['created_at'] = now();
 
         if ($request->hasFile('logo_url')) {
             $Data['logo_url'] = '/storage/' . $request->file('logo_url')->store('channel_partners/logos', 'public');

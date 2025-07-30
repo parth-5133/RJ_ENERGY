@@ -35,6 +35,7 @@ use App\Http\Controllers\API\v1\EmployeeResignationController;
 use App\Http\Controllers\API\V1\NotificationSettingController;
 use App\Http\Controllers\API\V1\ConsumerApplicationController;
 use App\Http\Controllers\API\V1\ChannelPartnersController;
+use App\Http\Controllers\API\V1\ManageBankController;
 
 
 Route::prefix('v1')->group(function () {
@@ -72,6 +73,14 @@ Route::middleware(['jwt.verify'])->group(function () {
         Route::post('/channel-partners/delete/{id}', [ChannelPartnersController::class, 'delete']);
         Route::post('/channel-partners/upload-documents', [ChannelPartnersController::class, 'uploadDocuments']);
         Route::post('/channel-partners/delete-documents/{id}', [ChannelPartnersController::class, 'deleteDocuments']);
+
+        // Manage Bank
+        Route::get('/manage-bank', [ManageBankController::class, 'index']);
+        Route::post('/manage-bank/create', [ManageBankController::class, 'store']);
+        Route::get('/manage-bank/view', [ManageBankController::class, 'view']);
+        Route::post('/manage-bank/update', [ManageBankController::class, 'update']);
+        Route::post('/manage-bank/delete/{id}', [ManageBankController::class, 'delete']);
+
 
         Route::post('/set-year-filter', [AuthController::class, 'setYearFilter'])->name('set.year.filter');
         Route::post('/set-company-filter', [AuthController::class, 'setCompaniesFilter'])->name('set.companies.filter');

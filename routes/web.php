@@ -30,6 +30,7 @@ use App\Http\Controllers\Web\LayoutController;
 use App\Http\Controllers\Web\EmployeeResignationController;
 use App\Http\Controllers\Web\ConsumerApplicationController;
 use App\Http\Controllers\Web\ChannelPartnersController;
+use App\Http\Controllers\Web\ManageBankController;
 
 
 Route::group(['middleware' => 'guest'], function () {
@@ -169,6 +170,10 @@ Route::middleware(['CheckAuth'])->group(function () {
     // Channel Partners
     Route::get('/channel-partners', [ChannelPartnersController::class, 'index'])->name('channel-partners');
     Route::get('/channel-partners/create', [ChannelPartnersController::class, 'create'])->name('channel-partners.create');
+
+    // Manage Bank
+    Route::get('/manage-bank', [ManageBankController::class, 'index'])->name('manage-bank');
+    Route::get('/manage-bank/create', [ManageBankController::class, 'create'])->name('manage-bank.create');
 });
 
 Route::get('/401', [ErrorController::class, 'index'])->name('unauthorized.401');
