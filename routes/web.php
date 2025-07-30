@@ -31,6 +31,7 @@ use App\Http\Controllers\Web\EmployeeResignationController;
 use App\Http\Controllers\Web\ConsumerApplicationController;
 use App\Http\Controllers\Web\ChannelPartnersController;
 use App\Http\Controllers\Web\ManageBankController;
+use App\Http\Controllers\Web\InstallersController;
 
 
 Route::group(['middleware' => 'guest'], function () {
@@ -174,6 +175,10 @@ Route::middleware(['CheckAuth'])->group(function () {
     // Manage Bank
     Route::get('/manage-bank', [ManageBankController::class, 'index'])->name('manage-bank');
     Route::get('/manage-bank/create', [ManageBankController::class, 'create'])->name('manage-bank.create');
+
+    // Installers
+    Route::get('/installers', [InstallersController::class, 'index'])->name('installers');
+    Route::get('/installers/create', [InstallersController::class, 'create'])->name('installers.create');
 });
 
 Route::get('/401', [ErrorController::class, 'index'])->name('unauthorized.401');

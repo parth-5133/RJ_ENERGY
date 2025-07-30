@@ -36,6 +36,7 @@ use App\Http\Controllers\API\V1\NotificationSettingController;
 use App\Http\Controllers\API\V1\ConsumerApplicationController;
 use App\Http\Controllers\API\V1\ChannelPartnersController;
 use App\Http\Controllers\API\V1\ManageBankController;
+use App\Http\Controllers\API\V1\InstallersController;
 
 
 Route::prefix('v1')->group(function () {
@@ -80,6 +81,14 @@ Route::middleware(['jwt.verify'])->group(function () {
         Route::get('/manage-bank/view', [ManageBankController::class, 'view']);
         Route::post('/manage-bank/update', [ManageBankController::class, 'update']);
         Route::post('/manage-bank/delete/{id}', [ManageBankController::class, 'delete']);
+
+        // INSTALLERS
+        Route::get('/installers', [InstallersController::class, 'index']);
+        Route::post('/installers/create', [InstallersController::class, 'store']);
+        Route::get('/installers/view', [InstallersController::class, 'view']);
+        Route::post('/installers/update', [InstallersController::class, 'update']);
+        Route::post('/installers/delete/{id}', [InstallersController::class, 'delete']);
+
 
 
         Route::post('/set-year-filter', [AuthController::class, 'setYearFilter'])->name('set.year.filter');
