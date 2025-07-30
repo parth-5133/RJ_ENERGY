@@ -2,6 +2,14 @@
 
 return [
 
+    'CHANNEL_PARTNERS_URLS' => [
+        'CHANNEL_PARTNERS' => env('APP_URL') . env('API_BASE_PATH') . '/channel-partners',
+        'CHANNEL_PARTNERS_STORE' => env('APP_URL') . env('API_BASE_PATH') . '/channel-partners/create',
+        'CHANNEL_PARTNERS_VIEW' => env('APP_URL') . env('API_BASE_PATH') . '/channel-partners/view',
+        'CHANNEL_PARTNERS_UPDATE' => env('APP_URL') . env('API_BASE_PATH') . '/channel-partners/update',
+        'CHANNEL_PARTNERS_DELETE' => env('APP_URL') . env('API_BASE_PATH') . '/channel-partners/delete',
+    ],
+
     'AUTH_URL' => [
 
         'LOGIN' => env('APP_URL') . env('API_BASE_PATH') . '/login',

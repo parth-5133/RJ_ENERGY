@@ -29,6 +29,7 @@ use App\Http\Controllers\Web\ShiftController;
 use App\Http\Controllers\Web\LayoutController;
 use App\Http\Controllers\Web\EmployeeResignationController;
 use App\Http\Controllers\Web\ConsumerApplicationController;
+use App\Http\Controllers\Web\ChannelPartnersController;
 
 
 Route::group(['middleware' => 'guest'], function () {
@@ -164,6 +165,10 @@ Route::middleware(['CheckAuth'])->group(function () {
     // sift
     Route::get('/shift', [ShiftController::class, 'index'])->name('shift');
     Route::get('/shift/create', [ShiftController::class, 'create'])->name('shift.create');
+
+    // Channel Partners
+    Route::get('/channel-partners', [ChannelPartnersController::class, 'index'])->name('channel-partners');
+    Route::get('/channel-partners/create', [ChannelPartnersController::class, 'create'])->name('channel-partners.create');
 });
 
 Route::get('/401', [ErrorController::class, 'index'])->name('unauthorized.401');
