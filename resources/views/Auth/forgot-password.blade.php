@@ -8,7 +8,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Forgot Password | Skysphere Infosoft LLP</title>
+    <title>Forgot Password | RJ ENERGY</title>
 
     <meta name="description" content="" />
     <!-- Fonts -->

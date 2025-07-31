@@ -76,7 +76,7 @@ Route::middleware(['jwt.verify'])->group(function () {
         Route::post('/channel-partners/delete-documents/{id}', [ChannelPartnersController::class, 'deleteDocuments']);
 
         // Manage Bank
-        Route::get('/manage-bank', [ManageBankController::class, 'index']);
+        Route::get('/manage-bank', [ManageBankController::class, 'index'])->name('manage-bank');
         Route::post('/manage-bank/create', [ManageBankController::class, 'store']);
         Route::get('/manage-bank/view', [ManageBankController::class, 'view']);
         Route::post('/manage-bank/update', [ManageBankController::class, 'update']);

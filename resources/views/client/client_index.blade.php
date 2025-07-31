@@ -8,7 +8,7 @@
                 </div>
                 @if ($permissions['canAdd'])
                     <button id="btnAdd" type="submit" class="btn btn-primary waves-effect waves-light"
-                        onClick="fnAddEdit(this, '{{ url('user/create') }}', 0, 'Add New Customer',true)">
+                        onClick="fnAddEdit(this, '{{ url('/client/create') }}', 0, 'Add New Customer',true)">
                         <span class="tf-icons mdi mdi-plus">&nbsp;</span>Adds New Customer
                     </button>
                 @endif

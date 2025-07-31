@@ -153,9 +153,6 @@ Route::middleware(['CheckAuth'])->group(function () {
 
     Route::get('/notifications-settings', [AppSettingsController::class, 'notificationsIndex'])->name('notifications-settings');
 
-    // client
-    Route::get('/client', [ClientController::class, 'index'])->name('client');
-
     // department
     Route::get('/department', [DepartmentController::class, 'index'])->name('departments');
     Route::get('/department/create', [DepartmentController::class, 'create'])->name('departments.create');
@@ -179,6 +176,10 @@ Route::middleware(['CheckAuth'])->group(function () {
     // Installers
     Route::get('/installers', [InstallersController::class, 'index'])->name('installers');
     Route::get('/installers/create', [InstallersController::class, 'create'])->name('installers.create');
+
+    // client
+    Route::get('/client', [ClientController::class, 'index'])->name('client');
+    Route::get('/client/create', [ClientController::class, 'create'])->name('customer.create');
 });
 
 Route::get('/401', [ErrorController::class, 'index'])->name('unauthorized.401');
