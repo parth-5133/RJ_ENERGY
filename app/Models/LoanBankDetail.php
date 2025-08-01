@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class LoanBankDetail extends Model
 {
     use HasFactory, SoftDeletes;
-
     protected $fillable = [
         'customer_id',
         'bank_id',

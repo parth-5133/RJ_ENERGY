@@ -1,6 +1,6 @@
 <form action="javascript:void(0)" id="customerForm" name="customerForm" class="form-horizontal" method="POST"
     enctype="multipart/form-data">
-    <input type="hidden" id="userId" value="{{ $userId ?? '' }}">
+    <input type="hidden" id="clientId" value="{{ $clientId ?? '' }}">
 
     <!-- Section 1: Customer Basic Details -->
     <h5 class="fw-bold mb-3 mt-4">👤 Customer Basic Details</h5>
@@ -8,15 +8,14 @@
         <!-- Name -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
-                <input type="text" class="form-control" name="customer_name" id="customer_name" placeholder="Name"
-                    required />
+                <input type="text" class="form-control" name="customer_name" id="customer_name" placeholder="Name" />
                 <label for="customer_name">Name <span class="text-danger">*</span></label>
             </div>
         </div>
         <!-- Age -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
-                <input type="number" class="form-control" name="age" id="age" placeholder="Age" required />
+                <input type="number" class="form-control" name="age" id="age" placeholder="Age" />
                 <label for="age">Age <span class="text-danger">*</span></label>
             </div>
         </div>
@@ -24,7 +23,7 @@
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="tel" class="form-control" name="mobile" id="mobile" maxlength="10"
-                    placeholder="Aadhar-linked Mobile" required />
+                    placeholder="Aadhar-linked Mobile" />
                 <label for="mobile">Aadhar-linked Mobile <span class="text-danger">*</span></label>
             </div>
         </div>
@@ -41,8 +40,7 @@
         <!-- Aadhar -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
-                <input type="text" class="form-control" name="aadhar" id="aadhar" placeholder="Aadhar Number"
-                    required />
+                <input type="text" class="form-control" name="aadhar" id="aadhar" placeholder="Aadhar Number" />
                 <label for="aadhar">Aadhar Number <span class="text-danger">*</span></label>
             </div>
         </div>
@@ -57,14 +55,14 @@
     <!-- Section 3: 🧾 Quotation – By Accountant OR Registrar -->
     <h5 class="fw-bold mb-3 mt-4">🧾 Quotation</h5>
     <div class="row">
-        <!-- Quotation Required -->
+        <!-- Quotation  -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
-                <select class="form-select" name="quotation_required" id="quotation_required" required>
+                <select class="form-select" name="quotation_" id="quotation_">
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
                 </select>
-                <label for="quotation_required">Is Quotation Required<span class="text-danger">*</span></label>
+                <label for="quotation_">Is Quotation <span class="text-danger">*</span></label>
             </div>
         </div>
         <!-- Quotation Amount -->
@@ -114,7 +112,7 @@
         <!-- Roof Type -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
-                <select class="form-select" name="roof_type" id="roof_type" required>
+                <select class="form-select" name="roof_type" id="roof_type">
                     <option value="">Select Roof Type</option>
                     <option value="RCC">RCC</option>
                     <option value="Tin">Tin</option>
@@ -127,15 +125,15 @@
         <!-- Roof Area -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
-                <input type="number" class="form-control" name="roof_area" id="roof_area" placeholder="Roof Area"
-                    required />
+                <input type="number" class="form-control" name="roof_area" id="roof_area"
+                    placeholder="Roof Area" />
                 <label for="roof_area">Roof Area (sq. ft) <span class="text-danger">*</span></label>
             </div>
         </div>
         <!-- Usage Pattern -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
-                <select class="form-select" name="usage_pattern" id="usage_pattern" required>
+                <select class="form-select" name="usage_pattern" id="usage_pattern">
                     <option value="">Select Usage Pattern</option>
                     <option value="Domestic">Domestic</option>
                     <option value="Commercial">Commercial</option>
@@ -157,7 +155,7 @@
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="text" class="form-control" name="solar_company" id="solar_company"
-                    placeholder="Solar Company Name" required />
+                    placeholder="Solar Company Name" />
                 <label for="solar_company">Solar Company <span class="text-danger">*</span></label>
             </div>
         </div>
@@ -165,7 +163,7 @@
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="text" class="form-control" name="inverter_company" id="inverter_company"
-                    placeholder="Inverter Company Name" required />
+                    placeholder="Inverter Company Name" />
                 <label for="inverter_company">Inverter Company <span class="text-danger">*</span></label>
             </div>
         </div>
@@ -175,7 +173,7 @@
         <!-- Subsidy -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
-                <select class="form-select" name="subsidy_claimed" id="subsidy_claimed" required>
+                <select class="form-select" name="subsidy_claimed" id="subsidy_claimed">
                     <option value="">Select Option</option>
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
@@ -200,21 +198,21 @@
         </div>
     </div>
     <div class="row">
-        <!-- Loan Required -->
+        <!-- Loan  -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
-                <select class="form-select" name="loan_required" id="loan_required" required>
-                    <option value="">Loan Required?</option>
+                <select class="form-select" name="loan_" id="loan_">
+                    <option value="">Loan ?</option>
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
                 </select>
-                <label for="loan_required">Loan Required? <span class="text-danger">*</span></label>
+                <label for="loan_">Loan ? <span class="text-danger">*</span></label>
             </div>
         </div>
         <!-- Payment Mode -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
-                <select class="form-select" name="payment_mode" id="payment_mode" required>
+                <select class="form-select" name="payment_mode" id="payment_mode">
                     <option value="">Select Payment Mode</option>
                     <option value="cash">Cash</option>
                     <option value="loan">Loan</option>
@@ -241,7 +239,7 @@
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="text" class="form-control" name="consumer_no" id="consumer_no"
-                    placeholder="Consumer No." required />
+                    placeholder="Consumer No." />
                 <label for="consumer_no">Light Bill No. / Consumer No. <span class="text-danger">*</span></label>
             </div>
         </div>
@@ -257,7 +255,7 @@
     <div class="row">
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
-                <select class="form-select" name="channel_partner" id="channel_partner" required>
+                <select class="form-select" name="channel_partner" id="channel_partner">
                     <option value="">Select Channel Partner</option>
                     <!-- Dynamic options -->
                 </select>
@@ -266,8 +264,7 @@
         </div>
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
-                <input type="date" class="form-control" name="registration_date" id="registration_date"
-                    required />
+                <input type="date" class="form-control" name="registration_date" id="registration_date" />
                 <label for="registration_date">Registration Date <span class="text-danger">*</span></label>
             </div>
         </div>
@@ -275,7 +272,7 @@
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="number" class="form-control" name="solar_total_amount" id="solar_total_amount"
-                    placeholder="Total Amount" required />
+                    placeholder="Total Amount" />
                 <label for="solar_total_amount">Solar Total Amount (₹) <span class="text-danger">*</span></label>
             </div>
         </div>
@@ -284,7 +281,7 @@
         <!-- Customer Address -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
-                <select class="form-select" name="installers" id="installers" required>
+                <select class="form-select" name="installers" id="installers">
                     <option value="">Select Installers</option>
                 </select>
                 <label for="installers">Installers<span class="text-danger">*</span></label>
@@ -296,7 +293,7 @@
         <div class="col-md-8 mb-4">
             <div class="form-floating form-floating-outline">
                 <textarea class="form-control" name="customer_address" id="customer_address" placeholder="Enter Address"
-                    style="height: 100px;" required></textarea>
+                    style="height: 100px;"></textarea>
                 <label for="customer_address">Customer Address (Current & Residential) <span
                         class="text-danger">*</span></label>
             </div>
@@ -444,6 +441,7 @@
     </div>
 </form>
 <script type="text/javascript">
+    var clientId = $("#clientId").val();
     $(document).ready(function() {
         // Declare a variable to hold bank data
         var bankDataMap = {};
@@ -532,5 +530,143 @@
                     });
                 }
             });
+    });
+
+    // jQuery Validation Setup
+    $("#customerForm").validate({
+        rules: {
+            name: {
+                required: true,
+                maxlength: 50,
+            },
+            age: {
+                required: true,
+                digits: true,
+                minlength: 1,
+                maxlength: 3
+            },
+            mobile: {
+                required: true,
+                digits: true,
+                minlength: 10,
+                maxlength: 15
+            },
+            alternate_mobile: {
+                required: false,
+                digits: true,
+                minlength: 10,
+                maxlength: 15
+            },
+            aadhar: {
+                required: true,
+                digits: true,
+                minlength: 12,
+                maxlength: 12
+            },
+            pan: {
+                required: true,
+                minlength: 10,
+                maxlength: 10
+            },
+            quotation_: {
+                required: true,
+            },
+            quotation_amount: {
+                required: true,
+                number: true,
+            },
+            quotation_date: {
+                required: true,
+                date: true,
+            },
+            quotation_status: {
+                required: true,
+            },
+            quotation_by: {
+                required: true,
+            }
+        },
+        messages: {
+            name: {
+                required: "Name is required ",
+                maxlength: "Name cannot be more than 50 characters",
+            },
+            age: {
+                required: "Age is required ",
+                digits: "Please enter a valid age",
+                minlength: "Age must be at least 1 year old",
+                maxlength: "Age cannot exceed 3 digits",
+            },
+            mobile: {
+                required: "Mobile is required ",
+                digits: "Please enter a valid mobile number",
+                minlength: "Mobile number must be at least 10 digits long",
+                maxlength: "Mobile number must be at most 15 digits long"
+            },
+            alternate_mobile: {
+                digits: "Please enter a valid mobile number",
+                minlength: "Mobile number must be at least 10 digits long",
+                maxlength: "Mobile number must be at most 15 digits long"
+            },
+            aadhar: {
+                required: "Aadhar is required ",
+                digits: "Please enter a valid Aadhar number",
+                minlength: "Aadhar number must be 12 digits long",
+                maxlength: "Aadhar number must be 12 digits long"
+            },
+            pan: {
+                required: "PAN is required ",
+                minlength: "PAN number must be 10 characters long",
+                maxlength: "PAN number must be 10 characters long"
+            },
+            quotation_: {
+                required: "Quotation  is required ",
+            },
+            quotation_amount: {
+                required: "Quotation Amount is required ",
+                number: "Please enter a valid number",
+            },
+            quotation_date: {
+                required: "Quotation Date is required ",
+                date: "Please enter a valid date",
+            },
+            quotation_status: {
+                required: "Quotation Status is required ",
+            },
+            quotation_by: {
+                required: "Quotation By is required ",
+            }
+        },
+        errorPlacement: function(error, element) {
+            var errorId = element.attr("name") +
+                "-error";
+            $("#" + errorId).text(error.text());
+            $("#" + errorId).show();
+            element.addClass("is-invalid");
+        },
+        success: function(label, element) {
+            var errorId = $(element).attr("name") + "-error";
+            $("#" + errorId).text("");
+            $(element).removeClass("is-invalid");
+        },
+        submitHandler: function(form) {
+            event.preventDefault();
+
+            var formData = new FormData(form);
+
+            var storeUrl = "{{ config('apiConstants.CLIENT_URLS.CLIENT_STORE') }}";
+            var updateUrl = "{{ config('apiConstants.CLIENT_URLS.CLIENT_UPDATE') }}";
+            var url = clientId > 0 ? updateUrl : storeUrl;
+            fnCallAjaxHttpPostEventWithoutJSON(url, formData, true, true, function(response) {
+                if (response.status === 200) {
+                    bootstrap.Offcanvas.getInstance(document.getElementById(
+                        'commonOffcanvas')).hide();
+                    $('#grid').DataTable().ajax.reload();
+                    ShowMsg("bg-success", response.message);
+                } else {
+                    ShowMsg("bg-warning", 'The record could not be processed.');
+                }
+            });
+        }
     });
 </script>

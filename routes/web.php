@@ -32,6 +32,7 @@ use App\Http\Controllers\Web\ConsumerApplicationController;
 use App\Http\Controllers\Web\ChannelPartnersController;
 use App\Http\Controllers\Web\ManageBankController;
 use App\Http\Controllers\Web\InstallersController;
+use App\Http\Controllers\Web\QuotesController;
 
 
 Route::group(['middleware' => 'guest'], function () {
@@ -176,6 +177,10 @@ Route::middleware(['CheckAuth'])->group(function () {
     // Installers
     Route::get('/installers', [InstallersController::class, 'index'])->name('installers');
     Route::get('/installers/create', [InstallersController::class, 'create'])->name('installers.create');
+
+    // Quotations
+    Route::get('/quotation-list', [QuotesController::class, 'index'])->name('quotes');
+    Route::get('/quotation/create', [QuotesController::class, 'create'])->name('quotes.create');
 
     // client
     Route::get('/client', [ClientController::class, 'index'])->name('client');

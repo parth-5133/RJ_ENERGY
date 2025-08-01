@@ -37,6 +37,7 @@ use App\Http\Controllers\API\V1\ConsumerApplicationController;
 use App\Http\Controllers\API\V1\ChannelPartnersController;
 use App\Http\Controllers\API\V1\ManageBankController;
 use App\Http\Controllers\API\V1\InstallersController;
+use App\Http\Controllers\API\V1\QuotationController;
 
 
 Route::prefix('v1')->group(function () {
@@ -89,7 +90,20 @@ Route::middleware(['jwt.verify'])->group(function () {
         Route::post('/installers/update', [InstallersController::class, 'update']);
         Route::post('/installers/delete/{id}', [InstallersController::class, 'delete']);
 
+        // Quotations
+        Route::get('/quotation', [QuotationController::class, 'index']);
+        Route::post('/quotation/create', [QuotationController::class, 'store']);
+        Route::get('/quotation/view', [QuotationController::class, 'view']);
+        Route::post('/quotation/update', [QuotationController::class, 'update']);
+        Route::post('/quotation/delete/{id}', [QuotationController::class, 'delete']);
 
+        // Client Application
+        // Route::get('/client', [ClientController::class, 'index']);
+        Route::get('/client-application', [ClientController::class, 'index']);
+        Route::post('/client-application/create', [ClientController::class, 'store']);
+        Route::get('/client-application/view', [ClientController::class, 'view']);
+        Route::post('/client-application/update', [ClientController::class, 'update']);
+        Route::post('/client-application/delete/{id}', [ClientController::class, 'delete']);
 
         Route::post('/set-year-filter', [AuthController::class, 'setYearFilter'])->name('set.year.filter');
         Route::post('/set-company-filter', [AuthController::class, 'setCompaniesFilter'])->name('set.companies.filter');
@@ -268,8 +282,7 @@ Route::middleware(['jwt.verify'])->group(function () {
         Route::get('/kanban/view', [KanbanController::class, 'viewKanban']);
         Route::post('/kanban/update', [KanbanController::class, 'kanbanUpdateBoard']);
 
-        // Clients
-        Route::get('/client', [ClientController::class, 'index']);
+
 
         // Employee
         Route::get('/employees', [EmployeeController::class, 'index'])->name('employee');

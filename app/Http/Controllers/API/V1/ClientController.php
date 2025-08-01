@@ -48,4 +48,25 @@ class ClientController extends Controller
 
         return ApiResponse::success($users, ResMessages::RETRIEVED_SUCCESS);
     }
+    public function store(Request $request)
+    {
+        dd($request);
+
+        $currentUser = JWTUtils::getCurrentUserByUuid();
+        $CompanyId = GetCompanyId::GetCompanyId();
+
+        if ($CompanyId == null) {
+            return ApiResponse::error(ResMessages::COMPANY_NOT_FOUND, 404);
+        }
+
+        $roleData = $request->all();
+        $roleData['created_by'] = $currentUser->id;
+        $roleData['created_at'] = now();
+        $roleData['updated_at'] = null;
+        $roleData['company_id'] = $CompanyId;
+
+        $role = Role::create($roleData);
+
+        return ApiResponse::success($role, ResMessages::CREATED_SUCCESS);
+    }
 }

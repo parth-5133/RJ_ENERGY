@@ -1,8 +1,7 @@
 @extends('layouts.layout')
 @section('content')
-    <div class="container-fluid flex-grow-1 container-p-y">
+    {{-- <div class="container-fluid flex-grow-1 container-p-y">
 
-        {{-- CTA BOXES --}}
         <div class="row mb-4 g-3">
             <div class="col-12 col-sm-6 col-md-3">
                 <a href="#"
@@ -30,7 +29,6 @@
             </div>
         </div>
 
-        {{-- APPLICATION JOURNEY --}}
         <div class="card mb-4">
             <div class="card-body">
                 <h5 class="mb-4">Application Journey</h5>
@@ -79,7 +77,6 @@
             </div>
         </div>
 
-        {{-- DASHBOARD CARDS --}}
         <div class="row gy-4">
             <div class="col-md-4">
                 <div class="card border shadow-sm h-100">
@@ -112,15 +109,5 @@
             </div>
 
         </div>
-    </div>
-    {{-- <script type="text/javascript">
-        $(document).ready(function() {
-            // Function to open the application form
-            function openapplyfrom() {
-                window.location.href = "{{ route('application.create') }}";
-            }
-
-            window.openapplyfrom = openapplyfrom;
-        });
-    </script> --}}
+    </div> --}}
 @endsection

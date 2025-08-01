@@ -25,6 +25,22 @@ return [
         'INSTALLERS_UPDATE' => env('APP_URL') . env('API_BASE_PATH') . '/installers/update',
         'INSTALLERS_DELETE' => env('APP_URL') . env('API_BASE_PATH') . '/installers/delete',
     ],
+    
+    'QUOTATION_URLS' => [
+        'QUOTATION' => env('APP_URL') . env('API_BASE_PATH') . '/quotation',
+        'QUOTATION_STORE' => env('APP_URL') . env('API_BASE_PATH') . '/quotation/create',
+        'QUOTATION_VIEW' => env('APP_URL') . env('API_BASE_PATH') . '/quotation/view',
+        'QUOTATION_UPDATE' => env('APP_URL') . env('API_BASE_PATH') . '/quotation/update',
+        'QUOTATION_DELETE' => env('APP_URL') . env('API_BASE_PATH') . '/quotation/delete',
+    ],
+
+    'CLIENT_URLS' => [
+        'CLIENT' => env('APP_URL') . env('API_BASE_PATH') . '/client-application',
+        'CLIENT_STORE' => env('APP_URL') . env('API_BASE_PATH') . '/client-application/create',
+        'CLIENT_VIEW' => env('APP_URL') . env('API_BASE_PATH') . '/client-application/view',
+        'CLIENT_UPDATE' => env('APP_URL') . env('API_BASE_PATH') . '/client-application/update',
+        'CLIENT_DELETE' => env('APP_URL') . env('API_BASE_PATH') . '/client-application/delete',
+    ],
 
     'AUTH_URL' => [
 
@@ -221,9 +237,6 @@ return [
         'COMPANY_DELETE' => env('APP_URL') . env('API_BASE_PATH') . '/company/delete',
     ],
 
-    'CLIENT_URLS' => [
-        'CLIENT' => env('APP_URL') . env('API_BASE_PATH') . '/client',
-    ],
 
     'EMPLOYEE_URLS' => [
         'EMPLOYEE' => env('APP_URL') . env('API_BASE_PATH') . '/employees',
