@@ -10,11 +10,13 @@ class Quotation extends Model
 {
     use HasFactory , SoftDeletes;
 
-    public $timestamps = false; // only using created_at
+    public $timestamps = false;
 
     protected $fillable = [
         'customer_id',
         'required',
+        'solar_capacity',
+        'rooftop_size',
         'amount',
         'date',
         'by',

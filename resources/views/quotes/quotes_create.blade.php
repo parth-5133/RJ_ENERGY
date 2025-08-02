@@ -41,22 +41,6 @@
                 <span class="text-danger" id="alternate_mobile-error"></span>
             </div>
         </div>
-        <!-- Aadhar -->
-        <div class="col-md-4 mb-4">
-            <div class="form-floating form-floating-outline">
-                <input type="text" class="form-control" name="aadhar" id="aadhar" placeholder="Aadhar Number" />
-                <label for="aadhar">Aadhar Number <span class="text-danger">*</span></label>
-                <span class="text-danger" id="aadhar-error"></span>
-            </div>
-        </div>
-        <!-- PAN -->
-        <div class="col-md-4 mb-4">
-            <div class="form-floating form-floating-outline">
-                <input type="text" class="form-control" name="pan" id="pan" placeholder="PAN Number" />
-                <label for="pan">PAN Number</label>
-                <span class="text-danger" id="pan-error"></span>
-            </div>
-        </div>
     </div>
 
     <!-- Section 3: Quotation -->
@@ -71,6 +55,24 @@
                 </select>
                 <label for="quotation_">Is Quotation <span class="text-danger">*</span></label>
                 <span class="text-danger" id="quotation_-error"></span>
+            </div>
+        </div>
+        <!-- Proposed Solar Capacity -->
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="text" class="form-control" name="solar_capacity" id="solar_capacity"
+                    placeholder="Solar Capacity" />
+                <label for="solar_capacity">Solar Capacity (e.g., 3kW) <span class="text-danger">*</span></label>
+                <span class="text-danger" id="solar_capacity-error"></span>
+            </div>
+        </div>
+        <!-- Rooftop Size -->
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="text" class="form-control" name="rooftop_size" id="rooftop_size"
+                    placeholder="Rooftop Size" />
+                <label for="rooftop_size">Rooftop Size (in sq. ft) <span class="text-danger">*</span></label>
+                <span class="text-danger" id="rooftop_size-error"></span>
             </div>
         </div>
         <!-- Quotation Amount -->
@@ -91,20 +93,17 @@
                 <span class="text-danger" id="quotation_date-error"></span>
             </div>
         </div>
-    </div>
-    <div class="row quotation-dependent">
         <!-- Entered By -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="quotation_by" id="quotation_by">
-                    <option selected disabled value="">Select</option>
-                    <option value="1">John Smith</option>
-                    <option value="2">Jane Doe</option>
                 </select>
                 <label for="quotation_by">Entered By <span class="text-danger">*</span></label>
                 <span class="text-danger" id="quotation_by-error"></span>
             </div>
         </div>
+    </div>
+    <div class="row quotation-dependent">
         <!-- Quotation Status -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
@@ -118,7 +117,6 @@
             </div>
         </div>
     </div>
-
     <!-- Footer -->
     <div class="offcanvas-footer justify-content-md-end position-absolute bottom-0 end-0 w-100">
         <button class="btn rounded btn-secondary me-2" type="button" data-bs-dismiss="offcanvas">
@@ -134,6 +132,25 @@
     var quotesId = $("#quotesId").val();
 
     $(document).ready(function() {
+
+
+        fnCallAjaxHttpGetEvent("{{ config('apiConstants.QUOTATION_URLS.QUOTATION_ALL_ACCOUNTANT') }}", null,
+            true, true,
+            function(
+                response) {
+                if (response.status === 200 && response.data) {
+                    var options = '<option selected disabled value="">Select</option>';
+                    $.each(response.data, function(index, accountant) {
+                        options += '<option value="' + accountant.id + '">' + accountant.full_name +
+                            '</option>';
+                    });
+                    $("#quotation_by").html(options);
+                } else {
+                    console.log('Failed to retrieve accountant data.');
+
+                }
+            });
+
         if (quotesId > 0) {
             var Url = "{{ config('apiConstants.QUOTATION_URLS.QUOTATION_VIEW') }}";
             fnCallAjaxHttpGetEvent(Url, {
@@ -148,6 +165,8 @@
                     $("#aadhar").val(response.data.aadhar);
                     $("#pan").val(response.data.pan);
                     $("#quotation_").val(response.data.required);
+                    $("#solar_capacity").val(response.data.solar_capacity);
+                    $("#rooftop_size").val(response.data.rooftop_size);
                     $("#quotation_amount").val(response.data.amount);
                     $("#quotation_date").val(response.data.date);
                     $("#quotation_by").val(response.data.by);
@@ -158,7 +177,6 @@
             });
         }
     });
-
 
     $("#customerForm").validate({
         rules: {
@@ -196,17 +214,6 @@
             quotation_: {
                 required: true,
             },
-            quotation_amount: {
-                required: true,
-                number: true,
-            },
-            quotation_date: {
-                required: true,
-                date: true,
-            },
-            quotation_status: {
-                required: true,
-            },
             quotation_by: {
                 required: true,
             }
@@ -233,28 +240,8 @@
                 minlength: "Mobile number must be at least 10 digits long",
                 maxlength: "Mobile number must be at most 15 digits long"
             },
-            aadhar: {
-                required: "Aadhar is required",
-                digits: "Please enter a valid Aadhar number",
-                minlength: "Aadhar number must be 12 digits long",
-                maxlength: "Aadhar number must be 12 digits long"
-            },
-            pan: {
-                maxlength: "PAN number must be 10 characters long"
-            },
             quotation_: {
                 required: "Quotation selection is required",
-            },
-            quotation_amount: {
-                required: "Quotation Amount is required",
-                number: "Please enter a valid number",
-            },
-            quotation_date: {
-                required: "Quotation Date is required",
-                date: "Please enter a valid date",
-            },
-            quotation_status: {
-                required: "Quotation Status is required",
             },
             quotation_by: {
                 required: "Quotation By is required",

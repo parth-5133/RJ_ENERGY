@@ -89,7 +89,7 @@
                         data: "amount",
                     },
                     {
-                        data: "by",
+                        data: "prepared_by",
                     },
                     {
                         data: "date",
@@ -100,8 +100,8 @@
                     {
                         data: "status",
                         render: function(data) {
-                            return data === 1 ?
-                                `<span class="badge rounded bg-label-success">Accepted</span>` :
+                            return data === "Agreed" ?
+                                `<span class="badge rounded bg-label-success">Agreed</span>` :
                                 `<span class="badge rounded bg-label-danger">Pending</span>`;
                         }
                     },

@@ -1,111 +1,6 @@
 <form action="javascript:void(0)" id="customerForm" name="customerForm" class="form-horizontal" method="POST"
     enctype="multipart/form-data">
     <input type="hidden" id="clientId" value="{{ $clientId ?? '' }}">
-
-    <!-- Section 1: Customer Basic Details -->
-    <h5 class="fw-bold mb-3 mt-4">👤 Customer Basic Details</h5>
-    <div class="row">
-        <!-- Name -->
-        <div class="col-md-4 mb-4">
-            <div class="form-floating form-floating-outline">
-                <input type="text" class="form-control" name="customer_name" id="customer_name" placeholder="Name" />
-                <label for="customer_name">Name <span class="text-danger">*</span></label>
-            </div>
-        </div>
-        <!-- Age -->
-        <div class="col-md-4 mb-4">
-            <div class="form-floating form-floating-outline">
-                <input type="number" class="form-control" name="age" id="age" placeholder="Age" />
-                <label for="age">Age <span class="text-danger">*</span></label>
-            </div>
-        </div>
-        <!-- Mobile -->
-        <div class="col-md-4 mb-4">
-            <div class="form-floating form-floating-outline">
-                <input type="tel" class="form-control" name="mobile" id="mobile" maxlength="10"
-                    placeholder="Aadhar-linked Mobile" />
-                <label for="mobile">Aadhar-linked Mobile <span class="text-danger">*</span></label>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <!-- Alternate Mobile -->
-        <div class="col-md-4 mb-4">
-            <div class="form-floating form-floating-outline">
-                <input type="tel" class="form-control" name="alternate_mobile" id="alternate_mobile" maxlength="10"
-                    placeholder="Alternate Mobile" />
-                <label for="alternate_mobile">Alternate Mobile</label>
-            </div>
-        </div>
-        <!-- Aadhar -->
-        <div class="col-md-4 mb-4">
-            <div class="form-floating form-floating-outline">
-                <input type="text" class="form-control" name="aadhar" id="aadhar" placeholder="Aadhar Number" />
-                <label for="aadhar">Aadhar Number <span class="text-danger">*</span></label>
-            </div>
-        </div>
-        <!-- PAN -->
-        <div class="col-md-4 mb-4">
-            <div class="form-floating form-floating-outline">
-                <input type="text" class="form-control" name="pan" id="pan" placeholder="PAN Number" />
-                <label for="pan">PAN Number</label>
-            </div>
-        </div>
-    </div>
-    <!-- Section 3: 🧾 Quotation – By Accountant OR Registrar -->
-    <h5 class="fw-bold mb-3 mt-4">🧾 Quotation</h5>
-    <div class="row">
-        <!-- Quotation  -->
-        <div class="col-md-4 mb-4">
-            <div class="form-floating form-floating-outline">
-                <select class="form-select" name="quotation_" id="quotation_">
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                </select>
-                <label for="quotation_">Is Quotation <span class="text-danger">*</span></label>
-            </div>
-        </div>
-        <!-- Quotation Amount -->
-        <div class="col-md-4 mb-4 quotation-dependent">
-            <div class="form-floating form-floating-outline">
-                <input type="number" class="form-control" name="quotation_amount" id="quotation_amount"
-                    placeholder="Quotation Amount">
-                <label for="quotation_amount">Quotation Amount</label>
-            </div>
-        </div>
-        <!-- Quotation Date -->
-        <div class="col-md-4 mb-4 quotation-dependent">
-            <div class="form-floating form-floating-outline">
-                <input type="date" class="form-control" name="quotation_date" id="quotation_date"
-                    placeholder="Quotation Date">
-                <label for="quotation_date">Quotation Date</label>
-            </div>
-        </div>
-    </div>
-    <div class="row quotation-dependent">
-        <!-- Entered By -->
-        <div class="col-md-4 mb-4">
-            <div class="form-floating form-floating-outline">
-                <select class="form-select" name="quotation_by" id="quotation_by" aria-label="Entered By">
-                    <option selected disabled value="">Select</option>
-                    <option value="Accountant">John Smith</option>
-                    <option value="Registrar">Jane Doe</option>
-                </select>
-                <label for="quotation_by">Entered By</label>
-            </div>
-        </div>
-        <!-- Quotation Status -->
-        <div class="col-md-4 mb-4">
-            <div class="form-floating form-floating-outline">
-                <select class="form-select" name="quotation_status" id="quotation_status">
-                    <option value="">Select Status</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Agreed">Agreed</option>
-                </select>
-                <label for="quotation_status">Quotation Status</label>
-            </div>
-        </div>
-    </div>
     <!-- Section 4: Solar Details -->
     <h5 class="fw-bold mb-3 mt-4">☀️ Solar Details</h5>
     <div class="row">
@@ -120,14 +15,15 @@
                     <option value="Other">Other</option>
                 </select>
                 <label for="roof_type">Roof Type <span class="text-danger">*</span></label>
+                <span class="text-danger" id="roof_type-error"></span>
             </div>
         </div>
         <!-- Roof Area -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
-                <input type="number" class="form-control" name="roof_area" id="roof_area"
-                    placeholder="Roof Area" />
+                <input type="number" class="form-control" name="roof_area" id="roof_area" placeholder="Roof Area" />
                 <label for="roof_area">Roof Area (sq. ft) <span class="text-danger">*</span></label>
+                <span class="text-danger" id="roof_area-error"></span>
             </div>
         </div>
         <!-- Usage Pattern -->
@@ -139,6 +35,7 @@
                     <option value="Commercial">Commercial</option>
                 </select>
                 <label for="usage_pattern">Usage Pattern <span class="text-danger">*</span></label>
+                <span class="text-danger" id="usage_pattern-error"></span>
             </div>
         </div>
     </div>
@@ -149,6 +46,7 @@
                 <input type="text" class="form-control" name="solar_capacity" id="solar_capacity"
                     placeholder="Capacity (e.g. 3KW)" />
                 <label for="solar_capacity">Capacity (e.g. 3KW)</label>
+                <span class="text-danger" id="solar_capacity-error"></span>
             </div>
         </div>
         <!-- Solar Company -->
@@ -157,6 +55,7 @@
                 <input type="text" class="form-control" name="solar_company" id="solar_company"
                     placeholder="Solar Company Name" />
                 <label for="solar_company">Solar Company <span class="text-danger">*</span></label>
+                <span class="text-danger" id="solar_company-error"></span>
             </div>
         </div>
         <!-- Inverter Company -->
@@ -165,20 +64,20 @@
                 <input type="text" class="form-control" name="inverter_company" id="inverter_company"
                     placeholder="Inverter Company Name" />
                 <label for="inverter_company">Inverter Company <span class="text-danger">*</span></label>
+                <span class="text-danger" id="inverter_company-error"></span>
             </div>
         </div>
 
     </div>
     <div class="row">
-        <!-- Subsidy -->
+        <!-- Customer Address -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
-                <select class="form-select" name="subsidy_claimed" id="subsidy_claimed">
-                    <option value="">Select Option</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
+                <select class="form-select" name="installers" id="installers">
+                    <option value="">Select Installers</option>
                 </select>
-                <label for="subsidy_claimed">Is Subsidy to be claimed? <span class="text-danger">*</span></label>
+                <label for="installers">Installers<span class="text-danger">*</span></label>
+                <span class="text-danger" id="installers-error"></span>
             </div>
         </div>
         <div class="col-md-4 mb-4">
@@ -186,6 +85,7 @@
                 <input type="text" class="form-control" name="jan_samarth_id" id="jan_samarth_id"
                     placeholder="Jan-Samarth ID" />
                 <label for="jan_samarth_id">Jan-Samarth ID</label>
+                <span class="text-danger" id="jan_samarth_id-error"></span>
             </div>
         </div>
         <!-- Acknowledge No. -->
@@ -194,6 +94,7 @@
                 <input type="text" class="form-control" name="acknowledge_no" id="acknowledge_no"
                     placeholder="Acknowledgement No." />
                 <label for="acknowledge_no">Acknowledge No.</label>
+                <span class="text-danger" id="acknowledge_no-error"></span>
             </div>
         </div>
     </div>
@@ -207,6 +108,7 @@
                     <option value="No">No</option>
                 </select>
                 <label for="loan_">Loan ? <span class="text-danger">*</span></label>
+                <span class="text-danger" id="loan_-error"></span>
             </div>
         </div>
         <!-- Payment Mode -->
@@ -218,6 +120,7 @@
                     <option value="loan">Loan</option>
                 </select>
                 <label for="payment_mode">Payment Mode <span class="text-danger">*</span></label>
+                <span class="text-danger" id="payment_mode-error"></span>
             </div>
         </div>
         <!-- Cancelled Cheque -->
@@ -238,9 +141,10 @@
         </div>
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
-                <input type="text" class="form-control" name="consumer_no" id="consumer_no"
+                <input type="text" class="form-control" name="light_bill_no" id="light_bill_no"
                     placeholder="Consumer No." />
-                <label for="consumer_no">Light Bill No. / Consumer No. <span class="text-danger">*</span></label>
+                <label for="light_bill_no">Light Bill No<span class="text-danger">*</span></label>
+                <span class="text-danger" id="light_bill_no-error"></span>
             </div>
         </div>
         <!-- Application Reference No -->
@@ -260,12 +164,14 @@
                     <!-- Dynamic options -->
                 </select>
                 <label for="channel_partner">Channel Partner <span class="text-danger">*</span></label>
+                <span class="text-danger" id="channel_partner-error"></span>
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="date" class="form-control" name="registration_date" id="registration_date" />
                 <label for="registration_date">Registration Date <span class="text-danger">*</span></label>
+                <span class="text-danger" id="registration_date-error"></span>
             </div>
         </div>
         <!-- Solar Total Amount -->
@@ -274,28 +180,54 @@
                 <input type="number" class="form-control" name="solar_total_amount" id="solar_total_amount"
                     placeholder="Total Amount" />
                 <label for="solar_total_amount">Solar Total Amount (₹) <span class="text-danger">*</span></label>
+                <span class="text-danger" id="solar_total_amount-error"></span>
             </div>
         </div>
     </div>
     <div class="row">
-        <!-- Customer Address -->
-        <div class="col-md-4 mb-4">
-            <div class="form-floating form-floating-outline">
-                <select class="form-select" name="installers" id="installers">
-                    <option value="">Select Installers</option>
-                </select>
-                <label for="installers">Installers<span class="text-danger">*</span></label>
-            </div>
-        </div>
+
     </div>
     <div class="row">
         <!-- Customer Address -->
-        <div class="col-md-8 mb-4">
+        <div class="col-md-6 mb-4">
             <div class="form-floating form-floating-outline">
                 <textarea class="form-control" name="customer_address" id="customer_address" placeholder="Enter Address"
                     style="height: 100px;"></textarea>
-                <label for="customer_address">Customer Address (Current & Residential) <span
+                <label for="customer_address">Permanent Address<span class="text-danger">*</span></label>
+                <span class="text-danger" id="customer_address-error"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-floating form-floating-outline">
+                <textarea class="form-control" name="customer_residential_address" id="customer_residential_address"
+                    placeholder="Enter Address" style="height: 100px;"></textarea>
+                <label for="customer_residential_address">Residential Address <span
                         class="text-danger">*</span></label>
+                <span class="text-danger" id="customer_residential_address-error"></span>
+            </div>
+        </div>
+    </div>
+    <!-- Section: 💰 Subsidy Info -->
+    <h5 class="fw-bold mb-3 mt-4">💰 Subsidy Info</h5>
+    <div class="row">
+        <!-- Subsidy Amount -->
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="number" class="form-control" name="subsidy_amount" id="subsidy_amount"
+                    placeholder="Subsidy Amount" />
+                <label for="subsidy_amount">Subsidy Amount (₹)</label>
+            </div>
+        </div>
+
+        <!-- Subsidy Status -->
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <select class="form-select" name="subsidy_status" id="subsidy_status">
+                    <option value="">Select Subsidy Status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Received">Received</option>
+                </select>
+                <label for="subsidy_status">Subsidy Status</label>
             </div>
         </div>
     </div>
@@ -403,25 +335,24 @@
                     <span class="text-danger" id="loan_manager_phone_loan-error"></span>
                 </div>
             </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="form-floating form-floating-outline">
+                    <select class="form-select" name="loan_status" id="loan_status">
+                        <option value="">Select Loan Status</option>
+                        <option value="Sanctioned">Sanctioned</option>
+                        <option value="Disbursed">Disbursed</option>
+                        <option value="Rejected">Rejected</option>
+                        <option value="Pending">Approved</option>
+                    </select>
+                    <label for="loan_status">Loan Status <span class="text-danger">*</span></label>
+                </div>
+            </div>
         </div>
     </div>
     <!-- Section: 📌 Application Status -->
     <h5 class="fw-bold mb-3 mt-4">📌 Application Status</h5>
     <div class="row">
-        <div class="col-md-4 mb-3">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="status_subsidy_approved"
-                    id="status_subsidy_approved">
-                <label class="form-check-label" for="status_subsidy_approved">Subsidy Approved</label>
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="status_loan_approved"
-                    id="status_loan_approved">
-                <label class="form-check-label" for="status_loan_approved">Loan Approved</label>
-            </div>
-        </div>
         <div class="col-md-4 mb-3">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" name="status_completed_fitting"
@@ -535,107 +466,142 @@
     // jQuery Validation Setup
     $("#customerForm").validate({
         rules: {
-            name: {
-                required: true,
-                maxlength: 50,
+            roof_type: {
+                required: true
             },
-            age: {
+            roof_area: {
                 required: true,
-                digits: true,
-                minlength: 1,
-                maxlength: 3
+                number: true
             },
-            mobile: {
+            usage_pattern: {
+                required: true
+            },
+            solar_capacity: {
+                required: true
+            },
+            solar_company: {
+                required: true
+            },
+            inverter_company: {
+                required: true
+            },
+            customer_address: {
+                required: true
+            },
+            customer_residential_address: {
+                required: true
+            },
+            light_bill_no: {
+                required: true
+            },
+            channel_partner: {
+                required: true
+            },
+            registration_date: {
                 required: true,
-                digits: true,
-                minlength: 10,
-                maxlength: 15
+                dateISO: true
             },
-            alternate_mobile: {
-                required: false,
-                digits: true,
-                minlength: 10,
-                maxlength: 15
-            },
-            aadhar: {
+            solar_total_amount: {
                 required: true,
-                digits: true,
-                minlength: 12,
-                maxlength: 12
+                number: true
             },
-            pan: {
-                required: true,
-                minlength: 10,
-                maxlength: 10
+            installers: {
+                required: true
             },
-            quotation_: {
-                required: true,
+            jan_samarth_id: {
+                required: true
             },
-            quotation_amount: {
-                required: true,
-                number: true,
+            loan_: {
+                required: true
             },
-            quotation_date: {
-                required: true,
-                date: true,
+            payment_mode: {
+                required: true
             },
-            quotation_status: {
-                required: true,
+            bank_name: {
+                required: true
             },
-            quotation_by: {
+            bank_branch: {
+                required: true
+            },
+            account_number: {
                 required: true,
-            }
+                digits: true
+            },
+            ifsc_code: {
+                required: true,
+                minlength: 11,
+                maxlength: 11
+            },
+
         },
         messages: {
-            name: {
-                required: "Name is required ",
-                maxlength: "Name cannot be more than 50 characters",
+
+            roof_type: {
+                required: "Please select a roof type."
             },
-            age: {
-                required: "Age is required ",
-                digits: "Please enter a valid age",
-                minlength: "Age must be at least 1 year old",
-                maxlength: "Age cannot exceed 3 digits",
+            roof_area: {
+                required: "Roof area is required.",
+                number: "Please enter a valid number."
             },
-            mobile: {
-                required: "Mobile is required ",
-                digits: "Please enter a valid mobile number",
-                minlength: "Mobile number must be at least 10 digits long",
-                maxlength: "Mobile number must be at most 15 digits long"
+            usage_pattern: {
+                required: "Please select a usage pattern."
             },
-            alternate_mobile: {
-                digits: "Please enter a valid mobile number",
-                minlength: "Mobile number must be at least 10 digits long",
-                maxlength: "Mobile number must be at most 15 digits long"
+            solar_capacity: {
+                required: "Solar capacity is required."
             },
-            aadhar: {
-                required: "Aadhar is required ",
-                digits: "Please enter a valid Aadhar number",
-                minlength: "Aadhar number must be 12 digits long",
-                maxlength: "Aadhar number must be 12 digits long"
+            solar_company: {
+                required: "Solar company name is required."
             },
-            pan: {
-                required: "PAN is required ",
-                minlength: "PAN number must be 10 characters long",
-                maxlength: "PAN number must be 10 characters long"
+            inverter_company: {
+                required: "Inverter company name is required."
             },
-            quotation_: {
-                required: "Quotation  is required ",
+            customer_address: {
+                required: "Customer address is required."
             },
-            quotation_amount: {
-                required: "Quotation Amount is required ",
-                number: "Please enter a valid number",
+            light_bill_no: {
+                required: "Light bill number is required."
             },
-            quotation_date: {
-                required: "Quotation Date is required ",
-                date: "Please enter a valid date",
+            channel_partner: {
+                required: "Channel partner selection is required."
             },
-            quotation_status: {
-                required: "Quotation Status is required ",
+            registration_date: {
+                required: "Registration date is required.",
+                dateISO: "Please enter a valid date."
             },
-            quotation_by: {
-                required: "Quotation By is required ",
-            }
+            solar_total_amount: {
+                required: "Total amount is required.",
+                number: "Please enter a valid number."
+            },
+            bank_name: {
+                required: "Bank name is required."
+            },
+            bank_branch: {
+                required: "Bank branch is required."
+            },
+            account_number: {
+                required: "Account number is required.",
+                digits: "Please enter only digits."
+            },
+            ifsc_code: {
+                required: "IFSC code is required.",
+                minlength: "IFSC code must be 11 characters long.",
+                maxlength: "IFSC code must be 11 characters long."
+            },
+            customer_residential_address: {
+                required: "Residential address is required."
+            },
+            jan_samarth_id: {
+                required: "Jan-Samarth ID is required."
+            },
+            loan_: {
+                required: "Please specify if loan is applicable."
+            },
+            payment_mode: {
+                required: "Payment mode is required."
+            },
+            installers: {
+                required: "Installers selection is required."
+            },
         },
         errorPlacement: function(error, element) {
             var errorId = element.attr("name") +

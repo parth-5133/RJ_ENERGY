@@ -8,13 +8,13 @@
                 </div>
                 @if ($permissions['canAdd'])
                     <button id="btnAdd" type="submit" class="btn btn-primary waves-effect waves-light"
-                        onClick="fnAddEdit(this, '{{ url('/client/create') }}', 0, 'Add New Customer',true)">
-                        <span class="tf-icons mdi mdi-plus">&nbsp;</span>Adds New Customer
+                        onClick="fnAddEdit(this, '{{ url('/client/create') }}', 0, 'Add Solar Application',true)">
+                        <span class="tf-icons mdi mdi-plus">&nbsp;</span>Adds New Solar Application
                     </button>
                 @endif
             </div>
             <div class="col-12 d-flex justify-content-between align-items-center">
-                <div
+                {{-- <div
                     class="col-12 d-flex align-items-center flex-nowrap px-5 py-4 justify-content-center justify-content-sm-end">
                     <a href="javascript:void(0)"
                         class="btn btn-sm btn-danger waves-effect waves-light mb-3 me-2 mb-xxl-0 mb-sm-0 rounded d-flex flex-wrap"
@@ -33,19 +33,17 @@
                         id="btnExcel">
                         <i class="mdi mdi-file-excel-box me-1"></i> Export Excel
                     </a>
-                </div>
+                </div> --}}
             </div>
             <div class="card-datatable text-nowrap">
                 <table id="grid" class="table table-bordered">
                     <thead>
                         <tr>
                             <th>Action</th>
-                            <th>Client ID</th>
-                            <th>Client Name</th>
-                            <th>Email</th>
-                            <th>Modified By</th>
-                            <th>Modified Date</th>
-                            <th>Status</th>
+                            <th>Customer Name</th>
+                            <th>Mobile</th>
+                            <th>Age</th>
+                            <th>Quotation Status</th>
                         </tr>
                     </thead>
                 </table>
@@ -58,15 +56,15 @@
             initializeDataTable();
         });
 
-        $('#btnExcel').click(function() {
-            $('#grid').DataTable().button('.buttons-excel').trigger();
-        });
-        $('#btnCsv').click(function() {
-            $('#grid').DataTable().button('.buttons-csv').trigger();
-        });
-        $('#btnPdf').click(function() {
-            $('#grid').DataTable().button('.buttons-pdf').trigger();
-        });
+        // $('#btnExcel').click(function() {
+        //     $('#grid').DataTable().button('.buttons-excel').trigger();
+        // });
+        // $('#btnCsv').click(function() {
+        //     $('#grid').DataTable().button('.buttons-csv').trigger();
+        // });
+        // $('#btnPdf').click(function() {
+        //     $('#grid').DataTable().button('.buttons-pdf').trigger();
+        // });
 
         function initializeDataTable() {
             $("#grid").DataTable({
@@ -123,16 +121,25 @@
                             html += "<li class='list-inline-item'>" +
                                 GetEditDeleteButton({{ $permissions['canEdit'] }},
                                     "{{ url('user/create') }}", "Edit",
-                                    data, "Edit Client") +
+                                    data, "Edit Solar Application") +
                                 "</li>";
 
                             // Delete Button
                             html += "<li class='list-inline-item'>" +
                                 GetEditDeleteButton({{ $permissions['canDelete'] }},
-                                    "fnShowConfirmDeleteDialog('" + row.name + "',fnDeleteRecord," +
+                                    "fnShowConfirmDeleteDialog('" + row.customer_name +
+                                    "',fnDeleteRecord," +
                                     data + ",'" +
                                     '{{ config('apiConstants.USER_API_URLS.USER_DELETE') }}' +
                                     "','#grid')", "Delete") +
+                                "</li>";
+
+                            // Accept Button (Extra Menu)
+                            html += "<li class='list-inline-item'>" +
+                                "<button type='button' onclick='acceptcustomer(" + data +
+                                ")' class='btn btn-sm btn-success' title='Accept'>" +
+                                "<i class='mdi mdi-check-circle'></i>" +
+                                "</button>" +
                                 "</li>";
 
                             html += "</ul>";
@@ -140,39 +147,36 @@
                         },
                     },
                     {
-                        data: "employee_id",
+                        data: "customer_name",
                     },
                     {
-                        data: "name",
-                        render: function(data, type, row) {
-                            if ({{ $permissions['canEdit'] }}) {
-                                return `<a href="javascript:void(0);" onclick="fnAddEdit(this,'{{ url('user/create') }}',${row.id}, 'Edit Client')"
-                            class="user-name" data-id="${row.id}">
-                            ${data}
-                        </a>`;
-                            }
-                            return data;
-                        }
+                        data: "mobile",
                     },
                     {
-                        data: "email",
+                        data: "age",
                     },
                     {
-                        data: "updated_name",
-                    },
-                    {
-                        data: "updated_at_formatted",
-                    },
-                    {
-                        data: "is_active",
-                        render: function(data) {
-                            return data === 1 ?
-                                `<span class="badge rounded bg-label-success">Active</span>` :
-                                `<span class="badge rounded bg-label-danger">Inactive</span>`;
-                        }
+                        data: "status",
                     }
 
                 ]
+            });
+        }
+
+        function acceptcustomer(id) {
+            var Url = "{{ config('apiConstants.CLIENT_URLS.CLIENT_ACCEPT') }}";
+
+            var postData = {
+                id: id,
+            };
+
+            fnCallAjaxHttpPostEvent(Url, postData, true, true, function(response) {
+                if (response.status === 200) {
+                    $('#grid').DataTable().ajax.reload();
+                    ShowMsg("bg-success", response.message);
+                } else {
+                    ShowMsg("bg-warning", 'The record could not be processed.');
+                }
             });
         }
     </script>

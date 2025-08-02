@@ -15,4 +15,6 @@ class ResMessages
     const VALIDATION_ERROR = 'Validation error.';
     const UNPROCESSABLE_ENTITY = 'Unprocessable entity.';
     const COMPANY_NOT_FOUND = 'Company not found.';
+    const ALREADY_ACCEPTED = 'This customer has already been accepted another Registrar.';
+    const ALREADY_ACCEPTED_YOU = 'You have already accepted this customer.';
 }

@@ -32,10 +32,12 @@ return [
         'QUOTATION_VIEW' => env('APP_URL') . env('API_BASE_PATH') . '/quotation/view',
         'QUOTATION_UPDATE' => env('APP_URL') . env('API_BASE_PATH') . '/quotation/update',
         'QUOTATION_DELETE' => env('APP_URL') . env('API_BASE_PATH') . '/quotation/delete',
+        'QUOTATION_ALL_ACCOUNTANT' => env('APP_URL') . env('API_BASE_PATH') . '/getAccountant-list',
     ],
 
     'CLIENT_URLS' => [
         'CLIENT' => env('APP_URL') . env('API_BASE_PATH') . '/client-application',
+        'CLIENT_ACCEPT' => env('APP_URL') . env('API_BASE_PATH') . '/client-application/accept',
         'CLIENT_STORE' => env('APP_URL') . env('API_BASE_PATH') . '/client-application/create',
         'CLIENT_VIEW' => env('APP_URL') . env('API_BASE_PATH') . '/client-application/view',
         'CLIENT_UPDATE' => env('APP_URL') . env('API_BASE_PATH') . '/client-application/update',

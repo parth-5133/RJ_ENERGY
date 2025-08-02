@@ -19,7 +19,6 @@ class SolarDetail extends Model
         'capacity',
         'solar_company',
         'inverter_company',
-        'subsidy_claimed',
         'jan_samarth_id',
         'acknowledge_no',
         'loan_required',
@@ -31,9 +30,11 @@ class SolarDetail extends Model
         'channel_partner_id',
         'registration_date',
         'solar_total_amount',
-        'subsidy_amount',
-        'deleted_at',
+        'installers',
+        'customer_address',
+        'customer_residential_address',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'deleted_at'
     ];
 }

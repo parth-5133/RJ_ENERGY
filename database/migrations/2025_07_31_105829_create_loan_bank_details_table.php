@@ -13,15 +13,17 @@ return new class extends Migration
     {
         Schema::create('loan_bank_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade');
-            $table->unsignedBigInteger('bank_id')->nullable();
+            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('solar_detail_id');
+            $table->string('bank_name')->nullable();
             $table->string('bank_branch')->nullable();
             $table->string('account_number')->nullable();
             $table->string('ifsc_code')->nullable();
             $table->string('branch_manager_phone')->nullable();
             $table->string('loan_manager_phone')->nullable();
-            $table->softDeletes();
+            $table->string('loan_status')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

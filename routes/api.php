@@ -96,10 +96,12 @@ Route::middleware(['jwt.verify'])->group(function () {
         Route::get('/quotation/view', [QuotationController::class, 'view']);
         Route::post('/quotation/update', [QuotationController::class, 'update']);
         Route::post('/quotation/delete/{id}', [QuotationController::class, 'delete']);
+        Route::get('/getAccountant-list', [QuotationController::class, 'getAllAccountantList']);
 
         // Client Application
         // Route::get('/client', [ClientController::class, 'index']);
         Route::get('/client-application', [ClientController::class, 'index']);
+        Route::post('/client-application/accept', [ClientController::class, 'accept']);
         Route::post('/client-application/create', [ClientController::class, 'store']);
         Route::get('/client-application/view', [ClientController::class, 'view']);
         Route::post('/client-application/update', [ClientController::class, 'update']);
