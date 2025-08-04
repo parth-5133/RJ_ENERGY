@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('customer_bank_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade');
-            $table->unsignedBigInteger('bank_id')->nullable();
+            $table->unsignedBigInteger('bank_name')->nullable();
             $table->string('bank_branch')->nullable();
             $table->string('account_number')->nullable();
             $table->string('ifsc_code')->nullable();

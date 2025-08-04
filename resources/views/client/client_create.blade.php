@@ -1,10 +1,93 @@
 <form action="javascript:void(0)" id="customerForm" name="customerForm" class="form-horizontal" method="POST"
     enctype="multipart/form-data">
-    <input type="hidden" id="clientId" value="{{ $clientId ?? '' }}">
-    <!-- Section 4: Solar Details -->
+    <input type="hidden" id="clientId" name="clientId" value="{{ $clientId ?? '' }}">
+
+    <h5 class="fw-bold mb-3 mt-4">👤 Customer Basic Details</h5>
+    <div class="row">
+
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="text" class="form-control" name="customer_name" id="customer_name" placeholder="Name" />
+                <label for="customer_name">Name <span class="text-danger">*</span></label>
+                <span class="text-danger" id="customer_name-error"></span>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="number" class="form-control" name="age" id="age" placeholder="Age" />
+                <label for="age">Age <span class="text-danger">*</span></label>
+                <span class="text-danger" id="age-error"></span>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="tel" class="form-control" name="mobile" id="mobile" maxlength="10"
+                    placeholder="Aadhar-linked Mobile" />
+                <label for="mobile">Aadhar-linked Mobile <span class="text-danger">*</span></label>
+                <span class="text-danger" id="mobile-error"></span>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="tel" class="form-control" name="alternate_mobile" id="alternate_mobile" maxlength="10"
+                    placeholder="Alternate Mobile" />
+                <label for="alternate_mobile">Alternate Mobile</label>
+                <span class="text-danger" id="alternate_mobile-error"></span>
+            </div>
+        </div>
+    </div>
+
+    <h5 class="fw-bold mb-3 mt-4">🧾 Quotation</h5>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <select class="form-select" name="quotation_" id="quotation_">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+                <label for="quotation_">Is Quotation <span class="text-danger">*</span></label>
+                <span class="text-danger" id="quotation_-error"></span>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4 quotation-dependent">
+            <div class="form-floating form-floating-outline">
+                <input type="number" class="form-control" name="quotation_amount" id="quotation_amount"
+                    placeholder="Quotation Amount">
+                <label for="quotation_amount">Quotation Amount <span class="text-danger">*</span></label>
+                <span class="text-danger" id="quotation_amount-error"></span>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4 quotation-dependent">
+            <div class="form-floating form-floating-outline">
+                <input type="date" class="form-control" name="quotation_date" id="quotation_date"
+                    placeholder="Quotation Date">
+                <label for="quotation_date">Quotation Date <span class="text-danger">*</span></label>
+                <span class="text-danger" id="quotation_date-error"></span>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <select class="form-select" name="quotation_by" id="quotation_by">
+                </select>
+                <label for="quotation_by">Entered By <span class="text-danger">*</span></label>
+                <span class="text-danger" id="quotation_by-error"></span>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <select class="form-select" name="quotation_status" id="quotation_status">
+                    <option value="">Select Status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Agreed">Agreed</option>
+                </select>
+                <label for="quotation_status">Quotation Status <span class="text-danger">*</span></label>
+                <span class="text-danger" id="quotation_status-error"></span>
+            </div>
+        </div>
+    </div>
+
     <h5 class="fw-bold mb-3 mt-4">☀️ Solar Details</h5>
     <div class="row">
-        <!-- Roof Type -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="roof_type" id="roof_type">
@@ -18,15 +101,14 @@
                 <span class="text-danger" id="roof_type-error"></span>
             </div>
         </div>
-        <!-- Roof Area -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
-                <input type="number" class="form-control" name="roof_area" id="roof_area" placeholder="Roof Area" />
+                <input type="number" class="form-control" name="roof_area" id="roof_area"
+                    placeholder="Roof Area" />
                 <label for="roof_area">Roof Area (sq. ft) <span class="text-danger">*</span></label>
                 <span class="text-danger" id="roof_area-error"></span>
             </div>
         </div>
-        <!-- Usage Pattern -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="usage_pattern" id="usage_pattern">
@@ -67,19 +149,19 @@
                 <span class="text-danger" id="inverter_company-error"></span>
             </div>
         </div>
-
     </div>
     <div class="row">
-        <!-- Customer Address -->
+        <!-- Installers -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="installers" id="installers">
                     <option value="">Select Installers</option>
                 </select>
-                <label for="installers">Installers<span class="text-danger">*</span></label>
+                <label for="installers">Installers <span class="text-danger">*</span></label>
                 <span class="text-danger" id="installers-error"></span>
             </div>
         </div>
+        <!-- Jan-Samarth ID -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="text" class="form-control" name="jan_samarth_id" id="jan_samarth_id"
@@ -99,7 +181,7 @@
         </div>
     </div>
     <div class="row">
-        <!-- Loan  -->
+        <!-- Loan -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="loan_" id="loan_">
@@ -139,11 +221,12 @@
                 <label for="light_bill">Light Bill (Upload)</label>
             </div>
         </div>
+        <!-- Light Bill No -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="text" class="form-control" name="light_bill_no" id="light_bill_no"
                     placeholder="Consumer No." />
-                <label for="light_bill_no">Light Bill No<span class="text-danger">*</span></label>
+                <label for="light_bill_no">Light Bill No <span class="text-danger">*</span></label>
                 <span class="text-danger" id="light_bill_no-error"></span>
             </div>
         </div>
@@ -157,6 +240,7 @@
         </div>
     </div>
     <div class="row">
+        <!-- Channel Partner -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="channel_partner" id="channel_partner">
@@ -167,6 +251,7 @@
                 <span class="text-danger" id="channel_partner-error"></span>
             </div>
         </div>
+        <!-- Registration Date -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="date" class="form-control" name="registration_date" id="registration_date" />
@@ -185,19 +270,17 @@
         </div>
     </div>
     <div class="row">
-
-    </div>
-    <div class="row">
         <!-- Customer Address -->
         <div class="col-md-6 mb-4">
             <div class="form-floating form-floating-outline">
                 <textarea class="form-control" name="customer_address" id="customer_address" placeholder="Enter Address"
                     style="height: 100px;"></textarea>
-                <label for="customer_address">Permanent Address<span class="text-danger">*</span></label>
+                <label for="customer_address">Permanent Address <span class="text-danger">*</span></label>
                 <span class="text-danger" id="customer_address-error"></span>
             </div>
         </div>
-        <div class="col-md-6">
+        <!-- Residential Address -->
+        <div class="col-md-6 mb-4">
             <div class="form-floating form-floating-outline">
                 <textarea class="form-control" name="customer_residential_address" id="customer_residential_address"
                     placeholder="Enter Address" style="height: 100px;"></textarea>
@@ -218,7 +301,6 @@
                 <label for="subsidy_amount">Subsidy Amount (₹)</label>
             </div>
         </div>
-
         <!-- Subsidy Status -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
@@ -231,10 +313,9 @@
             </div>
         </div>
     </div>
-    <!-- Consumer Bank Details Section  -->
+    <!-- Consumer Bank Details Section -->
     <div id="bankDetailsSection" class="mb-4">
         <h6 class="fw-bold mb-3">🏦 Customer Bank Details</h6>
-
         <div class="row">
             <div class="col-md-4 mb-4">
                 <div class="form-floating form-floating-outline">
@@ -262,7 +343,6 @@
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-4 mb-4">
                 <div class="form-floating form-floating-outline">
@@ -274,10 +354,9 @@
             </div>
         </div>
     </div>
-    <!-- Loan Bank Details Section  -->
-    <div id="bankDetailsSection" class="mb-4">
+    <!-- Loan Bank Details Section -->
+    <div id="loanBankDetailsSection" class="mb-4">
         <h6 class="fw-bold mb-3">🏦 Loan Applicants Bank Details</h6>
-
         <div class="row">
             <div class="col-md-4 mb-4">
                 <div class="form-floating form-floating-outline">
@@ -305,7 +384,6 @@
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-4 mb-4">
                 <div class="form-floating form-floating-outline">
@@ -325,7 +403,6 @@
                     <span class="text-danger" id="branch_manager_phone_loan-error"></span>
                 </div>
             </div>
-
             <!-- Loan Manager Phone -->
             <div class="col-md-4 mb-4">
                 <div class="form-floating form-floating-outline">
@@ -335,7 +412,8 @@
                     <span class="text-danger" id="loan_manager_phone_loan-error"></span>
                 </div>
             </div>
-
+        </div>
+        <div class="row">
             <div class="col-md-4 mb-4">
                 <div class="form-floating form-floating-outline">
                     <select class="form-select" name="loan_status" id="loan_status">
@@ -355,12 +433,12 @@
     <div class="row">
         <div class="col-md-4 mb-3">
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="status_completed_fitting"
-                    id="status_completed_fitting">
-                <label class="form-check-label" for="status_completed_fitting">Completed Fitting</label>
+                <input class="form-check-input" type="checkbox" name="is_completed" id="is_completed">
+                <label class="form-check-label" for="is_completed">Completed Fitting</label>
             </div>
         </div>
     </div>
+
     <!-- Footer -->
     <div class="offcanvas-footer justify-content-md-end position-absolute bottom-0 end-0 w-100">
         <button class="btn rounded btn-secondary me-2" type="button" data-bs-dismiss="offcanvas">
@@ -377,31 +455,30 @@
         // Declare a variable to hold bank data
         var bankDataMap = {};
         var bankDataMap2 = {};
+
         // Load banks via AJAX
-        fnCallAjaxHttpGetEvent("{{ config('apiConstants.MANAGE_BANK_URLS.MANAGE_BANK') }}", null,
-            true, true,
-            function(response) {
-                if (response.status === 200 && response.data) {
-                    var $Dropdown = $("#bank_name");
-                    var $Dropdown2 = $("#bank_name_loan");
-                    $Dropdown.empty();
-                    $Dropdown2.empty();
-                    $Dropdown.append(new Option('Select Bank', ''));
-                    $Dropdown2.append(new Option('Select Bank', ''));
+        fnCallAjaxHttpGetEvent("{{ config('apiConstants.MANAGE_BANK_URLS.MANAGE_BANK') }}", null, true, true, function(response) {
+            if (response.status === 200 && response.data) {
+                var $Dropdown = $("#bank_name");
+                var $Dropdown2 = $("#bank_name_loan");
+                $Dropdown.empty();
+                $Dropdown2.empty();
+                $Dropdown.append(new Option('Select Bank', ''));
+                $Dropdown2.append(new Option('Select Bank', ''));
 
-                    // Save bank data by ID
-                    response.data.forEach(function(bank) {
-                        bankDataMap[bank.id] = bank;
-                        $Dropdown.append(new Option(bank.bank_name, bank.id));
-                    });
+                // Save bank data by ID
+                response.data.forEach(function(bank) {
+                    bankDataMap[bank.id] = bank;
+                    $Dropdown.append(new Option(bank.bank_name, bank.id));
+                });
 
-                    // Save bank data by ID
-                    response.data.forEach(function(bank) {
-                        bankDataMap2[bank.id] = bank;
-                        $Dropdown2.append(new Option(bank.bank_name, bank.id));
-                    });
-                }
-            });
+                // Save bank data by ID
+                response.data.forEach(function(bank) {
+                    bankDataMap2[bank.id] = bank;
+                    $Dropdown2.append(new Option(bank.bank_name, bank.id));
+                });
+            }
+        });
 
         $("#bank_name").on("change", function() {
             var selectedBankId = $(this).val();
@@ -415,6 +492,7 @@
                 $("#ifsc_code").val('');
             }
         });
+
         $("#bank_name_loan").on("change", function() {
             var selectedBankId = $(this).val();
             if (selectedBankId && bankDataMap[selectedBankId]) {
@@ -433,39 +511,145 @@
         });
 
         // Load Channel Partner via AJAX
-        fnCallAjaxHttpGetEvent("{{ config('apiConstants.CHANNEL_PARTNERS_URLS.CHANNEL_PARTNERS') }}", null,
-            true, true,
-            function(response) {
-                if (response.status === 200 && response.data) {
-                    var $Dropdown = $("#channel_partner");
-                    $Dropdown.empty();
-                    $Dropdown.append(new Option('Select Channel Partner', ''));
+        fnCallAjaxHttpGetEvent("{{ config('apiConstants.CHANNEL_PARTNERS_URLS.CHANNEL_PARTNERS') }}", null, true, true, function(response) {
+            if (response.status === 200 && response.data) {
+                var $Dropdown = $("#channel_partner");
+                $Dropdown.empty();
+                $Dropdown.append(new Option('Select Channel Partner', ''));
 
-                    response.data.forEach(function(data) {
-                        $Dropdown.append(new Option(data.legal_name, data.id));
-                    });
-                }
-            });
+                response.data.forEach(function(data) {
+                    $Dropdown.append(new Option(data.legal_name, data.id));
+                });
+            }
+        });
 
         // Load Installers via AJAX
-        fnCallAjaxHttpGetEvent("{{ config('apiConstants.INSTALLERS_URLS.INSTALLERS') }}", null,
-            true, true,
-            function(response) {
-                if (response.status === 200 && response.data) {
-                    var $Dropdown = $("#installers");
-                    $Dropdown.empty();
-                    $Dropdown.append(new Option('Select Installers', ''));
+        fnCallAjaxHttpGetEvent("{{ config('apiConstants.INSTALLERS_URLS.INSTALLERS') }}", null, true, true, function(response) {
+            if (response.status === 200 && response.data) {
+                var $Dropdown = $("#installers");
+                $Dropdown.empty();
+                $Dropdown.append(new Option('Select Installers', ''));
 
-                    response.data.forEach(function(data) {
-                        $Dropdown.append(new Option(data.name, data.id));
-                    });
+                response.data.forEach(function(data) {
+                    $Dropdown.append(new Option(data.name, data.id));
+                });
+            }
+        });
+
+        fnCallAjaxHttpGetEvent("{{ config('apiConstants.QUOTATION_URLS.QUOTATION_ALL_ACCOUNTANT') }}", null, true, true, function(response) {
+            if (response.status === 200 && response.data) {
+                var options = '<option selected disabled value="">Select</option>';
+                $.each(response.data, function(index, accountant) {
+                    options += '<option value="' + accountant.id + '">' + accountant.full_name + '</option>';
+                });
+                $("#quotation_by").html(options);
+            } else {
+                console.log('Failed to retrieve accountant data.');
+            }
+        });
+
+        if (clientId > 0) {
+            var Url = "{{ config('apiConstants.QUOTATION_URLS.QUOTATION_VIEW') }}";
+            fnCallAjaxHttpGetEvent(Url, {
+                quotesId: clientId,
+                is_customer: 1
+            }, true, true, function(response) {
+                if (response.status === 200 && response.data) {
+                    $("#customer_name").val(response.data.customer_name);
+                    $("#age").val(response.data.age);
+                    $("#mobile").val(response.data.mobile);
+                    $("#alternate_mobile").val(response.data.alternate_mobile);
+                    $("#quotation_").val(response.data.required);
+                    $("#solar_capacity").val(response.data.capacity);
+                    $("#roof_area").val(response.data.roof_area);
+                    $("#quotation_amount").val(response.data.amount);
+                    $("#quotation_date").val(response.data.date);
+                    $("#quotation_by").val(response.data.by);
+                    $("#quotation_status").val(response.data.status);
+                } else {
+                    console.log('Failed to retrieve role data.');
                 }
             });
+        }
+
+        if (clientId > 0) {
+            var Url = "{{ config('apiConstants.CLIENT_URLS.CLIENT_VIEW') }}";
+            fnCallAjaxHttpGetEvent(Url, {
+                customerId: clientId
+            }, true, true, function(response) {
+                if (response.status === 200 && response.data) {
+                    // Solar detail data
+                    if (response.data.solar_detail) {
+                        $("#roof_type").val(response.data.solar_detail.roof_type);
+                        $("#roof_area").val(response.data.solar_detail.roof_area);
+                        $("#usage_pattern").val(response.data.solar_detail.usage_pattern);
+                        $("#solar_capacity").val(response.data.solar_detail.capacity);
+                        $("#solar_company").val(response.data.solar_detail.solar_company);
+                        $("#inverter_company").val(response.data.solar_detail.inverter_company);
+                        $("#installers").val(response.data.solar_detail.installers);
+                        $("#jan_samarth_id").val(response.data.solar_detail.jan_samarth_id);
+                        $("#acknowledge_no").val(response.data.solar_detail.acknowledge_no);
+                        $("#loan_").val(response.data.solar_detail.loan_required);
+                        $("#payment_mode").val(response.data.solar_detail.payment_mode);
+                        $("#light_bill_no").val(response.data.solar_detail.consumer_no);
+                        $("#application_ref_no").val(response.data.solar_detail.application_ref_no);
+                        $("#channel_partner").val(response.data.solar_detail.channel_partner_id);
+                        $("#registration_date").val(response.data.solar_detail.registration_date);
+                        $("#solar_total_amount").val(response.data.solar_detail.solar_total_amount);
+                        $("#customer_address").val(response.data.solar_detail.customer_address);
+                        $("#customer_residential_address").val(response.data.solar_detail.customer_residential_address);
+                        $("#is_completed").prop("checked", response.data.solar_detail.is_completed);
+                    }
+
+                    // Subsidy data
+                    if (response.data.subsidy) {
+                        $("#subsidy_amount").val(response.data.subsidy.subsidy_amount);
+                        $("#subsidy_status").val(response.data.subsidy.subsidy_status);
+                    }
+
+                    // Customer bank detail data
+                    if (response.data.customer_bank_detail) {
+                        $("#bank_name").val(response.data.customer_bank_detail.bank_name);
+                        $("#bank_branch").val(response.data.customer_bank_detail.bank_branch);
+                        $("#account_number").val(response.data.customer_bank_detail.account_number);
+                        $("#ifsc_code").val(response.data.customer_bank_detail.ifsc_code);
+                    }
+
+                    // Loan bank detail data
+                    if (response.data.loan_bank_detail) {
+                        $("#bank_name_loan").val(response.data.loan_bank_detail.bank_name);
+                        $("#bank_branch_loan").val(response.data.loan_bank_detail.bank_branch);
+                        $("#account_number_loan").val(response.data.loan_bank_detail.account_number);
+                        $("#ifsc_code_loan").val(response.data.loan_bank_detail.ifsc_code);
+                        $("#branch_manager_phone_loan").val(response.data.loan_bank_detail.branch_manager_phone);
+                        $("#loan_manager_phone_loan").val(response.data.loan_bank_detail.loan_manager_phone);
+                        $("#loan_status").val(response.data.loan_bank_detail.loan_status);
+                    }
+                } else {
+                    console.log('Failed to retrieve client data.');
+                }
+            });
+        }
     });
 
     // jQuery Validation Setup
     $("#customerForm").validate({
         rules: {
+            customer_name: {
+                required: true
+            },
+            age: {
+                required: true,
+                digits: true,
+                minlength: 1,
+                maxlength: 3
+            },
+            mobile: {
+                required: true,
+                digits: true,
+                minlength: 10,
+                maxlength: 15
+            },
             roof_type: {
                 required: true
             },
@@ -531,11 +715,24 @@
                 required: true,
                 minlength: 11,
                 maxlength: 11
-            },
-
+            }
         },
         messages: {
-
+            customer_name: {
+                required: "Name is required"
+            },
+            age: {
+                required: "Age is required",
+                digits: "Please enter a valid age",
+                minlength: "Age must be at least 1 year old",
+                maxlength: "Age cannot exceed 3 digits"
+            },
+            mobile: {
+                required: "Mobile is required",
+                digits: "Please enter a valid mobile number",
+                minlength: "Mobile number must be at least 10 digits long",
+                maxlength: "Mobile number must be at most 15 digits long"
+            },
             roof_type: {
                 required: "Please select a roof type."
             },
@@ -601,11 +798,10 @@
             },
             installers: {
                 required: "Installers selection is required."
-            },
+            }
         },
         errorPlacement: function(error, element) {
-            var errorId = element.attr("name") +
-                "-error";
+            var errorId = element.attr("name") + "-error";
             $("#" + errorId).text(error.text());
             $("#" + errorId).show();
             element.addClass("is-invalid");
@@ -619,14 +815,14 @@
             event.preventDefault();
 
             var formData = new FormData(form);
+            formData.append('is_completed', $("#is_completed").is(":checked") ? 1 : 0);
 
             var storeUrl = "{{ config('apiConstants.CLIENT_URLS.CLIENT_STORE') }}";
             var updateUrl = "{{ config('apiConstants.CLIENT_URLS.CLIENT_UPDATE') }}";
             var url = clientId > 0 ? updateUrl : storeUrl;
             fnCallAjaxHttpPostEventWithoutJSON(url, formData, true, true, function(response) {
                 if (response.status === 200) {
-                    bootstrap.Offcanvas.getInstance(document.getElementById(
-                        'commonOffcanvas')).hide();
+                    bootstrap.Offcanvas.getInstance(document.getElementById('commonOffcanvas')).hide();
                     $('#grid').DataTable().ajax.reload();
                     ShowMsg("bg-success", response.message);
                 } else {

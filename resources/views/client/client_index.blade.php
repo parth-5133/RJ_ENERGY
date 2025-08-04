@@ -120,8 +120,8 @@
                             // Edit Button (This is your existing edit button logic)
                             html += "<li class='list-inline-item'>" +
                                 GetEditDeleteButton({{ $permissions['canEdit'] }},
-                                    "{{ url('user/create') }}", "Edit",
-                                    data, "Edit Solar Application") +
+                                    "{{ url('/client/create') }}", "Edit",
+                                    data, "Edit Solar Application", true) +
                                 "</li>";
 
                             // Delete Button

@@ -27,7 +27,6 @@ class ConsumerApplicationController extends Controller
 
         return ApiResponse::success($applications, ResMessages::RETRIEVED_SUCCESS);
     }
-
     public function getDocumentsList()
     {
         $currentUser = JWTUtils::getCurrentUserByUuid();
@@ -38,7 +37,6 @@ class ConsumerApplicationController extends Controller
 
         return ApiResponse::success($documents, ResMessages::RETRIEVED_SUCCESS);
     }
-
     public function create(StoreUpdateProposalRequest $request)
     {
         $currentUser = JWTUtils::getCurrentUserByUuid();
@@ -120,8 +118,6 @@ class ConsumerApplicationController extends Controller
             return ApiResponse::error($proposal, ResMessages::NOT_FOUND);
         }
     }
-
-
     public function downloadDocument(Request $request)
     {
         $id = $request->id;

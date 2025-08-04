@@ -15,9 +15,7 @@ class Customer extends Model
         'age',
         'mobile',
         'alternate_mobile',
-        'aadhar',
-        'pan',
-        'address',
+        'assign_to',
         'deleted_at',
         'created_at',
         'updated_at'

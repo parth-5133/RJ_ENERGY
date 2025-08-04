@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Controllers\Controller;
 use App\Models\Quotation;
 use App\Models\Customer;
+use App\Models\SolarDetail;
 use App\Helpers\ApiResponse;
 use App\Helpers\AccessLevel;
 use App\Constants\ResMessages;
@@ -36,7 +37,6 @@ class QuotationController extends Controller
 
         return ApiResponse::success($quotations, ResMessages::RETRIEVED_SUCCESS);
     }
-
     public function store(StoreUpdateQuotationRequest $request)
     {
         DB::beginTransaction();
@@ -56,13 +56,19 @@ class QuotationController extends Controller
             // 2. Store quotation data
             $quotation = Quotation::create([
                 'customer_id' => $customer->id,
-                'solar_capacity' => $request->input('solar_capacity'),
-                'rooftop_size' => $request->input('rooftop_size'),
                 'required'    => $request->input('quotation_'),
                 'amount'      => $request->input('quotation_amount'),
                 'date'        => $request->input('quotation_date'),
                 'by'          => $request->input('quotation_by'),
                 'status'      => $request->input('quotation_status'),
+                'created_at'  => now(),
+            ]);
+
+            // 2. Store quotation data
+            $SolarDetail = SolarDetail::create([
+                'customer_id' => $customer->id,
+                'capacity' => $request->input('solar_capacity'),
+                'roof_area' => $request->input('rooftop_size'),
                 'created_at'  => now(),
             ]);
 
@@ -77,9 +83,11 @@ class QuotationController extends Controller
     public function view(Request $request)
     {
         $quotationId = $request->quotesId;
+        $isCustomer = $request->is_customer;
 
-        $quotation = DB::table('quotations')
+        $query = DB::table('quotations')
             ->leftJoin('customers', 'quotations.customer_id', '=', 'customers.id')
+            ->leftJoin('solar_details', 'quotations.customer_id', '=', 'solar_details.customer_id')
             ->select(
                 'quotations.id',
                 'customers.customer_name',
@@ -89,20 +97,26 @@ class QuotationController extends Controller
                 'customers.aadhar',
                 'customers.pan',
                 'quotations.required',
-                'quotations.solar_capacity',
-                'quotations.rooftop_size',
+                'solar_details.capacity',
+                'solar_details.roof_area',
                 'quotations.amount',
                 'quotations.date',
                 'quotations.by',
                 'quotations.status'
-            )
-            ->where('quotations.id', $quotationId)
-            ->first();
+            );
+
+        if ($isCustomer == 1) {
+            $query->where('quotations.customer_id', $quotationId);
+        } else {
+            $query->where('quotations.id', $quotationId);
+        }
+
+        $quotation = $query->first();
 
         if ($quotation) {
             return ApiResponse::success($quotation, ResMessages::RETRIEVED_SUCCESS);
         } else {
-            return ApiResponse::error($quotation, ResMessages::NOT_FOUND);
+            return ApiResponse::error(null, ResMessages::NOT_FOUND);
         }
     }
     public function update(StoreUpdateQuotationRequest $request)
@@ -129,13 +143,18 @@ class QuotationController extends Controller
 
             // 4. Update quotation data
             $quotation->update([
-                'required'    => $request->input('quotation_') === 'Yes' ? 1 : 0,
-                'solar_capacity' => $request->input('solar_capacity'),
-                'rooftop_size' => $request->input('rooftop_size'),
+                'required'    => $request->input('quotation_'),
                 'amount'      => $request->input('quotation_amount'),
                 'date'        => $request->input('quotation_date'),
                 'by'          => $request->input('quotation_by'),
                 'status'      => $request->input('quotation_status'),
+                'updated_at'  => now(),
+            ]);
+
+            $SolarDetail = SolarDetail::where('customer_id', $customer->id)->first();
+            $SolarDetail->update([
+                'capacity' => $request->input('solar_capacity'),
+                'roof_area' => $request->input('rooftop_size'),
                 'updated_at'  => now(),
             ]);
 
@@ -165,9 +184,9 @@ class QuotationController extends Controller
         $quotations = DB::table('users')
             ->select(
                 'users.id',
-                DB::raw('CONCAT(users.first_name, " ", users.last_name) AS full_name'),
+                DB::raw('CONCAT(users.first_name, " ", users.last_name) AS full_name')
             )
-            ->where('users.role_id', '=', 4)
+            ->whereIn('users.role_id', [4, 3])
             ->whereNull('users.deleted_at')
             ->get();
 

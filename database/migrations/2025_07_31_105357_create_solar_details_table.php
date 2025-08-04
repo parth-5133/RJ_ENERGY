@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('capacity')->nullable();
             $table->string('solar_company')->nullable();
             $table->string('inverter_company')->nullable();
-            $table->enum('subsidy_claimed', ['Yes', 'No'])->nullable();
             $table->string('jan_samarth_id')->nullable();
             $table->string('acknowledge_no')->nullable();
             $table->enum('loan_required', ['Yes', 'No'])->nullable();
@@ -32,7 +31,10 @@ return new class extends Migration
             $table->unsignedBigInteger('channel_partner_id')->nullable();
             $table->date('registration_date')->nullable();
             $table->decimal('solar_total_amount', 12, 2)->nullable();
-            $table->decimal('subsidy_amount', 12, 2)->nullable();
+            $table->string('installers')->nullable();
+            $table->text('customer_address')->nullable();
+            $table->text('customer_residential_address')->nullable();
+            $table->boolean('is_completed')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

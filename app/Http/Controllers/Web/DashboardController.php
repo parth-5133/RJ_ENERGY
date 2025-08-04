@@ -49,15 +49,8 @@ class DashboardController extends Controller
 
             return view('dashboard.superAdmin_dashboard', compact('name', 'profileImg', 'data'));
         }
-
-        if ($roleCode === $this->clientRoleCode) {
-
-            $ApiConsumerApplicationController = new ApiConsumerApplicationController();
-            $applicationId = $ApiConsumerApplicationController->gettApplictaionId();
-        }
-
         return match ($roleCode) {
-            $this->clientRoleCode => view('dashboard.client_dashboard', compact('name', 'profileImg', 'selectedProjects', 'selectedTasks', 'applicationId')),
+            $this->clientRoleCode => view('dashboard.client_dashboard', compact('name', 'profileImg', 'selectedProjects', 'selectedTasks')),
             default => view('dashboard.employee_dashboard', compact('name', 'profileImg', 'birthdayData', 'employeesList')),
         };
     }

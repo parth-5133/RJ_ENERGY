@@ -17,9 +17,7 @@ return new class extends Migration
             $table->integer('age')->nullable();
             $table->string('mobile', 10)->nullable();
             $table->string('alternate_mobile', 10)->nullable();
-            $table->string('aadhar')->nullable();
-            $table->string('pan')->nullable();
-            $table->text('address')->nullable();
+            $table->foreignId('assign_to')->nullable()->constrained('users', 'id');
             $table->softDeletes();
             $table->timestamps();
         });

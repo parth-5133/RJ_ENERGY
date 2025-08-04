@@ -165,8 +165,8 @@
                     $("#aadhar").val(response.data.aadhar);
                     $("#pan").val(response.data.pan);
                     $("#quotation_").val(response.data.required);
-                    $("#solar_capacity").val(response.data.solar_capacity);
-                    $("#rooftop_size").val(response.data.rooftop_size);
+                    $("#solar_capacity").val(response.data.capacity);
+                    $("#rooftop_size").val(response.data.roof_area);
                     $("#quotation_amount").val(response.data.amount);
                     $("#quotation_date").val(response.data.date);
                     $("#quotation_by").val(response.data.by);

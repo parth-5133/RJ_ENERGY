@@ -7,6 +7,8 @@ use App\Models\SolarDetail;
 use App\Models\Subsidy;
 use App\Models\LoanBankDetail;
 use App\Models\CustomerBankDetail;
+use App\Models\Customer;
+use App\Models\Quotation;
 use App\Helpers\ApiResponse;
 use App\Helpers\AccessLevel;
 use App\Constants\ResMessages;
@@ -37,7 +39,6 @@ class ClientController extends Controller
 
         return ApiResponse::success($quotations, ResMessages::RETRIEVED_SUCCESS);
     }
-
     public function accept(Request $request)
     {
         $customerId = $request->input('id');
@@ -65,16 +66,36 @@ class ClientController extends Controller
 
         return ApiResponse::success(null, ResMessages::UPDATED_SUCCESS);
     }
-
-
     public function store(Request $request)
     {
         DB::beginTransaction();
 
         try {
             // 1. Store customer data
-            $customer = SolarDetail::create([
-                'customer_id'                => $request->input('customer_id'),
+            $customer = Customer::create([
+                'customer_name'     => $request->input('customer_name'),
+                'age'               => $request->input('age'),
+                'mobile'            => $request->input('mobile'),
+                'alternate_mobile'  => $request->input('alternate_mobile'),
+                'aadhar'            => $request->input('aadhar'),
+                'pan'               => $request->input('pan'),
+                'created_at'        => now(),
+            ]);
+
+            // 2. Store quotation data
+            $quotation = Quotation::create([
+                'customer_id' => $customer->id,
+                'required'    => $request->input('quotation_'),
+                'amount'      => $request->input('quotation_amount'),
+                'date'        => $request->input('quotation_date'),
+                'by'          => $request->input('quotation_by'),
+                'status'      => $request->input('quotation_status'),
+                'created_at'  => now(),
+            ]);
+
+            // 3. Store solar detail data
+            $solarDetail = SolarDetail::create([
+                'customer_id'                => $customer->id,
                 'roof_type'                  => $request->input('roof_type'),
                 'roof_area'                  => $request->input('roof_area'),
                 'usage_pattern'              => $request->input('usage_pattern'),
@@ -85,8 +106,8 @@ class ClientController extends Controller
                 'acknowledge_no'             => $request->input('acknowledge_no'),
                 'loan_required'              => $request->input('loan_'),
                 'payment_mode'               => $request->input('payment_mode'),
-                'cancel_cheque'              => $request->file('cancel_cheque')?->store('cheques'), // Optional
-                'light_bill'                 => $request->file('light_bill')?->store('bills'),     // Optional
+                'cancel_cheque'              => $request->file('cancel_cheque')?->store('cheques'),
+                'light_bill'                 => $request->file('light_bill')?->store('bills'),
                 'consumer_no'                => $request->input('light_bill_no'),
                 'application_ref_no'         => $request->input('application_ref_no'),
                 'channel_partner_id'         => $request->input('channel_partner'),
@@ -95,17 +116,22 @@ class ClientController extends Controller
                 'installers'                 => $request->input('installers'),
                 'customer_address'           => $request->input('customer_address'),
                 'customer_residential_address' => $request->input('customer_residential_address'),
+                'is_completed'               => $request->input('is_completed'),
+                'created_at'  => now(),
             ]);
 
+            // 4. Store subsidy data
             $subsidy = Subsidy::create([
-                'customer_id'     => $request->input('customer_id'),
+                'customer_id'     => $customer->id,
                 'subsidy_amount'  => $request->input('subsidy_amount'),
                 'subsidy_status'  => $request->input('subsidy_status'),
+                'created_at'  => now(),
             ]);
 
+            // 5. Store loan bank detail data
             $loan = LoanBankDetail::create([
-                'customer_id'            => $request->input('customer_id'),
-                'solar_detail_id'        => $customer->id,
+                'customer_id'            => $customer->id,
+                'solar_detail_id'        => $solarDetail->id,
                 'bank_name'              => $request->input('bank_name_loan'),
                 'bank_branch'            => $request->input('bank_branch_loan'),
                 'account_number'         => $request->input('account_number_loan'),
@@ -113,16 +139,18 @@ class ClientController extends Controller
                 'branch_manager_phone'   => $request->input('branch_manager_phone_loan'),
                 'loan_manager_phone'     => $request->input('loan_manager_phone_loan'),
                 'loan_status'            => $request->input('loan_status'),
+                'created_at'  => now(),
             ]);
 
+            // 6. Store customer bank detail data
             $bank = CustomerBankDetail::create([
-                'customer_id'    => $request->input('customer_id'),
+                'customer_id'    => $customer->id,
                 'bank_name'      => $request->input('bank_name'),
                 'bank_branch'    => $request->input('bank_branch'),
                 'account_number' => $request->input('account_number'),
                 'ifsc_code'      => $request->input('ifsc_code'),
+                'created_at'  => now(),
             ]);
-
 
             DB::commit();
 
@@ -130,6 +158,159 @@ class ClientController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             return ApiResponse::error('Failed to store quotation: ' . $e->getMessage(), 500);
+        }
+    }
+    public function view(Request $request)
+    {
+        $customerId = $request->customerId;
+
+        $customer = Customer::find($customerId);
+
+        if (!$customer) {
+            return ApiResponse::error(ResMessages::NOT_FOUND, 404);
+        }
+
+        try {
+            // Get all related data for the customer
+            $quotation = Quotation::where('customer_id', $customer->id)->first();
+            $solarDetail = SolarDetail::where('customer_id', $customer->id)->first();
+            $subsidy = Subsidy::where('customer_id', $customer->id)->first();
+            $loanBankDetail = LoanBankDetail::where('customer_id', $customer->id)->first();
+            $customerBankDetail = CustomerBankDetail::where('customer_id', $customer->id)->first();
+
+            // Prepare comprehensive response data
+            $responseData = [
+                'customer' => $customer,
+                'quotation' => $quotation,
+                'solar_detail' => $solarDetail,
+                'subsidy' => $subsidy,
+                'loan_bank_detail' => $loanBankDetail,
+                'customer_bank_detail' => $customerBankDetail,
+            ];
+
+            return ApiResponse::success($responseData, ResMessages::RETRIEVED_SUCCESS);
+        } catch (\Exception $e) {
+            return ApiResponse::error('Failed to retrieve customer data: ' . $e->getMessage(), 500);
+        }
+    }
+
+    public function update(Request $request)
+    {
+        $customerId = $request->clientId;
+
+        $customer = Customer::find($customerId);
+
+        if (!$customer) {
+            return ApiResponse::error(ResMessages::NOT_FOUND, 404);
+        }
+
+        DB::beginTransaction();
+
+        try {
+            // 1. Update customer data
+            $customer->update([
+                'customer_name'     => $request->input('customer_name'),
+                'age'               => $request->input('age'),
+                'mobile'            => $request->input('mobile'),
+                'alternate_mobile'  => $request->input('alternate_mobile'),
+                'aadhar'            => $request->input('aadhar'),
+                'pan'               => $request->input('pan'),
+                'updated_at'        => now(),
+            ]);
+
+            // 2. Update quotation data
+            $quotation = Quotation::where('customer_id', $customer->id)->first();
+            if ($quotation) {
+                $quotation->update([
+                    'required'    => $request->input('quotation_'),
+                    'amount'      => $request->input('quotation_amount'),
+                    'date'        => $request->input('quotation_date'),
+                    'by'          => $request->input('quotation_by'),
+                    'status'      => $request->input('quotation_status'),
+                    'updated_at'  => now(),
+                ]);
+            }
+
+            // 3. Update solar detail data
+            $solarDetail = SolarDetail::where('customer_id', $customer->id)->first();
+            if ($solarDetail) {
+                $updateData = [
+                    'roof_type'                  => $request->input('roof_type'),
+                    'roof_area'                  => $request->input('roof_area'),
+                    'usage_pattern'              => $request->input('usage_pattern'),
+                    'capacity'                   => $request->input('solar_capacity'),
+                    'solar_company'              => $request->input('solar_company'),
+                    'inverter_company'           => $request->input('inverter_company'),
+                    'jan_samarth_id'             => $request->input('jan_samarth_id'),
+                    'acknowledge_no'             => $request->input('acknowledge_no'),
+                    'loan_required'              => $request->input('loan_'),
+                    'payment_mode'               => $request->input('payment_mode'),
+                    'consumer_no'                => $request->input('light_bill_no'),
+                    'application_ref_no'         => $request->input('application_ref_no'),
+                    'channel_partner_id'         => $request->input('channel_partner'),
+                    'registration_date'          => $request->input('registration_date'),
+                    'solar_total_amount'         => $request->input('solar_total_amount'),
+                    'installers'                 => $request->input('installers'),
+                    'customer_address'           => $request->input('customer_address'),
+                    'customer_residential_address' => $request->input('customer_residential_address'),
+                    'is_completed'               => $request->input('is_completed'),
+                    'updated_at'  => now(),
+                ];
+
+                // Handle file uploads if new files are provided
+                if ($request->hasFile('cancel_cheque')) {
+                    $updateData['cancel_cheque'] = $request->file('cancel_cheque')->store('cheques');
+                }
+                if ($request->hasFile('light_bill')) {
+                    $updateData['light_bill'] = $request->file('light_bill')->store('bills');
+                }
+
+                $solarDetail->update($updateData);
+            }
+
+            // 4. Update subsidy data
+            $subsidy = Subsidy::where('customer_id', $customer->id)->first();
+            if ($subsidy) {
+                $subsidy->update([
+                    'subsidy_amount'  => $request->input('subsidy_amount'),
+                    'subsidy_status'  => $request->input('subsidy_status'),
+                    'updated_at'  => now(),
+                ]);
+            }
+
+            // 5. Update loan bank detail data
+            $loan = LoanBankDetail::where('customer_id', $customer->id)->first();
+            if ($loan) {
+                $loan->update([
+                    'bank_name'              => $request->input('bank_name_loan'),
+                    'bank_branch'            => $request->input('bank_branch_loan'),
+                    'account_number'         => $request->input('account_number_loan'),
+                    'ifsc_code'              => $request->input('ifsc_code_loan'),
+                    'branch_manager_phone'   => $request->input('branch_manager_phone_loan'),
+                    'loan_manager_phone'     => $request->input('loan_manager_phone_loan'),
+                    'loan_status'            => $request->input('loan_status'),
+                    'updated_at'  => now(),
+                ]);
+            }
+
+            // 6. Update customer bank detail data
+            $bank = CustomerBankDetail::where('customer_id', $customer->id)->first();
+            if ($bank) {
+                $bank->update([
+                    'bank_name'      => $request->input('bank_name'),
+                    'bank_branch'    => $request->input('bank_branch'),
+                    'account_number' => $request->input('account_number'),
+                    'ifsc_code'      => $request->input('ifsc_code'),
+                    'updated_at'  => now(),
+                ]);
+            }
+
+            DB::commit();
+
+            return ApiResponse::success(null, ResMessages::UPDATED_SUCCESS);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return ApiResponse::error('Failed to update customer data: ' . $e->getMessage(), 500);
         }
     }
 }

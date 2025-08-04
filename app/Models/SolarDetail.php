@@ -33,6 +33,7 @@ class SolarDetail extends Model
         'installers',
         'customer_address',
         'customer_residential_address',
+        'is_completed',
         'created_at',
         'updated_at',
         'deleted_at'
