@@ -18,7 +18,7 @@
                                 <h6 class="mb-0 text-truncate">Total No of Company</h6>
                                 <div class="d-flex align-items-center">
                                     <h4 class="mb-0">
-                                        <span>{{ $data['totalCompanies'] }}</span>
+                                        <span>15</span>
                                     </h4>
                                 </div>
                             </div>
@@ -42,7 +42,7 @@
                                 <h6 class="mb-0 text-truncate">No of New Company</h6>
                                 <div class="d-flex align-items-center">
                                     <h4 class="mb-0">
-                                        <span>{{ $data['thisWeekCompanies'] }}</span>
+                                        <span>10</span>
                                     </h4>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                                 <h6 class="mb-0 text-truncate">No of Lost Company</h6>
                                 <div class="d-flex align-items-center">
                                     <h4 class="mb-0">
-                                        <span>{{ $data['lost'] }}</span>
+                                        <span>1</span>
                                     </h4>
                                 </div>
                             </div>

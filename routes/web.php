@@ -10,8 +10,6 @@ use App\Http\Controllers\Web\PermissionController;
 use App\Http\Controllers\Web\ProfileController;
 use App\Http\Controllers\Web\ErrorController;
 use App\Http\Controllers\Web\HolidaysController;
-use App\Http\Controllers\Web\ProjectsController;
-use App\Http\Controllers\Web\TaskController;
 use App\Http\Controllers\Web\LeaveController;
 use App\Http\Controllers\Web\AttendanceController;
 use App\Http\Controllers\Web\FinancialYearController;
@@ -23,9 +21,6 @@ use App\Http\Controllers\Web\EmployeeSalaryController;
 use App\Http\Controllers\Web\PolicyController;
 use App\Http\Controllers\Web\AppSettingsController;
 use App\Http\Controllers\Web\ClientController;
-use App\Http\Controllers\Web\DepartmentController;
-use App\Http\Controllers\Web\DesignationController;
-use App\Http\Controllers\Web\ShiftController;
 use App\Http\Controllers\Web\LayoutController;
 use App\Http\Controllers\Web\EmployeeResignationController;
 use App\Http\Controllers\Web\ConsumerApplicationController;
@@ -101,21 +96,6 @@ Route::middleware(['CheckAuth'])->group(function () {
     Route::get('/holidays', [HolidaysController::class, 'index'])->name('holidays');
     Route::get('/holidays/create', [HolidaysController::class, 'create'])->name('holidays.create');
 
-    // Projects
-    Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
-    Route::get('/projects/create', [ProjectsController::class, 'create'])->name('projects.create');
-    Route::get('/projects/details/{project_id}', [ProjectsController::class, 'showDetails'])->name('projects.details');
-    Route::get('/projects/documents/upload', [ProjectsController::class, 'uploadDocuments']);
-
-    // Kanban
-    Route::get('/kanban/view', [ProjectsController::class, 'kanbanView'])->name('kanbanView');
-    Route::get('/kanban/Edit', [ProjectsController::class, 'editKanbanBoard'])->name('edit.kanbanView');
-    Route::get('/kanban/Task/comment', [ProjectsController::class, 'taskComment'])->name('taskComment');
-
-    // Tasks
-    Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
-    Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
-
     // Company
     Route::get('/company', [CompanyController::class, 'index'])->name('company');
     Route::get('/company/create', [CompanyController::class, 'create'])->name('company.create');
@@ -154,17 +134,6 @@ Route::middleware(['CheckAuth'])->group(function () {
 
     Route::get('/notifications-settings', [AppSettingsController::class, 'notificationsIndex'])->name('notifications-settings');
 
-    // department
-    Route::get('/department', [DepartmentController::class, 'index'])->name('departments');
-    Route::get('/department/create', [DepartmentController::class, 'create'])->name('departments.create');
-
-    // designation
-    Route::get('/designation', [DesignationController::class, 'index'])->name('designation');
-    Route::get('/designation/create', [DesignationController::class, 'create'])->name('designation.create');
-
-    // sift
-    Route::get('/shift', [ShiftController::class, 'index'])->name('shift');
-    Route::get('/shift/create', [ShiftController::class, 'create'])->name('shift.create');
 
     // Channel Partners
     Route::get('/channel-partners', [ChannelPartnersController::class, 'index'])->name('channel-partners');

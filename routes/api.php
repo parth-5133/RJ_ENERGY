@@ -20,7 +20,6 @@ use App\Http\Controllers\API\v1\FinancialYearController;
 use App\Http\Controllers\API\v1\CompanyController;
 use App\Http\Controllers\API\v1\ClientController;
 use App\Http\Controllers\API\v1\EmployeeController;
-use App\Http\Controllers\API\v1\KanbanController;
 use App\Http\Controllers\API\v1\AdminDashboardController;
 use App\Http\Controllers\API\v1\superAdminDashboardController;
 use App\Http\Controllers\API\v1\AllowanceListController;
@@ -48,15 +47,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/password/reset', [AuthController::class, 'resetPassword'])->name('password.update');
     Route::post('/change/password', [AuthController::class, 'changePassword'])->name('change.password');
 
-
     Route::post('/UploadFiles', [DashboardController::class, 'UploadFiles']);
-
-    // kanban
-    Route::get('/kanban/data/{projectId}/{userId}', [KanbanController::class, 'kanbanViewData']);
-    Route::post('/kanban/update-task', [KanbanController::class, 'kanbanUpdateTask']);
-    Route::post('/kanban/create-board', [KanbanController::class, 'kanbanCreateBoard']);
-    Route::post('/kanban/delete/{id}', [KanbanController::class, 'kanbanDeleteBoard']);
-    Route::post('/kanban/update-board-position', [KanbanController::class, 'kanbanUpdateBoardPosition']);
 
     Route::get('/admin/Attendance/export', [AdminAttendanceController::class, 'exportAttendance']);
 });
@@ -242,29 +233,6 @@ Route::middleware(['jwt.verify'])->group(function () {
         // SuperAdmin Dashboard
         Route::get('/super-admin/dashboard/company-status-overview', [superAdminDashboardController::class, 'getCompanyStatusOverview']);
 
-        // Projects
-        Route::get('/projects', [ProjectsController::class, 'index']);
-        Route::post('/projects/create', [ProjectsController::class, 'createProjects']);
-        Route::get('/projects/view', [ProjectsController::class, 'viewProjects']);
-        Route::post('/projects/update', [ProjectsController::class, 'updateProjects']);
-        Route::post('/projects/delete/{id}', [ProjectsController::class, 'deleteProjects']);
-        Route::get('/projects/details', [ProjectsController::class, 'showDetails']);
-        Route::post('/projects/documents/upload', [ProjectsController::class, 'uploadProjectsDocuments']);
-        Route::post('/projects/documents/delete/{id}', [ProjectsController::class, 'deleteProjectsDocuments']);
-        Route::post('/projects/tasks/delete/{id}', [ProjectsController::class, 'projectTaskDelete'])->name('projects.tasks.delete');
-        Route::get('/projects/Get-teamMembers', [ProjectsController::class, 'getTeamMembers']);
-
-        // Tasks
-        Route::get('/task', [TaskController::class, 'index']);
-        Route::post('/task/create', [TaskController::class, 'createTask']);
-        Route::get('/task/view', [TaskController::class, 'viewTask']);
-        Route::post('/task/update', [TaskController::class, 'updateTask']);
-        Route::post('/task/delete/{id}', [TaskController::class, 'deleteTask']);
-        Route::get('/task/status', [TaskController::class, 'getTaskStatus']);
-        Route::post('/tasks/storeComment', [TaskController::class, 'storeComment']);
-        Route::get('/get/tasks/Comment', [TaskController::class, 'getTaskComments']);
-        Route::get('/task/status/log', [TaskController::class, 'taskStatusLog']);
-
         // Financial Year
         Route::get('/financial-year', [FinancialYearController::class, 'index']);
         Route::post('/financial-year/create', [FinancialYearController::class, 'createFinancialYear']);
@@ -272,19 +240,12 @@ Route::middleware(['jwt.verify'])->group(function () {
         Route::post('/financial-year/update', [FinancialYearController::class, 'updateFinancialYear']);
         Route::post('/financial-year/delete/{id}', [FinancialYearController::class, 'deleteFinancialYear']);
 
-
         // Company
         Route::get('/company', [CompanyController::class, 'index']);
         Route::post('/company/create', [CompanyController::class, 'createCompany']);
         Route::get('/company/view', [CompanyController::class, 'viewCompany']);
         Route::post('/company/update', [CompanyController::class, 'updateCompany']);
         Route::post('/company/delete/{id}', [CompanyController::class, 'deleteCompany']);
-
-        // Kanban
-        Route::get('/kanban/view', [KanbanController::class, 'viewKanban']);
-        Route::post('/kanban/update', [KanbanController::class, 'kanbanUpdateBoard']);
-
-
 
         // Employee
         Route::get('/employees', [EmployeeController::class, 'index'])->name('employee');
@@ -326,27 +287,6 @@ Route::middleware(['jwt.verify'])->group(function () {
         Route::post('/email-settings/update', [EmailSettingsController::class, 'update']);
         Route::post('/email-settings/delete/{id}', [EmailSettingsController::class, 'delete']);
         Route::post('/email-settings/test-connection', [EmailSettingsController::class, 'testConnection']);
-
-        // Department API Routes
-        Route::get('/department', [DepartmentController::class, 'index']);
-        Route::post('/department/create', [DepartmentController::class, 'store']);
-        Route::get('/department/view', [DepartmentController::class, 'view']);
-        Route::post('/department/update', [DepartmentController::class, 'update']);
-        Route::post('/department/delete/{id}', [DepartmentController::class, 'delete']);
-
-        // Designation API Routes
-        Route::get('/designation', [DesignationController::class, 'index']);
-        Route::post('/designation/create', [DesignationController::class, 'store']);
-        Route::get('/designation/view', [DesignationController::class, 'view']);
-        Route::post('/designation/update', [DesignationController::class, 'update']);
-        Route::post('/designation/delete/{id}', [DesignationController::class, 'delete']);
-
-        // Shift API Routes
-        Route::get('/shift', [ShiftController::class, 'index']);
-        Route::post('/shift/create', [ShiftController::class, 'store']);
-        Route::get('/shift/view', [ShiftController::class, 'view']);
-        Route::post('/shift/update', [ShiftController::class, 'update']);
-        Route::post('/shift/delete/{id}', [ShiftController::class, 'delete']);
 
         // Employee Resignation API Routes
         Route::get('/employee/resignation', [EmployeeResignationController::class, 'index']);
