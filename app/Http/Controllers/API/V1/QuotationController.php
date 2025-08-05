@@ -48,8 +48,6 @@ class QuotationController extends Controller
                 'age'               => $request->input('age'),
                 'mobile'            => $request->input('mobile'),
                 'alternate_mobile'  => $request->input('alternate_mobile'),
-                'aadhar'            => $request->input('aadhar'),
-                'pan'               => $request->input('pan'),
                 'created_at'        => now(),
             ]);
 
@@ -94,8 +92,6 @@ class QuotationController extends Controller
                 'customers.age',
                 'customers.mobile',
                 'customers.alternate_mobile',
-                'customers.aadhar',
-                'customers.pan',
                 'quotations.required',
                 'solar_details.capacity',
                 'solar_details.roof_area',

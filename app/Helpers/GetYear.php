@@ -11,6 +11,10 @@ class GetYear
     {
         $year = request()->cookie('selected_year');
 
+        if ($year == null) {
+            $year = 1;
+        }
+
         $data = DB::table('financial_years')
             ->where('id', $year)
             ->select('id', 'from_date', 'to_date', 'display_year')

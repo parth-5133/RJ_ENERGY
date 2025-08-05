@@ -9,6 +9,7 @@ use App\Models\LoanBankDetail;
 use App\Models\CustomerBankDetail;
 use App\Models\Customer;
 use App\Models\Quotation;
+use App\Models\Sequence;
 use App\Helpers\ApiResponse;
 use App\Helpers\AccessLevel;
 use App\Constants\ResMessages;
@@ -23,14 +24,29 @@ class ClientController extends Controller
 {
     public function index()
     {
-        $quotations = DB::table('quotations')
-            ->leftJoin('customers', 'quotations.customer_id', '=', 'customers.id')
+        $quotations = DB::table('customers')
+            ->leftJoin('quotations', 'quotations.customer_id', '=', 'customers.id')
+            ->leftJoin('subsidies', 'subsidies.customer_id', '=', 'customers.id')
+            ->leftJoin('loan_bank_details', 'loan_bank_details.customer_id', '=', 'customers.id')
+            ->leftJoin('solar_details', 'solar_details.customer_id', '=', 'customers.id')
+            ->leftJoin('channel_partners', 'solar_details.channel_partner_id', '=', 'channel_partners.id')
+            ->leftJoin('installers', 'solar_details.installers', '=', 'installers.id')
+            ->leftJoin('users as assign_user', 'customers.assign_to', '=', 'assign_user.id')
             ->select(
                 'customers.id',
+                'customers.customer_number',
                 'customers.customer_name',
                 'customers.mobile',
                 'customers.age',
-                'quotations.status'
+                DB::raw("CONCAT(assign_user.first_name, ' ', assign_user.last_name) as assign_to_name"),
+                'quotations.status',
+                'subsidies.subsidy_status',
+                'loan_bank_details.loan_status',
+                'solar_details.loan_required',
+                'installers.name as installer_name',
+                'channel_partners.legal_name as channel_partner_name',
+                'solar_details.solar_total_amount',
+                'solar_details.is_completed',
             )
             ->where('quotations.status', '=', 'Agreed')
             ->whereNull('quotations.deleted_at')
@@ -71,16 +87,20 @@ class ClientController extends Controller
         DB::beginTransaction();
 
         try {
+            $sequence = Sequence::where('type', 'customerNumber')->first();
+            $newSequenceNo = $sequence->sequenceNo + 1;
+            $customerNumber = $sequence->prefix . '-' . str_pad($newSequenceNo, 4, '0', STR_PAD_LEFT);
             // 1. Store customer data
             $customer = Customer::create([
+                'customer_number' => $customerNumber,
                 'customer_name'     => $request->input('customer_name'),
                 'age'               => $request->input('age'),
                 'mobile'            => $request->input('mobile'),
                 'alternate_mobile'  => $request->input('alternate_mobile'),
-                'aadhar'            => $request->input('aadhar'),
-                'pan'               => $request->input('pan'),
+                'assign_to'         => JWTUtils::getCurrentUserByUuid()->id,
                 'created_at'        => now(),
             ]);
+            Sequence::where('type', 'customerNumber')->update(['sequenceNo' => $newSequenceNo]);
 
             // 2. Store quotation data
             $quotation = Quotation::create([
@@ -154,7 +174,7 @@ class ClientController extends Controller
 
             DB::commit();
 
-            return ApiResponse::success(null, ResMessages::CREATED_SUCCESS);
+            return ApiResponse::success($customer, ResMessages::CREATED_SUCCESS);
         } catch (\Exception $e) {
             DB::rollBack();
             return ApiResponse::error('Failed to store quotation: ' . $e->getMessage(), 500);
@@ -193,7 +213,6 @@ class ClientController extends Controller
             return ApiResponse::error('Failed to retrieve customer data: ' . $e->getMessage(), 500);
         }
     }
-
     public function update(Request $request)
     {
         $customerId = $request->clientId;
@@ -213,8 +232,6 @@ class ClientController extends Controller
                 'age'               => $request->input('age'),
                 'mobile'            => $request->input('mobile'),
                 'alternate_mobile'  => $request->input('alternate_mobile'),
-                'aadhar'            => $request->input('aadhar'),
-                'pan'               => $request->input('pan'),
                 'updated_at'        => now(),
             ]);
 
@@ -307,10 +324,50 @@ class ClientController extends Controller
 
             DB::commit();
 
-            return ApiResponse::success(null, ResMessages::UPDATED_SUCCESS);
+            return ApiResponse::success($solarDetail, ResMessages::UPDATED_SUCCESS);
         } catch (\Exception $e) {
             DB::rollBack();
             return ApiResponse::error('Failed to update customer data: ' . $e->getMessage(), 500);
         }
+    }
+    public function ClientDetails(Request $request)
+    {
+
+        $customerId = $request->id;
+
+        $customer = Customer::find($customerId);
+
+        if (!$customer) {
+            return ApiResponse::error(ResMessages::NOT_FOUND, 404);
+        }
+
+        $data = DB::table('customers')
+            ->leftJoin('quotations', 'quotations.customer_id', '=', 'customers.id')
+            ->leftJoin('subsidies', 'subsidies.customer_id', '=', 'customers.id')
+            ->leftJoin('loan_bank_details', 'loan_bank_details.customer_id', '=', 'customers.id')
+            ->leftJoin('solar_details', 'solar_details.customer_id', '=', 'customers.id')
+            ->leftJoin('channel_partners', 'solar_details.channel_partner_id', '=', 'channel_partners.id')
+            ->leftJoin('installers', 'solar_details.installers', '=', 'installers.id')
+            ->leftJoin('users as assign_user', 'customers.assign_to', '=', 'assign_user.id')
+            ->select(
+                'customers.id',
+                'customers.customer_number',
+                'customers.customer_name',
+                'customers.mobile',
+                'customers.age',
+                DB::raw("CONCAT(assign_user.first_name, ' ', assign_user.last_name) as assign_to_name"),
+                'quotations.status',
+                'subsidies.subsidy_status',
+                'loan_bank_details.loan_status',
+                'solar_details.loan_required',
+                'installers.name as installer_name',
+                'channel_partners.legal_name as channel_partner_name',
+                'solar_details.*',
+            )
+            ->whereNull('customers.deleted_at')
+            ->where('customers.id', $customerId)
+            ->get();
+
+        return ApiResponse::success($data, ResMessages::RETRIEVED_SUCCESS);
     }
 }

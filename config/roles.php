@@ -4,5 +4,5 @@ return [
     'SUPERADMIN' => 'SUPERADMIN',
     'ADMIN' => 'ADMIN',
     'EMPLOYEE' => 'EMPLOYEE',
-    'CLIENT' => 'CLIENT',
+    'CLIENT' => 'ACCOUNTANT',
 ];

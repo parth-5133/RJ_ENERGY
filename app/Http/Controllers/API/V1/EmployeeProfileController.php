@@ -61,7 +61,6 @@ class EmployeeProfileController extends Controller
         $cachedData = Cache::remember('employee_related_data', 60, function () {
             return [
                 'state' => State::select('id', 'name', 'country_id')->get(),
-                'blood_groups' => BloodGroup::select('id', 'name')->get(),
                 'marital_statuses' => MaritalStatus::select('id', 'name')->get(),
                 'nationalities' => Country::select('id', 'name')->get(),
                 'employeeDepartment' => Department::select('id', 'name')->where('is_active', 1)->get(),
@@ -118,7 +117,6 @@ class EmployeeProfileController extends Controller
             'state' => $cachedData['state'],
             'allUser' => $cachedData['allUser'],
             'employeeType' => $cachedData['employeeType'],
-            'blood_groups' => $cachedData['blood_groups'],
             'nationalities' => $cachedData['nationalities'],
             'employeeStatus' => $cachedData['employeeStatus'],
             'marital_statuses' => $cachedData['marital_statuses'],

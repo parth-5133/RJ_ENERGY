@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\V1\MenuPermissionsController;
+use App\Http\Controllers\API\V1\ClientController as APIClientController;
 use App\Helpers\JWTUtils;
 
 class ClientController extends Controller
@@ -34,5 +35,25 @@ class ClientController extends Controller
         $clientId = $request->input('id');
 
         return view('client.client_create', compact('clientId'));
+    }
+    public function showDetails(Request $request, $id)
+    {
+        $request->merge(['id' => $id]);
+
+        $apiController = new APIClientController();
+        $response = $apiController->ClientDetails($request);
+
+        $responseData = $response->getData(true);
+
+        $client = $responseData['data'] ?? [];
+
+        return view('client.client_details', compact('client'));
+    }
+
+    public function uploadDocuments(Request $request)
+    {
+        $clientId = $request->input('id');
+
+        return view('client.client_document', compact('clientId'));
     }
 }

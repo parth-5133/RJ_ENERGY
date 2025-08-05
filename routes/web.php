@@ -154,6 +154,8 @@ Route::middleware(['CheckAuth'])->group(function () {
     // client
     Route::get('/client', [ClientController::class, 'index'])->name('client');
     Route::get('/client/create', [ClientController::class, 'create'])->name('customer.create');
+    Route::get('/client/details/{id}', [ClientController::class, 'showDetails'])->name('client.details');
+    Route::get('/client/documents/upload', [ClientController::class, 'uploadDocuments'])->name('client.documents.upload');
 });
 
 Route::get('/401', [ErrorController::class, 'index'])->name('unauthorized.401');

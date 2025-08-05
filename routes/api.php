@@ -98,6 +98,8 @@ Route::middleware(['jwt.verify'])->group(function () {
         Route::post('/client-application/update', [ClientController::class, 'update']);
         Route::post('/client-application/delete/{id}', [ClientController::class, 'delete']);
 
+        Route::get('/client/details', [ClientController::class, 'showDetails']);
+
         Route::post('/set-year-filter', [AuthController::class, 'setYearFilter'])->name('set.year.filter');
         Route::post('/set-company-filter', [AuthController::class, 'setCompaniesFilter'])->name('set.companies.filter');
 

@@ -22,7 +22,8 @@
                 </div>
 
                 <div class="row gy-5 gx-5">
-                    <div class="col-12 col-md-12 col-lg-12 col-xxl-12">
+                    <div class="col-12 col-md-12 col-lg-12
+                     col-xxl-12">
                         <div class="card mb-0">
                             <div class="card-header d-flex align-items-center justify-content-between">
                                 <h5 class="card-title m-0 me-2">Upcoming Holidays</h5>

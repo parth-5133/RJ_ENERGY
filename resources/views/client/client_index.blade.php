@@ -40,10 +40,17 @@
                     <thead>
                         <tr>
                             <th>Action</th>
+                            <th>Customer Number</th>
                             <th>Customer Name</th>
-                            <th>Mobile</th>
-                            <th>Age</th>
+                            <th>Solar Total Amount</th>
+                            <th>Channel Partner</th>
+                            <th>Installer</th>
+                            <th>Assigned To</th>
                             <th>Quotation Status</th>
+                            <th>Subsidy Status</th>
+                            <th>Loan Required</th>
+                            <th>Loan Status</th>
+                            <th>Is Completed</th>
                         </tr>
                     </thead>
                 </table>
@@ -147,18 +154,50 @@
                         },
                     },
                     {
+                        data: "customer_number",
+                        render: function(data, type, row) {
+                            if ({{ $permissions['canEdit'] }}) {
+                                return `<a href="{{ url('/client/details') }}/${row.id}"
+                           class="text-primary">${data}</a>`;
+                            }
+                            return data;
+                        }
+                    },
+                    {
                         data: "customer_name",
                     },
                     {
-                        data: "mobile",
+                        data: "solar_total_amount",
                     },
                     {
-                        data: "age",
+                        data: "channel_partner_name",
+                    },
+                    {
+                        data: "installer_name",
+                    },
+                    {
+                        data: "assign_to_name",
                     },
                     {
                         data: "status",
+                    },
+                    {
+                        data: "subsidy_status",
+                    },
+                    {
+                        data: "loan_required",
+                    },
+                    {
+                        data: "loan_status",
+                    },
+                    {
+                        data: "is_completed",
+                        render: function(data) {
+                            return data === 1 ?
+                                `<span class="badge rounded bg-label-success">Completed</span>` :
+                                `<span class="badge rounded bg-label-danger">Pending</span>`;
+                        }
                     }
-
                 ]
             });
         }
