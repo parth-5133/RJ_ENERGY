@@ -48,6 +48,8 @@ class QuotationController extends Controller
                 'customer_number'   => $customerNumber,
                 'customer_name'     => $request->input('customer_name'),
                 'age'               => $request->input('age'),
+                'gender'            => $request->input('gender'),
+                'marital_status'    => $request->input('marital_status'),
                 'mobile'            => $request->input('mobile'),
                 'alternate_mobile'  => $request->input('alternate_mobile'),
                 'assign_to'         => 0,
@@ -94,6 +96,8 @@ class QuotationController extends Controller
                 'quotations.id',
                 'customers.customer_name',
                 'customers.age',
+                'customers.gender',
+                'customers.marital_status',
                 'customers.mobile',
                 'customers.alternate_mobile',
                 'quotations.required',
@@ -134,6 +138,8 @@ class QuotationController extends Controller
             $customer->update([
                 'customer_name'     => $request->input('customer_name'),
                 'age'               => $request->input('age'),
+                'gender'            => $request->input('gender'),
+                'marital_status'    => $request->input('marital_status'),
                 'mobile'            => $request->input('mobile'),
                 'alternate_mobile'  => $request->input('alternate_mobile'),
                 'assign_to'         => 0,
@@ -185,7 +191,7 @@ class QuotationController extends Controller
                 'users.id',
                 DB::raw('CONCAT(users.first_name, " ", users.last_name) AS full_name')
             )
-            ->whereIn('users.role_id', [4, 3])
+            ->where('users.role_id', 4)
             ->whereNull('users.deleted_at')
             ->get();
 

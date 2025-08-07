@@ -20,6 +20,9 @@ class LoanBankDetail extends Model
         'branch_manager_phone',
         'loan_manager_phone',
         'loan_status',
+        'loan_sanction_date',
+        'loan_disbursed_date',
+        'managed_by',
         'deleted_at',
         'created_at',
         'updated_at'

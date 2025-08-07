@@ -4,7 +4,6 @@
 
     <h5 class="fw-bold mb-3 mt-4">👤 Customer Basic Details</h5>
     <div class="row">
-
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="text" class="form-control" name="customer_name" id="customer_name" placeholder="Name" />
@@ -17,6 +16,30 @@
                 <input type="number" class="form-control" name="age" id="age" placeholder="Age" />
                 <label for="age">Age <span class="text-danger">*</span></label>
                 <span class="text-danger" id="age-error"></span>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <select class="form-select" name="gender" id="gender">
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                <label for="gender">Gender <span class="text-danger">*</span></label>
+                <span class="text-danger" id="gender-error"></span>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <select class="form-select" name="marital_status" id="marital_status">
+                    <option value="">Select Marital Status</option>
+                    <option value="Single">Single</option>
+                    <option value="Married">Married</option>
+                    <option value="Divorced">Divorced</option>
+                </select>
+                <label for="marital_status">Marital Status <span class="text-danger">*</span></label>
+                <span class="text-danger" id="marital_status-error"></span>
             </div>
         </div>
         <div class="col-md-4 mb-4">
@@ -42,8 +65,8 @@
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="quotation_" id="quotation_">
-                    <option value="Yes">Yes</option>
                     <option value="No">No</option>
+                    <option value="Yes">Yes</option>
                 </select>
                 <label for="quotation_">Is Quotation <span class="text-danger">*</span></label>
                 <span class="text-danger" id="quotation_-error"></span>
@@ -150,14 +173,13 @@
         </div>
     </div>
     <div class="row">
-        <!-- Installers -->
+
+        <!-- Application Reference No -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
-                <select class="form-select" name="installers" id="installers">
-                    <option value="">Select Installers</option>
-                </select>
-                <label for="installers">Installers <span class="text-danger">*</span></label>
-                <span class="text-danger" id="installers-error"></span>
+                <input type="text" class="form-control" name="application_ref_no" id="application_ref_no"
+                    placeholder="Application Reference No." />
+                <label for="application_ref_no">Application Reference No. <span class="text-danger">*</span></label>
             </div>
         </div>
         <!-- Jan-Samarth ID -->
@@ -165,7 +187,7 @@
             <div class="form-floating form-floating-outline">
                 <input type="text" class="form-control" name="jan_samarth_id" id="jan_samarth_id"
                     placeholder="Jan-Samarth ID" />
-                <label for="jan_samarth_id">Jan-Samarth ID</label>
+                <label for="jan_samarth_id">Jan-Samarth ID <span class="text-danger">*</span></label>
                 <span class="text-danger" id="jan_samarth_id-error"></span>
             </div>
         </div>
@@ -174,8 +196,33 @@
             <div class="form-floating form-floating-outline">
                 <input type="text" class="form-control" name="acknowledge_no" id="acknowledge_no"
                     placeholder="Acknowledgement No." />
-                <label for="acknowledge_no">Acknowledge No.</label>
+                <label for="acknowledge_no">Acknowledge No. <span class="text-danger">*</span></label>
                 <span class="text-danger" id="acknowledge_no-error"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Cancelled Cheque -->
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="file" class="form-control" name="cancel_cheque" id="cancel_cheque" />
+                <label for="cancel_cheque">Cancelled Cheque (Upload)</label>
+            </div>
+        </div>
+        <!-- Light Bill -->
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="file" class="form-control" name="light_bill" id="light_bill" />
+                <label for="light_bill">Light Bill (Upload)</label>
+            </div>
+        </div>
+        <!-- Light Bill No -->
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="text" class="form-control" name="light_bill_no" id="light_bill_no"
+                    placeholder="Consumer No." />
+                <label for="light_bill_no">Light Bill No <span class="text-danger">*</span></label>
+                <span class="text-danger" id="light_bill_no-error"></span>
             </div>
         </div>
     </div>
@@ -204,41 +251,43 @@
                 <span class="text-danger" id="payment_mode-error"></span>
             </div>
         </div>
-        <!-- Cancelled Cheque -->
+        <!-- Solar Total Amount -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
-                <input type="file" class="form-control" name="cancel_cheque" id="cancel_cheque" />
-                <label for="cancel_cheque">Cancelled Cheque (Upload)</label>
+                <input type="number" class="form-control" name="solar_total_amount" id="solar_total_amount"
+                    placeholder="Total Amount" />
+                <label for="solar_total_amount">Solar Total Amount (₹) <span class="text-danger">*</span></label>
+                <span class="text-danger" id="solar_total_amount-error"></span>
             </div>
         </div>
     </div>
     <div class="row">
-        <!-- Light Bill -->
+        <!-- Total Received Amount -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
-                <input type="file" class="form-control" name="light_bill" id="light_bill" />
-                <label for="light_bill">Light Bill (Upload)</label>
+                <input type="number" class="form-control" name="total_received_amount" id="total_received_amount"
+                    placeholder="Total Received Amount" />
+                <label for="total_received_amount">Total Received Amount (₹) <span
+                        class="text-danger">*</span></label>
+                <span class="text-danger" id="total_received_amount-error"></span>
             </div>
         </div>
-        <!-- Light Bill No -->
+        <!-- Date of Full Payment -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
-                <input type="text" class="form-control" name="light_bill_no" id="light_bill_no"
-                    placeholder="Consumer No." />
-                <label for="light_bill_no">Light Bill No <span class="text-danger">*</span></label>
-                <span class="text-danger" id="light_bill_no-error"></span>
+                <input type="date" class="form-control" name="date_full_payment" id="date_full_payment" />
+                <label for="date_full_payment">Date of Full Payment </label>
+                <span class="text-danger" id="date_full_payment-error"></span>
             </div>
         </div>
-        <!-- Application Reference No -->
+        <!-- Registration Date -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
-                <input type="text" class="form-control" name="application_ref_no" id="application_ref_no"
-                    placeholder="Application Reference No." />
-                <label for="application_ref_no">Application Reference No.</label>
+                <input type="date" class="form-control" name="registration_date" id="registration_date" />
+                <label for="registration_date">Registration Date <span class="text-danger">*</span></label>
+                <span class="text-danger" id="registration_date-error"></span>
             </div>
         </div>
-    </div>
-    <div class="row">
         <!-- Channel Partner -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
@@ -250,23 +299,7 @@
                 <span class="text-danger" id="channel_partner-error"></span>
             </div>
         </div>
-        <!-- Registration Date -->
-        <div class="col-md-4 mb-4">
-            <div class="form-floating form-floating-outline">
-                <input type="date" class="form-control" name="registration_date" id="registration_date" />
-                <label for="registration_date">Registration Date <span class="text-danger">*</span></label>
-                <span class="text-danger" id="registration_date-error"></span>
-            </div>
-        </div>
-        <!-- Solar Total Amount -->
-        <div class="col-md-4 mb-4">
-            <div class="form-floating form-floating-outline">
-                <input type="number" class="form-control" name="solar_total_amount" id="solar_total_amount"
-                    placeholder="Total Amount" />
-                <label for="solar_total_amount">Solar Total Amount (₹) <span class="text-danger">*</span></label>
-                <span class="text-danger" id="solar_total_amount-error"></span>
-            </div>
-        </div>
+
     </div>
     <div class="row">
         <!-- Customer Address -->
@@ -357,15 +390,18 @@
     <div id="loanBankDetailsSection" class="mb-4">
         <h6 class="fw-bold mb-3">🏦 Loan Applicants Bank Details</h6>
         <div class="row">
+            <!-- Bank Name -->
             <div class="col-md-4 mb-4">
                 <div class="form-floating form-floating-outline">
                     <select class="form-select" name="bank_name_loan" id="bank_name_loan">
                         <option value="">Select Bank</option>
+                        <!-- Dynamic options -->
                     </select>
                     <label for="bank_name_loan">Bank Name <span style="color:red">*</span></label>
                     <span class="text-danger" id="bank_name_loan-error"></span>
                 </div>
             </div>
+            <!-- Branch -->
             <div class="col-md-4 mb-4">
                 <div class="form-floating form-floating-outline">
                     <input type="text" class="form-control" name="bank_branch_loan" id="bank_branch_loan"
@@ -374,6 +410,7 @@
                     <span class="text-danger" id="bank_branch_loan-error"></span>
                 </div>
             </div>
+            <!-- Account Number -->
             <div class="col-md-4 mb-4">
                 <div class="form-floating form-floating-outline">
                     <input type="text" class="form-control" name="account_number_loan" id="account_number_loan"
@@ -384,6 +421,7 @@
             </div>
         </div>
         <div class="row">
+            <!-- IFSC Code -->
             <div class="col-md-4 mb-4">
                 <div class="form-floating form-floating-outline">
                     <input type="text" class="form-control" name="ifsc_code_loan" id="ifsc_code_loan"
@@ -396,7 +434,7 @@
             <div class="col-md-4 mb-4">
                 <div class="form-floating form-floating-outline">
                     <input type="text" class="form-control" name="branch_manager_phone_loan"
-                        id="branch_manager_phone_loan" placeholder="Branch Manager Phone" />
+                        id="branch_manager_phone_loan" placeholder="Branch Manager Phone">
                     <label for="branch_manager_phone_loan">Branch Manager Phone <span
                             style="color:red">*</span></label>
                     <span class="text-danger" id="branch_manager_phone_loan-error"></span>
@@ -406,13 +444,14 @@
             <div class="col-md-4 mb-4">
                 <div class="form-floating form-floating-outline">
                     <input type="text" class="form-control" name="loan_manager_phone_loan"
-                        id="loan_manager_phone_loan" placeholder="Loan Manager Phone" />
+                        id="loan_manager_phone_loan" placeholder="Loan Manager Phone">
                     <label for="loan_manager_phone_loan">Loan Manager Phone <span style="color:red">*</span></label>
                     <span class="text-danger" id="loan_manager_phone_loan-error"></span>
                 </div>
             </div>
         </div>
         <div class="row">
+            <!-- Loan Status -->
             <div class="col-md-4 mb-4">
                 <div class="form-floating form-floating-outline">
                     <select class="form-select" name="loan_status" id="loan_status">
@@ -423,7 +462,62 @@
                         <option value="Pending">Approved</option>
                     </select>
                     <label for="loan_status">Loan Status <span class="text-danger">*</span></label>
+                    <span class="text-danger" id="loan_status-error"></span>
                 </div>
+            </div>
+            <!-- Loan Sanction Date -->
+            <div class="col-md-4 mb-4">
+                <div class="form-floating form-floating-outline">
+                    <input type="date" class="form-control" name="loan_sanction_date" id="loan_sanction_date" />
+                    <label for="loan_sanction_date">Loan Sanction Date</label>
+                    <span class="text-danger" id="loan_sanction_date-error"></span>
+                </div>
+            </div>
+            <!-- Loan Disbursal Date -->
+            <div class="col-md-4 mb-4">
+                <div class="form-floating form-floating-outline">
+                    <input type="date" class="form-control" name="loan_disbursal_date"
+                        id="loan_disbursal_date" />
+                    <label for="loan_disbursal_date">Loan Disbursal Date</label>
+                    <span class="text-danger" id="loan_disbursal_date-error"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Managed By -->
+            <div class="col-md-4 mb-4">
+                <div class="form-floating form-floating-outline">
+                    <select class="form-select" name="managed_by" id="managed_by">
+                        <option value="">Select Accountant</option>
+                        <!-- Example dynamic options -->
+                        <option value="Accountant1">Accountant 1</option>
+                        <option value="Accountant2">Accountant 2</option>
+                        <option value="Accountant3">Accountant 3</option>
+                    </select>
+                    <label for="managed_by">Managed By <span class="text-danger">*</span></label>
+                    <span class="text-danger" id="managed_by-error"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- INSTALLATION Details Section -->
+    <h5 class="fw-bold mb-3 mt-4">🔧 Installation Details</h5>
+    <div class="row">
+        <!-- Installers -->
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <select class="form-select" name="installers" id="installers">
+                    <option value="">Select Installers</option>
+                </select>
+                <label for="installers">Installers</label>
+                <span class="text-danger" id="installers-error"></span>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="date" class="form-control" name="installation_date" id="installation_date">
+                <label for="installation_date">Installation Date</label>
+                <span class="text-danger" id="installation_date-error"></span>
             </div>
         </div>
     </div>
@@ -451,6 +545,19 @@
 <script type="text/javascript">
     var clientId = $("#clientId").val();
     $(document).ready(function() {
+
+        $('#loanBankDetailsSection').hide();
+
+        $('#payment_mode').change(function() {
+            const selected = $(this).val();
+
+            if (selected === 'loan') {
+                $('#loanBankDetailsSection').slideDown();
+            } else {
+                $('#loanBankDetailsSection').slideUp();
+            }
+        });
+
         // Declare a variable to hold bank data
         var bankDataMap = {};
         var bankDataMap2 = {};
@@ -529,12 +636,19 @@
         fnCallAjaxHttpGetEvent("{{ config('apiConstants.INSTALLERS_URLS.INSTALLERS') }}", null, true, true,
             function(response) {
                 if (response.status === 200 && response.data) {
+                    // Populate existing installers dropdown
                     var $Dropdown = $("#installers");
                     $Dropdown.empty();
                     $Dropdown.append(new Option('Select Installers', ''));
 
+                    // Populate new installer_id dropdown for installation details
+                    var $InstallerIdDropdown = $("#installer_id");
+                    $InstallerIdDropdown.empty();
+                    $InstallerIdDropdown.append(new Option('Select Installer', ''));
+
                     response.data.forEach(function(data) {
                         $Dropdown.append(new Option(data.name, data.id));
+                        $InstallerIdDropdown.append(new Option(data.name, data.id));
                     });
                 }
             });
@@ -549,6 +663,7 @@
                             '</option>';
                     });
                     $("#quotation_by").html(options);
+                    $("#managed_by").html(options);
                 } else {
                     console.log('Failed to retrieve accountant data.');
                 }
@@ -653,6 +768,17 @@
                 minlength: 1,
                 maxlength: 3
             },
+            gender: {
+                required: true
+            },
+            marital_status: {
+                required: true
+            },
+            alternate_mobile: {
+                digits: true,
+                minlength: 10,
+                maxlength: 15
+            },
             mobile: {
                 required: true,
                 digits: true,
@@ -699,7 +825,7 @@
                 number: true
             },
             installers: {
-                required: true
+                required: false
             },
             jan_samarth_id: {
                 required: true
@@ -724,7 +850,23 @@
                 required: true,
                 minlength: 11,
                 maxlength: 11
-            }
+            },
+            total_received_amount: {
+                required: true,
+                number: true
+            },
+            acknowledge_no: {
+                required: true
+            },
+            acknowledge_no: {
+                required: true
+            },
+            application_ref_no: {
+                required: true
+            },
+            managed_by: {
+                required: true
+            },
         },
         messages: {
             customer_name: {
@@ -735,6 +877,17 @@
                 digits: "Please enter a valid age",
                 minlength: "Age must be at least 1 year old",
                 maxlength: "Age cannot exceed 3 digits"
+            },
+            gender: {
+                required: "Gender is required."
+            },
+            marital_status: {
+                required: "Marital status is required."
+            },
+            alternate_mobile: {
+                digits: "Please enter a valid mobile number",
+                minlength: "Mobile number must be at least 10 digits long",
+                maxlength: "Mobile number must be at most 15 digits long"
             },
             mobile: {
                 required: "Mobile is required",
@@ -807,6 +960,19 @@
             },
             installers: {
                 required: "Installers selection is required."
+            },
+            total_received_amount: {
+                required: "Total received amount is required.",
+                number: "Please enter a valid number."
+            },
+            acknowledge_no: {
+                required: "Acknowledgement number is required."
+            },
+            application_ref_no: {
+                required: "Application reference number is required."
+            },
+            managed_by: {
+                required: "Managed by is required."
             }
         },
         errorPlacement: function(error, element) {

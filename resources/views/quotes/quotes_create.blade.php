@@ -21,6 +21,30 @@
                 <span class="text-danger" id="age-error"></span>
             </div>
         </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <select class="form-select" name="gender" id="gender">
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                <label for="gender">Gender <span class="text-danger">*</span></label>
+                <span class="text-danger" id="gender-error"></span>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <select class="form-select" name="marital_status" id="marital_status">
+                    <option value="">Select Marital Status</option>
+                    <option value="Single">Single</option>
+                    <option value="Married">Married</option>
+                    <option value="Divorced">Divorced</option>
+                </select>
+                <label for="marital_status">Marital Status <span class="text-danger">*</span></label>
+                <span class="text-danger" id="marital_status-error"></span>
+            </div>
+        </div>
         <!-- Mobile -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
@@ -30,8 +54,6 @@
                 <span class="text-danger" id="mobile-error"></span>
             </div>
         </div>
-    </div>
-    <div class="row">
         <!-- Alternate Mobile -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
@@ -42,7 +64,6 @@
             </div>
         </div>
     </div>
-
     <!-- Section 3: Quotation -->
     <h5 class="fw-bold mb-3 mt-4">🧾 Quotation</h5>
     <div class="row">
@@ -189,6 +210,12 @@
                 minlength: 1,
                 maxlength: 3
             },
+            gender: {
+                required: true
+            },
+            marital_status: {
+                required: true
+            },
             mobile: {
                 required: true,
                 digits: true,
@@ -215,7 +242,26 @@
             },
             quotation_by: {
                 required: true,
-            }
+            },
+            quotation_amount: {
+                required: true,
+                number: true
+            },
+            quotation_date: {
+                required: true,
+                date: true
+            },
+            quotation_status: {
+                required: true,
+            },
+            solar_capacity: {
+                required: true,
+            },
+            rooftop_size: {
+                required: true,
+                number: true
+            },
+            
         },
         messages: {
             customer_name: {
@@ -227,6 +273,12 @@
                 digits: "Please enter a valid age",
                 minlength: "Age must be at least 1 year old",
                 maxlength: "Age cannot exceed 3 digits",
+            },
+            gender: {
+                required: "Gender is required."
+            },
+            marital_status: {
+                required: "Marital status is required."
             },
             mobile: {
                 required: "Mobile is required",
@@ -244,6 +296,24 @@
             },
             quotation_by: {
                 required: "Quotation By is required",
+            },
+            quotation_amount: {
+                required: "Quotation amount is required",
+                number: "Please enter a valid number"
+            },
+            quotation_date: {
+                required: "Quotation date is required",
+                date: "Please enter a valid date"
+            },
+            quotation_status: {
+                required: "Quotation status is required",
+            },
+            solar_capacity: {
+                required: "Solar capacity is required",
+            },
+            rooftop_size: {
+                required: "Rooftop size is required",
+                number: "Please enter a valid number"
             }
         },
         errorPlacement: function(error, element) {

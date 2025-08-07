@@ -19,7 +19,6 @@ use App\Helpers\GetCompanyId;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
-
 class ClientController extends Controller
 {
     public function index(Request $request)
@@ -121,6 +120,8 @@ class ClientController extends Controller
                 'customer_number' => $customerNumber,
                 'customer_name'     => $request->input('customer_name'),
                 'age'               => $request->input('age'),
+                'gender'            => $request->input('gender'),
+                'marital_status'    => $request->input('marital_status'),
                 'mobile'            => $request->input('mobile'),
                 'alternate_mobile'  => $request->input('alternate_mobile'),
                 'assign_to'         => $id,
@@ -162,6 +163,9 @@ class ClientController extends Controller
                 'installers'                 => $request->input('installers'),
                 'customer_address'           => $request->input('customer_address'),
                 'customer_residential_address' => $request->input('customer_residential_address'),
+                'installation_date'          => $request->input('installation_date'),
+                'total_received_amount'      => $request->input('total_received_amount'),
+                'date_full_payment'          => $request->input('date_full_payment'),
                 'is_completed'               => $request->input('is_completed'),
                 'created_at'  => now(),
             ]);
@@ -176,15 +180,18 @@ class ClientController extends Controller
 
             // 5. Store loan bank detail data
             $loan = LoanBankDetail::create([
-                'customer_id'            => $customer->id,
-                'solar_detail_id'        => $solarDetail->id,
-                'bank_name'              => $request->input('bank_name_loan'),
-                'bank_branch'            => $request->input('bank_branch_loan'),
-                'account_number'         => $request->input('account_number_loan'),
-                'ifsc_code'              => $request->input('ifsc_code_loan'),
-                'branch_manager_phone'   => $request->input('branch_manager_phone_loan'),
-                'loan_manager_phone'     => $request->input('loan_manager_phone_loan'),
-                'loan_status'            => $request->input('loan_status'),
+                'customer_id'             => $customer->id,
+                'solar_detail_id'         => $solarDetail->id,
+                'bank_name'               => $request->input('bank_name_loan'),
+                'bank_branch'             => $request->input('bank_branch_loan'),
+                'account_number'          => $request->input('account_number_loan'),
+                'ifsc_code'               => $request->input('ifsc_code_loan'),
+                'branch_manager_phone'    => $request->input('branch_manager_phone_loan'),
+                'loan_manager_phone'      => $request->input('loan_manager_phone_loan'),
+                'loan_status'             => $request->input('loan_status'),
+                'loan_sanction_date'      => $request->input('loan_sanction_date'),
+                'loan_disbursed_date'     => $request->input('loan_disbursed_date'),
+                'managed_by'              => $request->input('managed_by'),
                 'created_at'  => now(),
             ]);
 
@@ -256,6 +263,8 @@ class ClientController extends Controller
             $customer->update([
                 'customer_name'     => $request->input('customer_name'),
                 'age'               => $request->input('age'),
+                'gender'            => $request->input('gender'),
+                'marital_status'    => $request->input('marital_status'),
                 'mobile'            => $request->input('mobile'),
                 'alternate_mobile'  => $request->input('alternate_mobile'),
                 'updated_at'        => now(),

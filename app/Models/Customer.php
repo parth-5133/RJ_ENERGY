@@ -14,6 +14,8 @@ class Customer extends Model
         'customer_number',
         'customer_name',
         'age',
+        'gender',
+        'marital_status',
         'mobile',
         'alternate_mobile',
         'assign_to',
