@@ -100,6 +100,16 @@ class ClientController extends Controller
     }
     public function store(Request $request)
     {
+        $cookieData = json_decode($request->cookie('user_data'), true);
+        $roleCode = $cookieData['role_code'] ?? null;
+        $currentUser = JWTUtils::getCurrentUserByUuid();
+        $userId = $currentUser->id;
+
+        if ($roleCode === $this->employeeRoleCode) {
+            $id = $userId;
+        } else {
+            $id = 0;
+        }
         DB::beginTransaction();
 
         try {
@@ -113,7 +123,7 @@ class ClientController extends Controller
                 'age'               => $request->input('age'),
                 'mobile'            => $request->input('mobile'),
                 'alternate_mobile'  => $request->input('alternate_mobile'),
-                'assign_to'         => JWTUtils::getCurrentUserByUuid()->id,
+                'assign_to'         => $id,
                 'created_at'        => now(),
             ]);
             Sequence::where('type', 'customerNumber')->update(['sequenceNo' => $newSequenceNo]);

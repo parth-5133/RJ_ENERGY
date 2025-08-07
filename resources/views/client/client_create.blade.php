@@ -76,9 +76,8 @@
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="quotation_status" id="quotation_status">
-                    <option value="">Select Status</option>
-                    <option value="Pending">Pending</option>
                     <option value="Agreed">Agreed</option>
+                    <option value="Pending">Pending</option>
                 </select>
                 <label for="quotation_status">Quotation Status <span class="text-danger">*</span></label>
                 <span class="text-danger" id="quotation_status-error"></span>
@@ -457,28 +456,29 @@
         var bankDataMap2 = {};
 
         // Load banks via AJAX
-        fnCallAjaxHttpGetEvent("{{ config('apiConstants.MANAGE_BANK_URLS.MANAGE_BANK') }}", null, true, true, function(response) {
-            if (response.status === 200 && response.data) {
-                var $Dropdown = $("#bank_name");
-                var $Dropdown2 = $("#bank_name_loan");
-                $Dropdown.empty();
-                $Dropdown2.empty();
-                $Dropdown.append(new Option('Select Bank', ''));
-                $Dropdown2.append(new Option('Select Bank', ''));
+        fnCallAjaxHttpGetEvent("{{ config('apiConstants.MANAGE_BANK_URLS.MANAGE_BANK') }}", null, true, true,
+            function(response) {
+                if (response.status === 200 && response.data) {
+                    var $Dropdown = $("#bank_name");
+                    var $Dropdown2 = $("#bank_name_loan");
+                    $Dropdown.empty();
+                    $Dropdown2.empty();
+                    $Dropdown.append(new Option('Select Bank', ''));
+                    $Dropdown2.append(new Option('Select Bank', ''));
 
-                // Save bank data by ID
-                response.data.forEach(function(bank) {
-                    bankDataMap[bank.id] = bank;
-                    $Dropdown.append(new Option(bank.bank_name, bank.id));
-                });
+                    // Save bank data by ID
+                    response.data.forEach(function(bank) {
+                        bankDataMap[bank.id] = bank;
+                        $Dropdown.append(new Option(bank.bank_name, bank.id));
+                    });
 
-                // Save bank data by ID
-                response.data.forEach(function(bank) {
-                    bankDataMap2[bank.id] = bank;
-                    $Dropdown2.append(new Option(bank.bank_name, bank.id));
-                });
-            }
-        });
+                    // Save bank data by ID
+                    response.data.forEach(function(bank) {
+                        bankDataMap2[bank.id] = bank;
+                        $Dropdown2.append(new Option(bank.bank_name, bank.id));
+                    });
+                }
+            });
 
         $("#bank_name").on("change", function() {
             var selectedBankId = $(this).val();
@@ -511,42 +511,48 @@
         });
 
         // Load Channel Partner via AJAX
-        fnCallAjaxHttpGetEvent("{{ config('apiConstants.CHANNEL_PARTNERS_URLS.CHANNEL_PARTNERS') }}", null, true, true, function(response) {
-            if (response.status === 200 && response.data) {
-                var $Dropdown = $("#channel_partner");
-                $Dropdown.empty();
-                $Dropdown.append(new Option('Select Channel Partner', ''));
+        fnCallAjaxHttpGetEvent("{{ config('apiConstants.CHANNEL_PARTNERS_URLS.CHANNEL_PARTNERS') }}", null,
+            true, true,
+            function(response) {
+                if (response.status === 200 && response.data) {
+                    var $Dropdown = $("#channel_partner");
+                    $Dropdown.empty();
+                    $Dropdown.append(new Option('Select Channel Partner', ''));
 
-                response.data.forEach(function(data) {
-                    $Dropdown.append(new Option(data.legal_name, data.id));
-                });
-            }
-        });
+                    response.data.forEach(function(data) {
+                        $Dropdown.append(new Option(data.legal_name, data.id));
+                    });
+                }
+            });
 
         // Load Installers via AJAX
-        fnCallAjaxHttpGetEvent("{{ config('apiConstants.INSTALLERS_URLS.INSTALLERS') }}", null, true, true, function(response) {
-            if (response.status === 200 && response.data) {
-                var $Dropdown = $("#installers");
-                $Dropdown.empty();
-                $Dropdown.append(new Option('Select Installers', ''));
+        fnCallAjaxHttpGetEvent("{{ config('apiConstants.INSTALLERS_URLS.INSTALLERS') }}", null, true, true,
+            function(response) {
+                if (response.status === 200 && response.data) {
+                    var $Dropdown = $("#installers");
+                    $Dropdown.empty();
+                    $Dropdown.append(new Option('Select Installers', ''));
 
-                response.data.forEach(function(data) {
-                    $Dropdown.append(new Option(data.name, data.id));
-                });
-            }
-        });
+                    response.data.forEach(function(data) {
+                        $Dropdown.append(new Option(data.name, data.id));
+                    });
+                }
+            });
 
-        fnCallAjaxHttpGetEvent("{{ config('apiConstants.QUOTATION_URLS.QUOTATION_ALL_ACCOUNTANT') }}", null, true, true, function(response) {
-            if (response.status === 200 && response.data) {
-                var options = '<option selected disabled value="">Select</option>';
-                $.each(response.data, function(index, accountant) {
-                    options += '<option value="' + accountant.id + '">' + accountant.full_name + '</option>';
-                });
-                $("#quotation_by").html(options);
-            } else {
-                console.log('Failed to retrieve accountant data.');
-            }
-        });
+        fnCallAjaxHttpGetEvent("{{ config('apiConstants.QUOTATION_URLS.QUOTATION_ALL_ACCOUNTANT') }}", null,
+            true, true,
+            function(response) {
+                if (response.status === 200 && response.data) {
+                    var options = '<option selected disabled value="">Select</option>';
+                    $.each(response.data, function(index, accountant) {
+                        options += '<option value="' + accountant.id + '">' + accountant.full_name +
+                            '</option>';
+                    });
+                    $("#quotation_by").html(options);
+                } else {
+                    console.log('Failed to retrieve accountant data.');
+                }
+            });
 
         if (clientId > 0) {
             var Url = "{{ config('apiConstants.QUOTATION_URLS.QUOTATION_VIEW') }}";
@@ -597,7 +603,8 @@
                         $("#registration_date").val(response.data.solar_detail.registration_date);
                         $("#solar_total_amount").val(response.data.solar_detail.solar_total_amount);
                         $("#customer_address").val(response.data.solar_detail.customer_address);
-                        $("#customer_residential_address").val(response.data.solar_detail.customer_residential_address);
+                        $("#customer_residential_address").val(response.data.solar_detail
+                            .customer_residential_address);
                         $("#is_completed").prop("checked", response.data.solar_detail.is_completed);
                     }
 
@@ -621,8 +628,10 @@
                         $("#bank_branch_loan").val(response.data.loan_bank_detail.bank_branch);
                         $("#account_number_loan").val(response.data.loan_bank_detail.account_number);
                         $("#ifsc_code_loan").val(response.data.loan_bank_detail.ifsc_code);
-                        $("#branch_manager_phone_loan").val(response.data.loan_bank_detail.branch_manager_phone);
-                        $("#loan_manager_phone_loan").val(response.data.loan_bank_detail.loan_manager_phone);
+                        $("#branch_manager_phone_loan").val(response.data.loan_bank_detail
+                            .branch_manager_phone);
+                        $("#loan_manager_phone_loan").val(response.data.loan_bank_detail
+                            .loan_manager_phone);
                         $("#loan_status").val(response.data.loan_bank_detail.loan_status);
                     }
                 } else {
@@ -822,7 +831,8 @@
             var url = clientId > 0 ? updateUrl : storeUrl;
             fnCallAjaxHttpPostEventWithoutJSON(url, formData, true, true, function(response) {
                 if (response.status === 200) {
-                    bootstrap.Offcanvas.getInstance(document.getElementById('commonOffcanvas')).hide();
+                    bootstrap.Offcanvas.getInstance(document.getElementById('commonOffcanvas'))
+                        .hide();
                     $('#grid').DataTable().ajax.reload();
                     ShowMsg("bg-success", response.message);
                 } else {

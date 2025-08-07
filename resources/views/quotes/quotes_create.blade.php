@@ -108,9 +108,8 @@
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="quotation_status" id="quotation_status">
-                    <option value="">Select Status</option>
-                    <option value="Pending">Pending</option>
                     <option value="Agreed">Agreed</option>
+                    <option value="Pending">Pending</option>
                 </select>
                 <label for="quotation_status">Quotation Status <span class="text-danger">*</span></label>
                 <span class="text-danger" id="quotation_status-error"></span>
