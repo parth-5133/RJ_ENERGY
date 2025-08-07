@@ -110,10 +110,10 @@
                                         <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
                                     </div>
                                     <!-- Registration link -->
-                                    <div class="text-center mt-2">
+                                    {{-- <div class="text-center mt-2">
                                         <span>Don't have an account?</span>
                                         <a href="{{ route('register') }}" class="ms-1 text-primary">Register here</a>
-                                    </div>
+                                    </div> --}}
                                 </form>
                             </div>
                         </div>

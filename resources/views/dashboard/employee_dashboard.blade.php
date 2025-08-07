@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('content')
-    <div class="container-fluid flex-grow-1 container-p-y">
+    {{-- <div class="container-fluid flex-grow-1 container-p-y">
         <div class="row gy-5 gx-5">
             <div class="col-12 col-md-12 col-lg-6 col-xxl-4">
                 <div class="card">
@@ -930,5 +930,5 @@
                 }
             });
         }
-    </script>
+    </script> --}}
 @endsection

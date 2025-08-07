@@ -22,9 +22,15 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $quotations = DB::table('customers')
+
+        $cookieData = json_decode($request->cookie('user_data'), true);
+        $roleCode = $cookieData['role_code'] ?? null;
+        $currentUser = JWTUtils::getCurrentUserByUuid();
+        $userId = $currentUser->id;
+
+        $quotationsQuery = DB::table('customers')
             ->leftJoin('quotations', 'quotations.customer_id', '=', 'customers.id')
             ->leftJoin('subsidies', 'subsidies.customer_id', '=', 'customers.id')
             ->leftJoin('loan_bank_details', 'loan_bank_details.customer_id', '=', 'customers.id')
@@ -49,7 +55,17 @@ class ClientController extends Controller
                 'solar_details.is_completed',
             )
             ->where('quotations.status', '=', 'Agreed')
-            ->whereNull('quotations.deleted_at')
+            ->whereNull('quotations.deleted_at');
+
+        // Role-based filter
+        if ($roleCode === $this->employeeRoleCode && $userId) {
+            $quotationsQuery->where(function ($query) use ($userId) {
+                $query->where('customers.assign_to', $userId)
+                    ->orWhere('customers.assign_to', 0);
+            });
+        }
+
+        $quotations = $quotationsQuery
             ->orderBy('quotations.id', 'desc')
             ->get();
 

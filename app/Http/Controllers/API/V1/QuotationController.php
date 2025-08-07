@@ -6,11 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Quotation;
 use App\Models\Customer;
 use App\Models\SolarDetail;
+use App\Models\Sequence;
 use App\Helpers\ApiResponse;
-use App\Helpers\AccessLevel;
 use App\Constants\ResMessages;
-use App\Helpers\JWTUtils;
-use App\Helpers\GetCompanyId;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUpdateQuotationRequest;
@@ -42,14 +40,20 @@ class QuotationController extends Controller
         DB::beginTransaction();
 
         try {
+            $sequence = Sequence::where('type', 'customerNumber')->first();
+            $newSequenceNo = $sequence->sequenceNo + 1;
+            $customerNumber = $sequence->prefix . '-' . str_pad($newSequenceNo, 4, '0', STR_PAD_LEFT);
             // 1. Store customer data
             $customer = Customer::create([
+                'customer_number'   => $customerNumber,
                 'customer_name'     => $request->input('customer_name'),
                 'age'               => $request->input('age'),
                 'mobile'            => $request->input('mobile'),
                 'alternate_mobile'  => $request->input('alternate_mobile'),
+                'assign_to'         => 0,
                 'created_at'        => now(),
             ]);
+            Sequence::where('type', 'customerNumber')->update(['sequenceNo' => $newSequenceNo]);
 
             // 2. Store quotation data
             $quotation = Quotation::create([
@@ -132,8 +136,7 @@ class QuotationController extends Controller
                 'age'               => $request->input('age'),
                 'mobile'            => $request->input('mobile'),
                 'alternate_mobile'  => $request->input('alternate_mobile'),
-                'aadhar'            => $request->input('aadhar'),
-                'pan'               => $request->input('pan'),
+                'assign_to'         => 0,
                 'updated_at'        => now(),
             ]);
 
