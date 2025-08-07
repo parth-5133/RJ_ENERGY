@@ -52,7 +52,7 @@ class AttendanceController extends Controller
             return response()->view('errors.401',);
         }
 
-        return $role_code === $this->superAdminRoleCode || $role_code === $this->AdminRoleCode ? view('admin.attendance.attendance_list', ['permissions' => $permissions, 'menuName' => $menuName]) :  view('employee.attendanceList', ['permissions' => $permissions, 'menuName' => $menuName]);
+        return $role_code === $this->superAdminRoleCode || $role_code === $this->AdminRoleCode ? view('admin.attendance.attendance_list', ['permissions' => $permissions, 'menuName' => $menuName]) :  view('employee.attendancelist', ['permissions' => $permissions, 'menuName' => $menuName]);
     }
 
     public  function adminAttendanceRequest()

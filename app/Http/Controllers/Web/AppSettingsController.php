@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\API\V1\MenuPermissionsController;
-use App\Http\Controllers\API\V1\EmailSettingsController as ApiEmailSettingsController;
 use Illuminate\Http\Request;
 
 class AppSettingsController extends Controller

@@ -44,7 +44,7 @@
                     [0, "desc"]
                 ],
                 ajax: {
-                    url: "{{ url('/api/v1/employee/Attendance/request') }}",
+                    url: "{{ url('/api/V1/employee/Attendance/request') }}",
                     type: "GET",
                     headers: {
                         Authorization: "Bearer " + getCookie("access_token"),

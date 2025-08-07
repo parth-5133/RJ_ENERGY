@@ -1,36 +1,34 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\v1\RoleController;
-use App\Http\Controllers\API\v1\MenuController;
-use App\Http\Controllers\API\v1\UsersController;
-use App\Http\Controllers\API\v1\AuthController;
-use App\Http\Controllers\API\v1\RoleMenuPermissionController;
-use App\Http\Controllers\API\v1\EmployeeProfileController;
-use App\Http\Controllers\API\v1\MenuPermissionsController;
-use App\Http\Controllers\API\v1\EmployeeDashboardController;
-use App\Http\Controllers\API\v1\LeaveController;
-use App\Http\Controllers\API\v1\AdminLeaveController;
-use App\Http\Controllers\API\v1\AdminAttendanceController;
-use App\Http\Controllers\API\v1\HolidayController;
-use App\Http\Controllers\API\v1\ProjectsController;
-use App\Http\Controllers\API\v1\TaskController;
-use App\Http\Controllers\API\v1\DashboardController;
-use App\Http\Controllers\API\v1\FinancialYearController;
-use App\Http\Controllers\API\v1\CompanyController;
-use App\Http\Controllers\API\v1\ClientController;
-use App\Http\Controllers\API\v1\EmployeeController;
-use App\Http\Controllers\API\v1\AdminDashboardController;
-use App\Http\Controllers\API\v1\superAdminDashboardController;
-use App\Http\Controllers\API\v1\AllowanceListController;
-use App\Http\Controllers\API\v1\DeductionController;
-use App\Http\Controllers\API\v1\EmployeeSalaryController;
-use App\Http\Controllers\API\v1\PolicyController;
-use App\Http\Controllers\API\v1\EmailSettingsController;
-use App\Http\Controllers\API\v1\DepartmentController;
-use App\Http\Controllers\API\v1\DesignationController;
-use App\Http\Controllers\API\v1\ShiftController;
-use App\Http\Controllers\API\v1\EmployeeResignationController;
+use App\Http\Controllers\API\V1\RoleController;
+use App\Http\Controllers\API\V1\MenuController;
+use App\Http\Controllers\API\V1\usersController;
+use App\Http\Controllers\API\V1\AuthController;
+use App\Http\Controllers\API\V1\RoleMenuPermissionController;
+use App\Http\Controllers\API\V1\EmployeeProfileController;
+use App\Http\Controllers\API\V1\MenuPermissionsController;
+use App\Http\Controllers\API\V1\EmployeeDashboardController;
+use App\Http\Controllers\API\V1\LeaveController;
+use App\Http\Controllers\API\V1\AdminLeaveController;
+use App\Http\Controllers\API\V1\AdminAttendanceController;
+use App\Http\Controllers\API\V1\HolidayController;
+use App\Http\Controllers\API\V1\DashboardController;
+use App\Http\Controllers\API\V1\FinancialYearController;
+use App\Http\Controllers\API\V1\CompanyController;
+use App\Http\Controllers\API\V1\ClientController;
+use App\Http\Controllers\API\V1\EmployeeController;
+use App\Http\Controllers\API\V1\AdminDashboardController;
+use App\Http\Controllers\API\V1\superAdminDashboardController;
+use App\Http\Controllers\API\V1\AllowanceListController;
+use App\Http\Controllers\API\V1\DeductionController;
+use App\Http\Controllers\API\V1\EmployeeSalaryController;
+use App\Http\Controllers\API\V1\PolicyController;
+use App\Http\Controllers\API\V1\EmailSettingsController;
+use App\Http\Controllers\API\V1\DepartmentController;
+use App\Http\Controllers\API\V1\DesignationController;
+use App\Http\Controllers\API\V1\ShiftController;
+use App\Http\Controllers\API\V1\EmployeeResignationController;
 use App\Http\Controllers\API\V1\NotificationSettingController;
 use App\Http\Controllers\API\V1\ConsumerApplicationController;
 use App\Http\Controllers\API\V1\ChannelPartnersController;
@@ -39,7 +37,7 @@ use App\Http\Controllers\API\V1\InstallersController;
 use App\Http\Controllers\API\V1\QuotationController;
 
 
-Route::prefix('v1')->group(function () {
+Route::prefix('V1')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('/refresh', [AuthController::class, 'refresh']);
@@ -54,7 +52,7 @@ Route::prefix('v1')->group(function () {
 
 
 Route::middleware(['jwt.verify'])->group(function () {
-    Route::prefix('v1')->group(function () {
+    Route::prefix('V1')->group(function () {
 
 
 
@@ -135,16 +133,16 @@ Route::middleware(['jwt.verify'])->group(function () {
         Route::post('/menu/reorder', [MenuController::class, 'menuReorder']);
 
         //Users
-        Route::get('/user', [UsersController::class, 'index']);
-        Route::post('/user/store', [UsersController::class, 'store']);
-        Route::get('/user/view', [UsersController::class, 'view']);
-        Route::post('/user/update', [UsersController::class, 'update']);
-        Route::post('/user/delete/{id}', [UsersController::class, 'delete']);
+        Route::get('/user', [usersController::class, 'index']);
+        Route::post('/user/store', [usersController::class, 'store']);
+        Route::get('/user/view', [usersController::class, 'view']);
+        Route::post('/user/update', [usersController::class, 'update']);
+        Route::post('/user/delete/{id}', [usersController::class, 'delete']);
 
         // Notification
-        Route::get('/notification', [UsersController::class, 'showNotifications']);
-        Route::post('/notification/markAsRead', [UsersController::class, 'markAllAsRead']);
-        Route::post('/notification/delete/{id}', [UsersController::class, 'deleteNotification']);
+        Route::get('/notification', [usersController::class, 'showNotifications']);
+        Route::post('/notification/markAsRead', [usersController::class, 'markAllAsRead']);
+        Route::post('/notification/delete/{id}', [usersController::class, 'deleteNotification']);
 
         //Profile
         Route::get('/profile', [EmployeeProfileController::class, 'index']);

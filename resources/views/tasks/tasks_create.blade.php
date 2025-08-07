@@ -155,7 +155,7 @@
 
         if ($('#description').length) {
             CKEDITOR.replace('description', {
-                filebrowserImageUploadUrl: '/api/v1/UploadFiles',
+                filebrowserImageUploadUrl: '/api/V1/UploadFiles',
                 filebrowserImageUploadMethod: 'form',
                 filebrowserBrowseUrl: ''
             });
@@ -163,7 +163,7 @@
 
         if ($('#comments').length) {
             CKEDITOR.replace('comments', {
-                filebrowserImageUploadUrl: '/api/v1/UploadFiles',
+                filebrowserImageUploadUrl: '/api/V1/UploadFiles',
                 filebrowserImageUploadMethod: 'form',
                 filebrowserBrowseUrl: ''
             });

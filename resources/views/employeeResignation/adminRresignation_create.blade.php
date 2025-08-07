@@ -69,7 +69,7 @@
     $(document).ready(function() {
         if ($('#reason').length) {
             CKEDITOR.replace('reason', {
-                filebrowserImageUploadUrl: '/api/v1/UploadFiles',
+                filebrowserImageUploadUrl: '/api/V1/UploadFiles',
                 filebrowserImageUploadMethod: 'form',
                 filebrowserBrowseUrl: ''
             });

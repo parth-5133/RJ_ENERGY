@@ -20,7 +20,7 @@ use App\Constants\ResMessages;
 use Illuminate\Http\Request;
 use App\Helpers\FinancialYearService;
 
-class UsersController extends Controller
+class usersController extends Controller
 {
     public function index(Request $request)
     {

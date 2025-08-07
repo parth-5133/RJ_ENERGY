@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Controllers\API\V1\ClientController as ApiClientController;
 use App\Http\Controllers\API\V1\superAdminDashboardController as ApiSuperAdminDashboardController;
-use App\Http\Controllers\API\V1\usersController as ApiUsersController;
+use App\Http\Controllers\API\V1\usersController as ApiusersController;
 
 
 class DashboardController extends Controller
@@ -25,7 +24,7 @@ class DashboardController extends Controller
 
         if ($roleCode === $this->AdminRoleCode) {
 
-            return view('dashboard.Admin_dashboard', compact('name', 'profileImg', 'birthdayData', 'employeesList'));
+            return view('dashboard.admin_dashboard', compact('name', 'profileImg', 'birthdayData', 'employeesList'));
         }
 
         if ($roleCode === $this->superAdminRoleCode) {
@@ -49,7 +48,7 @@ class DashboardController extends Controller
     }
     public function getTodaysBirthday()
     {
-        $apiController = new ApiUsersController();
+        $apiController = new ApiusersController();
         $response = $apiController->getTodaysBirthday();
 
         return $response->getData(true)['data'] ?? [];
@@ -62,7 +61,7 @@ class DashboardController extends Controller
             $isEmployee = true;
         }
 
-        $apiController = new ApiUsersController();
+        $apiController = new ApiusersController();
         $response = $apiController->getEmployeesList($isEmployee);
 
         return $response->getData(true)['data'] ?? [];

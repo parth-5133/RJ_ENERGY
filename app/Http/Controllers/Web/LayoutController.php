@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\V1\MenuPermissionsController;
-use App\Http\Controllers\API\V1\UsersController;
+use App\Http\Controllers\API\V1\usersController;
 use App\Http\Controllers\API\V1\DashboardController;
 use App\Http\Controllers\API\V1\CompanyController;
 use App\Helpers\GetYear;
@@ -37,7 +37,7 @@ class LayoutController extends Controller
         $role_code = $cookieData['role_code'] ?? null;
         $company_name = $cookieData['company_name'] ?? null;
 
-        $apiController = new UsersController();
+        $apiController = new usersController();
         $response = $apiController->showNotifications();
 
         if ($response == null) {
@@ -47,7 +47,7 @@ class LayoutController extends Controller
             $notifications = $responseData['data'] ?? [];
         }
 
-        $notifications = collect($notifications);
+        $notifications = collect($notifications);   
 
         $apiController = new DashboardController();
         $response = $apiController->getCompanies();
