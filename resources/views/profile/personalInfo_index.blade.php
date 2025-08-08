@@ -138,19 +138,6 @@
                                         <!-- Error span -->
                                     </div>
                                 </div>
-
-                                <!-- Nationality -->
-                                <div class="col-md-3">
-                                    <div class="form-floating form-floating-outline">
-                                        <select class="form-select" id="nationality_id" name="nationality">
-                                            <option value="">Select Country</option>
-                                        </select>
-                                        <label for="nationality_id">Nationality <span style="color:red">*</span></label>
-                                        <span class="text-danger" id="nationality-error"></span>
-                                        <!-- Error span -->
-                                    </div>
-                                </div>
-
                                 <!-- Disability Status -->
                                 <div class="col-md-3">
                                     <div class="form-floating form-floating-outline">
@@ -263,7 +250,6 @@
         function populateDropdowns(data) {
             populateDropdown("#marital_status_id", data.marital_statuses, "Select Marital Status");
             populateDropdown("#blood_group", data.blood_groups, "Select Blood Group");
-            populateDropdown("#nationality_id", data.nationalities, "Select Country");
         }
 
         function populateDropdown(selector, items, defaultText) {
@@ -289,7 +275,6 @@
                 $("#date_of_birth").val(employeeInfo.date_of_birth);
                 $("#gender").val(employeeInfo.gender);
                 $("#marital_status_id").val(employeeInfo.marital_status_id);
-                $("#nationality_id").val(employeeInfo.nationality_id);
                 $("#religion").val(employeeInfo.religion);
                 $("#blood_group").val(employeeInfo.blood_group);
                 $("#citizenship").val(employeeInfo.citizenship);
@@ -464,7 +449,6 @@
                 place_of_birth: $("#place_of_birth").val(),
                 gender: $("#gender").val(),
                 marital_status_id: $("#marital_status_id").val(),
-                nationality_id: $("#nationality_id").val(),
                 citizenship: $("#citizenship").val(),
                 disability_status: $("#disability_status").val(),
                 personal_email: $("#personal_email").val(),

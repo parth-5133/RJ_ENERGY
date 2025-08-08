@@ -18,7 +18,6 @@ class EmployeeInfo extends Model
         'place_of_birth',
         'gender',
         'marital_status_id',
-        'nationality_id',
         'citizenship',
         'disability_status',
         'personal_email',

@@ -545,11 +545,6 @@ function fnDeleteRecord(result, Id, url, grdId) {
                     if (data.returnValue === 1) {
                         // Reload the entire page if returnValue is 1
                         location.reload();
-                    } else if (data.data.project_id !== null) {
-                        $("#grid").DataTable().ajax.reload();
-                        ShowMsg("bg-success", data.message);
-                        KanbanData(data.data.project_id);
-                        return;
                     } else {
                         // Reload the DataTable if returnValue is null or not 1
                         $("#grid").DataTable().ajax.reload();

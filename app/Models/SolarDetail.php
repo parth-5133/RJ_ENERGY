@@ -31,8 +31,6 @@ class SolarDetail extends Model
         'registration_date',
         'solar_total_amount',
         'installers',
-        'customer_address',
-        'customer_residential_address',
         'installation_date',
         'total_received_amount',
         'date_full_payment',

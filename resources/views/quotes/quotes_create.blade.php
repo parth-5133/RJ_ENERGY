@@ -63,6 +63,55 @@
                 <span class="text-danger" id="alternate_mobile-error"></span>
             </div>
         </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <select class="form-select" id="PerAdd_state" name="PerAdd_state">
+                    <option value="">Select State</option>
+                </select>
+                <label for="PerAdd_state">State <span style="color:red">*</span></label>
+                <span class="text-danger" id="PerAdd_state-error"></span>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input class="form-control" type="text" id="district" name="district" placeholder="District" />
+                <label for="district">District <span style="color:red">*</span></label>
+                <span class="text-danger" id="district-error"></span>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input class="form-control" type="text" id="PerAdd_city" name="PerAdd_city"
+                    placeholder="City" />
+                <label for="city">City <span style="color:red">*</span></label>
+                <span class="text-danger" id="PerAdd_city-error"></span>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input class="form-control" type="text" id="PerAdd_pin_code" name="PerAdd_pin_code"
+                    placeholder="Pin Code" />
+                <label for="pin_code">Pin Code <span style="color:red">*</span></label>
+                <span class="text-danger" id="PerAdd_pin_code-error"></span>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <textarea class="form-control" name="customer_address" id="customer_address" placeholder="Enter Address"
+                    style="height: 10px;"></textarea>
+                <label for="customer_address">Permanent Address <span class="text-danger">*</span></label>
+                <span class="text-danger" id="customer_address-error"></span>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <textarea class="form-control" name="customer_residential_address" id="customer_residential_address"
+                    placeholder="Enter Address" style="height: 10px;"></textarea>
+                <label for="customer_residential_address">Residential Address <span
+                        class="text-danger">*</span></label>
+                <span class="text-danger" id="customer_residential_address-error"></span>
+            </div>
+        </div>
     </div>
     <!-- Section 3: Quotation -->
     <h5 class="fw-bold mb-3 mt-4">🧾 Quotation</h5>
@@ -153,6 +202,28 @@
 
     $(document).ready(function() {
 
+        let url =
+            `{{ config('apiConstants.PROFILE_URLS.PROFILE') }}?id={{ request()->get('id') }}&Params='Address'`;
+
+        fnCallAjaxHttpGetEvent(url, null, true, true, function(response) {
+            if (response.status === 200 && response.data) {
+                allStates = response.data.state;
+                const fixedCountryId = 1;
+                populateStateDropdown(fixedCountryId, "#PerAdd_state");
+            }
+        });
+
+        function populateStateDropdown(countryId, stateDropdownSelector) {
+            const stateDropdown = $(stateDropdownSelector);
+            stateDropdown.empty();
+            stateDropdown.append('<option value="">Select State</option>');
+            if (countryId) {
+                const filteredStates = allStates.filter(state => state.country_id == countryId);
+                filteredStates.forEach(function(state) {
+                    stateDropdown.append(`<option value="${state.name}">${state.name}</option>`);
+                });
+            }
+        }
 
         fnCallAjaxHttpGetEvent("{{ config('apiConstants.QUOTATION_URLS.QUOTATION_ALL_ACCOUNTANT') }}", null,
             true, true,
@@ -178,12 +249,19 @@
             }, true, true, function(
                 response) {
                 if (response.status === 200 && response.data) {
+                    debugger
                     $("#customer_name").val(response.data.customer_name);
                     $("#age").val(response.data.age);
+                    $("#gender").val(response.data.gender);
+                    $("#marital_status").val(response.data.marital_status);
                     $("#mobile").val(response.data.mobile);
                     $("#alternate_mobile").val(response.data.alternate_mobile);
-                    $("#aadhar").val(response.data.aadhar);
-                    $("#pan").val(response.data.pan);
+                    $("#PerAdd_state").val(response.data.PerAdd_state);
+                    $("#district").val(response.data.district);
+                    $("#PerAdd_city").val(response.data.PerAdd_city);
+                    $("#PerAdd_pin_code").val(response.data.PerAdd_pin_code);
+                    $("#customer_address").val(response.data.customer_address);
+                    $("#customer_residential_address").val(response.data.customer_residential_address);
                     $("#quotation_").val(response.data.required);
                     $("#solar_capacity").val(response.data.capacity);
                     $("#rooftop_size").val(response.data.roof_area);
@@ -242,26 +320,7 @@
             },
             quotation_by: {
                 required: true,
-            },
-            quotation_amount: {
-                required: true,
-                number: true
-            },
-            quotation_date: {
-                required: true,
-                date: true
-            },
-            quotation_status: {
-                required: true,
-            },
-            solar_capacity: {
-                required: true,
-            },
-            rooftop_size: {
-                required: true,
-                number: true
-            },
-            
+            }
         },
         messages: {
             customer_name: {
@@ -299,20 +358,6 @@
             },
             quotation_amount: {
                 required: "Quotation amount is required",
-                number: "Please enter a valid number"
-            },
-            quotation_date: {
-                required: "Quotation date is required",
-                date: "Please enter a valid date"
-            },
-            quotation_status: {
-                required: "Quotation status is required",
-            },
-            solar_capacity: {
-                required: "Solar capacity is required",
-            },
-            rooftop_size: {
-                required: "Rooftop size is required",
                 number: "Please enter a valid number"
             }
         },

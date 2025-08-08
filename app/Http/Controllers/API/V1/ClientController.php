@@ -124,6 +124,12 @@ class ClientController extends Controller
                 'marital_status'    => $request->input('marital_status'),
                 'mobile'            => $request->input('mobile'),
                 'alternate_mobile'  => $request->input('alternate_mobile'),
+                'PerAdd_state'  => $request->input('PerAdd_state'),
+                'district'  => $request->input('district'),
+                'PerAdd_city'  => $request->input('PerAdd_city'),
+                'PerAdd_pin_code'  => $request->input('PerAdd_pin_code'),
+                'customer_address'           => $request->input('customer_address'),
+                'customer_residential_address' => $request->input('customer_residential_address'),
                 'assign_to'         => $id,
                 'created_at'        => now(),
             ]);
@@ -161,8 +167,6 @@ class ClientController extends Controller
                 'registration_date'          => $request->input('registration_date'),
                 'solar_total_amount'         => $request->input('solar_total_amount'),
                 'installers'                 => $request->input('installers'),
-                'customer_address'           => $request->input('customer_address'),
-                'customer_residential_address' => $request->input('customer_residential_address'),
                 'installation_date'          => $request->input('installation_date'),
                 'total_received_amount'      => $request->input('total_received_amount'),
                 'date_full_payment'          => $request->input('date_full_payment'),
@@ -267,9 +271,14 @@ class ClientController extends Controller
                 'marital_status'    => $request->input('marital_status'),
                 'mobile'            => $request->input('mobile'),
                 'alternate_mobile'  => $request->input('alternate_mobile'),
+                'PerAdd_state'  => $request->input('PerAdd_state'),
+                'district'  => $request->input('district'),
+                'PerAdd_city'  => $request->input('PerAdd_city'),
+                'PerAdd_pin_code'  => $request->input('PerAdd_pin_code'),
+                'customer_address'           => $request->input('customer_address'),
+                'customer_residential_address' => $request->input('customer_residential_address'),
                 'updated_at'        => now(),
             ]);
-
             // 2. Update quotation data
             $quotation = Quotation::where('customer_id', $customer->id)->first();
             if ($quotation) {
@@ -297,14 +306,17 @@ class ClientController extends Controller
                     'acknowledge_no'             => $request->input('acknowledge_no'),
                     'loan_required'              => $request->input('loan_'),
                     'payment_mode'               => $request->input('payment_mode'),
+                    'cancel_cheque'              => $request->file('cancel_cheque')?->store('cheques'),
+                    'light_bill'                 => $request->file('light_bill')?->store('bills'),
                     'consumer_no'                => $request->input('light_bill_no'),
                     'application_ref_no'         => $request->input('application_ref_no'),
                     'channel_partner_id'         => $request->input('channel_partner'),
                     'registration_date'          => $request->input('registration_date'),
                     'solar_total_amount'         => $request->input('solar_total_amount'),
                     'installers'                 => $request->input('installers'),
-                    'customer_address'           => $request->input('customer_address'),
-                    'customer_residential_address' => $request->input('customer_residential_address'),
+                    'installation_date'          => $request->input('installation_date'),
+                    'total_received_amount'      => $request->input('total_received_amount'),
+                    'date_full_payment'          => $request->input('date_full_payment'),
                     'is_completed'               => $request->input('is_completed'),
                     'updated_at'  => now(),
                 ];
@@ -320,20 +332,18 @@ class ClientController extends Controller
                 $solarDetail->update($updateData);
             }
 
-            // 4. Update subsidy data
-            $subsidy = Subsidy::where('customer_id', $customer->id)->first();
-            if ($subsidy) {
-                $subsidy->update([
-                    'subsidy_amount'  => $request->input('subsidy_amount'),
-                    'subsidy_status'  => $request->input('subsidy_status'),
-                    'updated_at'  => now(),
-                ]);
-            }
-
-            // 5. Update loan bank detail data
-            $loan = LoanBankDetail::where('customer_id', $customer->id)->first();
-            if ($loan) {
-                $loan->update([
+            Subsidy::updateOrCreate(
+                ['customer_id' => $customer->id],
+                [
+                    'subsidy_amount' => $request->input('subsidy_amount'),
+                    'subsidy_status' => $request->input('subsidy_status'),
+                    'updated_at'     => now(),
+                ]
+            );
+            LoanBankDetail::updateOrCreate(
+                ['customer_id' => $customer->id],
+                [
+                    'solar_detail_id' => $solarDetail->id,
                     'bank_name'              => $request->input('bank_name_loan'),
                     'bank_branch'            => $request->input('bank_branch_loan'),
                     'account_number'         => $request->input('account_number_loan'),
@@ -341,21 +351,23 @@ class ClientController extends Controller
                     'branch_manager_phone'   => $request->input('branch_manager_phone_loan'),
                     'loan_manager_phone'     => $request->input('loan_manager_phone_loan'),
                     'loan_status'            => $request->input('loan_status'),
-                    'updated_at'  => now(),
-                ]);
-            }
+                    'loan_sanction_date'     => $request->input('loan_sanction_date'),
+                    'loan_disbursed_date'    => $request->input('loan_disbursed_date'),
+                    'managed_by'             => $request->input('managed_by'),
+                    'updated_at'             => now(),
+                ]
 
-            // 6. Update customer bank detail data
-            $bank = CustomerBankDetail::where('customer_id', $customer->id)->first();
-            if ($bank) {
-                $bank->update([
+            );
+            CustomerBankDetail::updateOrCreate(
+                ['customer_id' => $customer->id], // search criteria
+                [
                     'bank_name'      => $request->input('bank_name'),
                     'bank_branch'    => $request->input('bank_branch'),
                     'account_number' => $request->input('account_number'),
                     'ifsc_code'      => $request->input('ifsc_code'),
-                    'updated_at'  => now(),
-                ]);
-            }
+                    'updated_at'     => now(),
+                ]
+            );
 
             DB::commit();
 

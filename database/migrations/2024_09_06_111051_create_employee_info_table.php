@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('place_of_birth')->nullable();
             $table->string('gender')->nullable();
             $table->unsignedBigInteger('marital_status_id')->nullable()->constrained('employee_statuses', 'id');
-            $table->unsignedBigInteger('nationality_id')->nullable()->constrained('countries', 'id');
             $table->string('religion')->nullable();
             $table->unsignedBigInteger('blood_group')->nullable()->constrained('bloodgroups', 'id');
             $table->string('citizenship')->nullable();

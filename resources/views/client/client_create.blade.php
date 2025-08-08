@@ -1,7 +1,6 @@
 <form action="javascript:void(0)" id="customerForm" name="customerForm" class="form-horizontal" method="POST"
     enctype="multipart/form-data">
     <input type="hidden" id="clientId" name="clientId" value="{{ $clientId ?? '' }}">
-
     <h5 class="fw-bold mb-3 mt-4">👤 Customer Basic Details</h5>
     <div class="row">
         <div class="col-md-4 mb-4">
@@ -58,8 +57,56 @@
                 <span class="text-danger" id="alternate_mobile-error"></span>
             </div>
         </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <select class="form-select" id="PerAdd_state" name="PerAdd_state">
+                    <option value="">Select State</option>
+                </select>
+                <label for="PerAdd_state">State <span style="color:red">*</span></label>
+                <span class="text-danger" id="PerAdd_state-error"></span>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input class="form-control" type="text" id="district" name="district" placeholder="District" />
+                <label for="district">District <span style="color:red">*</span></label>
+                <span class="text-danger" id="district-error"></span>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input class="form-control" type="text" id="PerAdd_city" name="PerAdd_city"
+                    placeholder="City" />
+                <label for="city">City <span style="color:red">*</span></label>
+                <span class="text-danger" id="PerAdd_city-error"></span>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input class="form-control" type="text" id="PerAdd_pin_code" name="PerAdd_pin_code"
+                    placeholder="Pin Code" />
+                <label for="pin_code">Pin Code <span style="color:red">*</span></label>
+                <span class="text-danger" id="PerAdd_pin_code-error"></span>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <textarea class="form-control" name="customer_address" id="customer_address" placeholder="Enter Address"
+                    style="height: 10px;"></textarea>
+                <label for="customer_address">Permanent Address <span class="text-danger">*</span></label>
+                <span class="text-danger" id="customer_address-error"></span>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating form-floating-outline">
+                <textarea class="form-control" name="customer_residential_address" id="customer_residential_address"
+                    placeholder="Enter Address" style="height: 10px;"></textarea>
+                <label for="customer_residential_address">Residential Address <span
+                        class="text-danger">*</span></label>
+                <span class="text-danger" id="customer_residential_address-error"></span>
+            </div>
+        </div>
     </div>
-
     <h5 class="fw-bold mb-3 mt-4">🧾 Quotation</h5>
     <div class="row">
         <div class="col-md-4 mb-4">
@@ -173,7 +220,6 @@
         </div>
     </div>
     <div class="row">
-
         <!-- Application Reference No -->
         <div class="col-md-4 mb-4">
             <div class="form-floating form-floating-outline">
@@ -300,27 +346,6 @@
             </div>
         </div>
 
-    </div>
-    <div class="row">
-        <!-- Customer Address -->
-        <div class="col-md-6 mb-4">
-            <div class="form-floating form-floating-outline">
-                <textarea class="form-control" name="customer_address" id="customer_address" placeholder="Enter Address"
-                    style="height: 100px;"></textarea>
-                <label for="customer_address">Permanent Address <span class="text-danger">*</span></label>
-                <span class="text-danger" id="customer_address-error"></span>
-            </div>
-        </div>
-        <!-- Residential Address -->
-        <div class="col-md-6 mb-4">
-            <div class="form-floating form-floating-outline">
-                <textarea class="form-control" name="customer_residential_address" id="customer_residential_address"
-                    placeholder="Enter Address" style="height: 100px;"></textarea>
-                <label for="customer_residential_address">Residential Address <span
-                        class="text-danger">*</span></label>
-                <span class="text-danger" id="customer_residential_address-error"></span>
-            </div>
-        </div>
     </div>
     <!-- Section: 💰 Subsidy Info -->
     <h5 class="fw-bold mb-3 mt-4">💰 Subsidy Info</h5>
@@ -476,10 +501,10 @@
             <!-- Loan Disbursal Date -->
             <div class="col-md-4 mb-4">
                 <div class="form-floating form-floating-outline">
-                    <input type="date" class="form-control" name="loan_disbursal_date"
-                        id="loan_disbursal_date" />
-                    <label for="loan_disbursal_date">Loan Disbursal Date</label>
-                    <span class="text-danger" id="loan_disbursal_date-error"></span>
+                    <input type="date" class="form-control" name="loan_disbursed_date"
+                        id="loan_disbursed_date" />
+                    <label for="loan_disbursed_date">Loan Disbursal Date</label>
+                    <span class="text-danger" id="loan_disbursed_date-error"></span>
                 </div>
             </div>
         </div>
@@ -531,7 +556,6 @@
             </div>
         </div>
     </div>
-
     <!-- Footer -->
     <div class="offcanvas-footer justify-content-md-end position-absolute bottom-0 end-0 w-100">
         <button class="btn rounded btn-secondary me-2" type="button" data-bs-dismiss="offcanvas">
@@ -546,8 +570,12 @@
     var clientId = $("#clientId").val();
     $(document).ready(function() {
 
-        $('#loanBankDetailsSection').hide();
-
+        if (clientId > 0) {
+            $('#loanBankDetailsSection').show();
+        }
+        if (clientId == 0) {
+            $('#loanBankDetailsSection').hide();
+        }
         $('#payment_mode').change(function() {
             const selected = $(this).val();
 
@@ -557,6 +585,34 @@
                 $('#loanBankDetailsSection').slideUp();
             }
         });
+
+        let url =
+            `{{ config('apiConstants.PROFILE_URLS.PROFILE') }}?id={{ request()->get('id') }}&Params='Address'`;
+
+        fnCallAjaxHttpGetEvent(url, null, true, true, function(response) {
+            if (response.status === 200 && response.data) {
+                // Store all states data globally
+                allStates = response.data.state;
+
+                // Use fixed country ID
+                const fixedCountryId = 1;
+
+                // Populate state dropdowns based on fixed country ID
+                populateStateDropdown(fixedCountryId, "#PerAdd_state");
+            }
+        });
+
+        function populateStateDropdown(countryId, stateDropdownSelector) {
+            const stateDropdown = $(stateDropdownSelector);
+            stateDropdown.empty(); // Clear existing options
+            stateDropdown.append('<option value="">Select State</option>'); // Add default option
+            if (countryId) {
+                const filteredStates = allStates.filter(state => state.country_id == countryId);
+                filteredStates.forEach(function(state) {
+                    stateDropdown.append(`<option value="${state.name}">${state.name}</option>`);
+                });
+            }
+        }
 
         // Declare a variable to hold bank data
         var bankDataMap = {};
@@ -678,8 +734,17 @@
                 if (response.status === 200 && response.data) {
                     $("#customer_name").val(response.data.customer_name);
                     $("#age").val(response.data.age);
+                    $("#gender").val(response.data.gender);
+                    $("#marital_status").val(response.data.marital_status);
+
                     $("#mobile").val(response.data.mobile);
                     $("#alternate_mobile").val(response.data.alternate_mobile);
+                    $("#PerAdd_state").val(response.data.PerAdd_state);
+                    $("#district").val(response.data.district);
+                    $("#PerAdd_city").val(response.data.PerAdd_city);
+                    $("#PerAdd_pin_code").val(response.data.PerAdd_pin_code);
+                    $("#customer_address").val(response.data.customer_address);
+                    $("#customer_residential_address").val(response.data.customer_residential_address);
                     $("#quotation_").val(response.data.required);
                     $("#solar_capacity").val(response.data.capacity);
                     $("#roof_area").val(response.data.roof_area);
@@ -708,6 +773,7 @@
                         $("#solar_company").val(response.data.solar_detail.solar_company);
                         $("#inverter_company").val(response.data.solar_detail.inverter_company);
                         $("#installers").val(response.data.solar_detail.installers);
+                        $("#installation_date").val(response.data.solar_detail.installation_date);
                         $("#jan_samarth_id").val(response.data.solar_detail.jan_samarth_id);
                         $("#acknowledge_no").val(response.data.solar_detail.acknowledge_no);
                         $("#loan_").val(response.data.solar_detail.loan_required);
@@ -717,9 +783,9 @@
                         $("#channel_partner").val(response.data.solar_detail.channel_partner_id);
                         $("#registration_date").val(response.data.solar_detail.registration_date);
                         $("#solar_total_amount").val(response.data.solar_detail.solar_total_amount);
-                        $("#customer_address").val(response.data.solar_detail.customer_address);
-                        $("#customer_residential_address").val(response.data.solar_detail
-                            .customer_residential_address);
+                        $("#total_received_amount").val(response.data.solar_detail
+                            .total_received_amount);
+                        $("#date_full_payment").val(response.data.solar_detail.date_full_payment);
                         $("#is_completed").prop("checked", response.data.solar_detail.is_completed);
                     }
 
@@ -748,6 +814,11 @@
                         $("#loan_manager_phone_loan").val(response.data.loan_bank_detail
                             .loan_manager_phone);
                         $("#loan_status").val(response.data.loan_bank_detail.loan_status);
+                        $("#loan_status").val(response.data.loan_bank_detail.loan_status);
+                        $("#managed_by").val(response.data.loan_bank_detail.managed_by);
+                        $("#loan_sanction_date").val(response.data.loan_bank_detail.loan_sanction_date);
+                        $("#loan_disbursed_date").val(response.data.loan_bank_detail
+                            .loan_disbursed_date);
                     }
                 } else {
                     console.log('Failed to retrieve client data.');
@@ -784,6 +855,18 @@
                 digits: true,
                 minlength: 10,
                 maxlength: 15
+            },
+            PerAdd_state: {
+                required: true,
+            },
+            district: {
+                required: true,
+            },
+            PerAdd_city: {
+                required: true,
+            },
+            PerAdd_pin_code: {
+                required: true,
             },
             roof_type: {
                 required: true
@@ -894,6 +977,18 @@
                 digits: "Please enter a valid mobile number",
                 minlength: "Mobile number must be at least 10 digits long",
                 maxlength: "Mobile number must be at most 15 digits long"
+            },
+            PerAdd_state: {
+                required: "State is required",
+            },
+            district: {
+                required: "District is required",
+            },
+            PerAdd_city: {
+                required: "City is required",
+            },
+            PerAdd_pin_code: {
+                required: "PinCode is required",
             },
             roof_type: {
                 required: "Please select a roof type."

@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Helpers\ApiResponse;
 use Illuminate\Http\Exceptions\HttpResponseException;
+
 class StorePersonalInfoRequest extends FormRequest
 {
     public function rules()
@@ -18,7 +19,6 @@ class StorePersonalInfoRequest extends FormRequest
             'emergency_phone_number' => 'required|digits:10',
             'alternate_phone_number' => 'nullable|digits:10',
             'marital_status_id' => 'required|exists:marital_statuses,id',
-            'nationality_id' => 'required|exists:countries,id',
             'disability_status' => 'required|in:0,1,2,3',
             'citizenship' => 'nullable|string',
             'religion' => 'nullable|string',
