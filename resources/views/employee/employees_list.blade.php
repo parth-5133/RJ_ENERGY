@@ -16,19 +16,23 @@
             </div>
 
             <div class="col-12 d-flex justify-content-between align-items-center">
-                <div class="col-12 d-flex align-items-center flex-nowrap px-5 py-4 justify-content-center justify-content-sm-end">
+                <div
+                    class="col-12 d-flex align-items-center flex-nowrap px-5 py-4 justify-content-center justify-content-sm-end">
                     <a href="javascript:void(0)"
-                        class="btn btn-sm btn-danger waves-effect waves-light mb-3 me-2 mb-xxl-0 mb-sm-0 rounded d-flex flex-wrap" id="btnPdf">
+                        class="btn btn-sm btn-danger waves-effect waves-light mb-3 me-2 mb-xxl-0 mb-sm-0 rounded d-flex flex-wrap"
+                        id="btnPdf">
                         <i class="mdi mdi-file-pdf-box me-1"></i> Export PDF
                     </a>
 
                     <a href="javascript:void(0)"
-                        class="btn btn-sm btn-info waves-effect waves-light mb-3 me-2 mb-xxl-0 mb-sm-0 rounded d-flex flex-wrap" id="btnCsv">
+                        class="btn btn-sm btn-info waves-effect waves-light mb-3 me-2 mb-xxl-0 mb-sm-0 rounded d-flex flex-wrap"
+                        id="btnCsv">
                         <i class="mdi mdi-file-delimited-outline me-1"></i> Export CSV
                     </a>
 
                     <a href="javascript:void(0)"
-                        class="btn btn-sm btn-success waves-effect waves-light mb-3 mb-xxl-0 mb-sm-0 rounded d-flex flex-wrap" id="btnExcel">
+                        class="btn btn-sm btn-success waves-effect waves-light mb-3 mb-xxl-0 mb-sm-0 rounded d-flex flex-wrap"
+                        id="btnExcel">
                         <i class="mdi mdi-file-excel-box me-1"></i> Export Excel
                     </a>
                 </div>
@@ -44,9 +48,6 @@
                             <th>Employee ID</th>
                             <th>Employee Name</th>
                             <th>Email</th>
-                            <th>Department</th>
-                            <th>Employee Type</th>
-                            <th>Joining Date</th>
                             <th>Status</th>
                             @if ($permissions['canDelete'] || $permissions['canEdit'])
                                 <th>Modified By</th>
@@ -153,12 +154,6 @@
                         }
                     }, {
                         data: "email",
-                    }, {
-                        data: "department_name",
-                    }, {
-                        data: "employee_type_name",
-                    }, {
-                        data: "date_of_joining",
                     }, {
                         data: "employee_status_name",
                         render: function(data, type, row) {

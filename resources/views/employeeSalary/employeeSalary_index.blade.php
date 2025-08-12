@@ -6,7 +6,7 @@
                 <div class="head-label text-center">
                     <h5 class="card-title mb-0"><b>{{ $menuName }}</b></h5>
                 </div>
-                @if ($role_code == config('roles.ADMIN') || $role_code == config('roles.SUPERADMIN'))
+                @if ($role_code == config('roles.ADMIN') || $role_code == config('roles.SUPERADMIN') || $role_code == config('roles.CLIENT'))
                     @if ($permissions['canAdd'])
                         <button id="btnAdd" type="submit" class="btn btn-primary waves-effect waves-light"
                             onClick="fnAddEdit(this, '{{ url('employee-salary/create') }}', 0, 'Add Employee Salary',true)">
@@ -23,7 +23,6 @@
                             <th>Action</th>
                             <th>Employee ID</th>
                             <th>Employee</th>
-                            <th>Department</th>
                             <th>Basic Salary</th>
                             <th>Total Allowances</th>
                             <th>Total Deductions</th>
@@ -133,9 +132,6 @@
                                 return data;
                             }
                         @endif
-                    },
-                    {
-                        data: "department_name"
                     },
                     {
                         data: "basic_salary"
