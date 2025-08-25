@@ -151,16 +151,12 @@ class ClientController extends Controller
                 'customer_id'                => $customer->id,
                 'roof_type'                  => $request->input('roof_type'),
                 'roof_area'                  => $request->input('roof_area'),
-                'usage_pattern'              => $request->input('usage_pattern'),
                 'capacity'                   => $request->input('solar_capacity'),
                 'solar_company'              => $request->input('solar_company'),
                 'inverter_company'           => $request->input('inverter_company'),
                 'jan_samarth_id'             => $request->input('jan_samarth_id'),
-                'acknowledge_no'             => $request->input('acknowledge_no'),
                 'loan_required'              => $request->input('loan_'),
                 'payment_mode'               => $request->input('payment_mode'),
-                'cancel_cheque'              => $request->file('cancel_cheque')?->store('cheques'),
-                'light_bill'                 => $request->file('light_bill')?->store('bills'),
                 'consumer_no'                => $request->input('light_bill_no'),
                 'application_ref_no'         => $request->input('application_ref_no'),
                 'channel_partner_id'         => $request->input('channel_partner'),
@@ -298,16 +294,12 @@ class ClientController extends Controller
                 $updateData = [
                     'roof_type'                  => $request->input('roof_type'),
                     'roof_area'                  => $request->input('roof_area'),
-                    'usage_pattern'              => $request->input('usage_pattern'),
                     'capacity'                   => $request->input('solar_capacity'),
                     'solar_company'              => $request->input('solar_company'),
                     'inverter_company'           => $request->input('inverter_company'),
                     'jan_samarth_id'             => $request->input('jan_samarth_id'),
-                    'acknowledge_no'             => $request->input('acknowledge_no'),
                     'loan_required'              => $request->input('loan_'),
                     'payment_mode'               => $request->input('payment_mode'),
-                    'cancel_cheque'              => $request->file('cancel_cheque')?->store('cheques'),
-                    'light_bill'                 => $request->file('light_bill')?->store('bills'),
                     'consumer_no'                => $request->input('light_bill_no'),
                     'application_ref_no'         => $request->input('application_ref_no'),
                     'channel_partner_id'         => $request->input('channel_partner'),
@@ -320,14 +312,6 @@ class ClientController extends Controller
                     'is_completed'               => $request->input('is_completed'),
                     'updated_at'  => now(),
                 ];
-
-                // Handle file uploads if new files are provided
-                if ($request->hasFile('cancel_cheque')) {
-                    $updateData['cancel_cheque'] = $request->file('cancel_cheque')->store('cheques');
-                }
-                if ($request->hasFile('light_bill')) {
-                    $updateData['light_bill'] = $request->file('light_bill')->store('bills');
-                }
 
                 $solarDetail->update($updateData);
             }

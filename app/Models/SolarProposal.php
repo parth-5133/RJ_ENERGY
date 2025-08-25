@@ -15,7 +15,6 @@ class SolarProposal extends Model
         'solar_capacity',
         'roof_type',
         'roof_area',
-        'usage_pattern',
         'net_metering',
         'subsidy_claimed',
         'purchase_mode',

@@ -14,7 +14,6 @@ class StoreUpdateProposalRequest extends FormRequest
             'solar_capacity'     => 'required|string|max:255',
             'roof_type'          => 'required|string|in:RCC,Tin,Slope,Other',
             'roof_area'          => 'required|numeric|min:1',
-            'usage_pattern'      => 'required|string|in:Domestic,Commercial,Agricultural,Industrial',
             'net_metering'       => 'required|in:Yes,No',
             'subsidy_claimed'    => 'required|in:Yes,No',
             'purchase_mode'      => 'required|in:Cash,Loan,EMI',

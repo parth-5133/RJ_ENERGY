@@ -177,21 +177,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="row align-items-center mb-3">
-                                    <div class="col-sm-5">
-                                        <p class="d-flex align-items-center mb-0">
-                                            <i class="mdi mdi-factory me-2 p-1 bg-label-secondary rounded"></i>
-                                            Usage Pattern
-                                        </p>
-                                    </div>
-                                    <div class="col-sm-7">
-                                        <span
-                                            class="badge rounded bg-label-secondary">{{ $client[0]['usage_pattern'] ?? 'N/A' }}</span>
-                                    </div>
-                                </div>
-                            </div>
-
                             <!-- Fourth Row -->
                             <div class="col-md-6">
                                 <div class="row align-items-center mb-3">
@@ -304,7 +289,7 @@
                                 <i class="mdi mdi-plus me-1"></i>Add New
                             </a> --}}
 
-                            <a onClick="fnAddEdit(this, '{{ url('/client/documents/upload') }}', {{ $client[0]['customer_id']}}, 'Upload Files')"
+                            <a onClick="fnAddEdit(this, '{{ url('/client/documents/upload') }}', {{ $client[0]['customer_id'] }}, 'Upload Files')"
                                 class="btn btn-primary waves-effect waves-light text-white">
                                 <i class="mdi mdi-plus me-1"></i>Add New
                             </a>
@@ -314,73 +299,6 @@
                     </div>
                     <div class="card-body mt-6" id="file-section">
                         <div class="row">
-                            @if ($client[0]['cancel_cheque'])
-                                <div class="col-sm-4">
-                                    <div class="card shadow-none border rounded mb-4">
-                                        <div class="card-body">
-                                            <div
-                                                class="d-flex align-items-center justify-content-between mb-2 pb-2 border-bottom">
-                                                <div class="d-flex align-items-center">
-                                                    <a href="javascript:void(0)">
-                                                        <i
-                                                            class="mdi mdi-file-document-outline me-2 p-2 bg-label-info rounded"></i>
-                                                    </a>
-                                                    <div>
-                                                        <h6 class="fw-bold mb-0">Cancel Cheque</h6>
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex align-items-center">
-                                                    <a href="{{ asset('storage/' . $client[0]['cancel_cheque']) }}"
-                                                        target="_blank"
-                                                        class="btn btn-sm btn-text-secondary rounded-pill btn-icon"
-                                                        download>
-                                                        <i class="mdi mdi-tray-arrow-down"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <p class="fw-medium mb-0">
-                                                    {{ date('d/m/Y', strtotime($client[0]['created_at'])) }}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-
-                            @if ($client[0]['light_bill'])
-                                <div class="col-sm-4">
-                                    <div class="card shadow-none border rounded mb-4">
-                                        <div class="card-body">
-                                            <div
-                                                class="d-flex align-items-center justify-content-between mb-2 pb-2 border-bottom">
-                                                <div class="d-flex align-items-center">
-                                                    <a href="javascript:void(0)">
-                                                        <i
-                                                            class="mdi mdi-file-document-outline me-2 p-2 bg-label-warning rounded"></i>
-                                                    </a>
-                                                    <div>
-                                                        <h6 class="fw-bold mb-0">Light Bill</h6>
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex align-items-center">
-                                                    <a href="{{ asset('storage/' . $client[0]['light_bill']) }}"
-                                                        target="_blank"
-                                                        class="btn btn-sm btn-text-secondary rounded-pill btn-icon"
-                                                        download>
-                                                        <i class="mdi mdi-tray-arrow-down"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <p class="fw-medium mb-0">
-                                                    {{ date('d/m/Y', strtotime($client[0]['created_at'])) }}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
                         </div>
                     </div>
                 </div>

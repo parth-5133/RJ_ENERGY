@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('solar_capacity')->nullable();
             $table->string('roof_type')->nullable();
             $table->string('roof_area')->nullable();
-            $table->string('usage_pattern')->nullable();
             $table->string('net_metering')->nullable();
             $table->string('subsidy_claimed')->nullable();
             $table->string('purchase_mode')->nullable();

@@ -45,17 +45,6 @@
                 <label for="roof_area">Roof Area (sq. ft) <span class="text-danger">*</span></label>
                 <span class="text-danger" id="roof_area-error"></span>
             </div>
-
-            <div class="form-floating form-floating-outline mb-4">
-                <select class="form-select" name="usage_pattern" id="usage_pattern" required>
-                    <option value="">Select Usage Pattern</option>
-                    <option value="Domestic">Domestic</option>
-                    <option value="Commercial">Commercial</option>
-                </select>
-                <label for="usage_pattern">Usage Pattern <span class="text-danger">*</span></label>
-                <span class="text-danger" id="usage_pattern-error"></span>
-            </div>
-
             <div class="form-floating form-floating-outline mb-4">
                 <select class="form-select" name="net_metering" id="net_metering" required>
                     <option value="">Select Option</option>

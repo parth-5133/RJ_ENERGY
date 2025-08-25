@@ -5,23 +5,50 @@
     <!-- Section 1: Customer Basic Details -->
     <h5 class="fw-bold mb-3 mt-4">👤 Customer Basic Details</h5>
     <div class="row">
-        <!-- Name -->
-        <div class="col-md-4 mb-4">
+        <!-- First Name -->
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
-                <input type="text" class="form-control" name="customer_name" id="customer_name" placeholder="Name" />
-                <label for="customer_name">Name <span class="text-danger">*</span></label>
-                <span class="text-danger" id="customer_name-error"></span>
+                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name" />
+                <label for="first_name">First Name <span class="text-danger">*</span></label>
+                <span class="text-danger" id="first_name-error"></span>
+            </div>
+        </div>
+
+        <!-- Middle Name -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="text" class="form-control" name="middle_name" id="middle_name"
+                    placeholder="Middle Name" />
+                <label for="middle_name">Middle Name</label>
+                <span class="text-danger" id="middle_name-error"></span>
+            </div>
+        </div>
+
+        <!-- Last Name -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name" />
+                <label for="last_name">Last Name <span class="text-danger">*</span></label>
+                <span class="text-danger" id="last_name-error"></span>
+            </div>
+        </div>
+        <!-- Email Address -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" />
+                <label for="email">Email Address <span class="text-danger">*</span></label>
+                <span class="text-danger" id="email-error"></span>
             </div>
         </div>
         <!-- Age -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="number" class="form-control" name="age" id="age" placeholder="Age" />
                 <label for="age">Age <span class="text-danger">*</span></label>
                 <span class="text-danger" id="age-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="gender" id="gender">
                     <option value="">Select Gender</option>
@@ -33,7 +60,25 @@
                 <span class="text-danger" id="gender-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <!-- PAN Number -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="text" class="form-control" name="pan_number" id="pan_number" maxlength="10"
+                    placeholder="PAN Number" />
+                <label for="pan_number">PAN Number <span class="text-danger">*</span></label>
+                <span class="text-danger" id="pan_number-error"></span>
+            </div>
+        </div>
+            <!-- Aadhar Number -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="text" class="form-control" name="aadhar_number" id="aadhar_number" maxlength="12"
+                    placeholder="Aadhar Number" />
+                <label for="aadhar_number">Aadhar Number <span class="text-danger">*</span></label>
+                <span class="text-danger" id="aadhar_number-error"></span>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="marital_status" id="marital_status">
                     <option value="">Select Marital Status</option>
@@ -46,7 +91,7 @@
             </div>
         </div>
         <!-- Mobile -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="tel" class="form-control" name="mobile" id="mobile" maxlength="10"
                     placeholder="Aadhar-linked Mobile" />
@@ -55,15 +100,15 @@
             </div>
         </div>
         <!-- Alternate Mobile -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
-                <input type="tel" class="form-control" name="alternate_mobile" id="alternate_mobile" maxlength="10"
-                    placeholder="Alternate Mobile" />
+                <input type="tel" class="form-control" name="alternate_mobile" id="alternate_mobile"
+                    maxlength="10" placeholder="Alternate Mobile" />
                 <label for="alternate_mobile">Alternate Mobile</label>
                 <span class="text-danger" id="alternate_mobile-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" id="PerAdd_state" name="PerAdd_state">
                     <option value="">Select State</option>
@@ -72,14 +117,14 @@
                 <span class="text-danger" id="PerAdd_state-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input class="form-control" type="text" id="district" name="district" placeholder="District" />
                 <label for="district">District <span style="color:red">*</span></label>
                 <span class="text-danger" id="district-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input class="form-control" type="text" id="PerAdd_city" name="PerAdd_city"
                     placeholder="City" />
@@ -87,7 +132,7 @@
                 <span class="text-danger" id="PerAdd_city-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input class="form-control" type="text" id="PerAdd_pin_code" name="PerAdd_pin_code"
                     placeholder="Pin Code" />
@@ -95,7 +140,7 @@
                 <span class="text-danger" id="PerAdd_pin_code-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <textarea class="form-control" name="customer_address" id="customer_address" placeholder="Enter Address"
                     style="height: 10px;"></textarea>
@@ -103,7 +148,7 @@
                 <span class="text-danger" id="customer_address-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <textarea class="form-control" name="customer_residential_address" id="customer_residential_address"
                     placeholder="Enter Address" style="height: 10px;"></textarea>
@@ -117,7 +162,7 @@
     <h5 class="fw-bold mb-3 mt-4">🧾 Quotation</h5>
     <div class="row">
         <!-- Quotation -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="quotation_" id="quotation_">
                     <option value="Yes">Yes</option>
@@ -128,7 +173,7 @@
             </div>
         </div>
         <!-- Proposed Solar Capacity -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="text" class="form-control" name="solar_capacity" id="solar_capacity"
                     placeholder="Solar Capacity" />
@@ -137,7 +182,7 @@
             </div>
         </div>
         <!-- Rooftop Size -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="text" class="form-control" name="rooftop_size" id="rooftop_size"
                     placeholder="Rooftop Size" />
@@ -146,7 +191,7 @@
             </div>
         </div>
         <!-- Quotation Amount -->
-        <div class="col-md-4 mb-4 quotation-dependent">
+        <div class="col-md-3 mb-4 quotation-dependent">
             <div class="form-floating form-floating-outline">
                 <input type="number" class="form-control" name="quotation_amount" id="quotation_amount"
                     placeholder="Quotation Amount">
@@ -155,7 +200,7 @@
             </div>
         </div>
         <!-- Quotation Date -->
-        <div class="col-md-4 mb-4 quotation-dependent">
+        <div class="col-md-3 mb-4 quotation-dependent">
             <div class="form-floating form-floating-outline">
                 <input type="date" class="form-control" name="quotation_date" id="quotation_date"
                     placeholder="Quotation Date">
@@ -164,7 +209,7 @@
             </div>
         </div>
         <!-- Entered By -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="quotation_by" id="quotation_by">
                 </select>
@@ -175,7 +220,7 @@
     </div>
     <div class="row quotation-dependent">
         <!-- Quotation Status -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="quotation_status" id="quotation_status">
                     <option value="Agreed">Agreed</option>

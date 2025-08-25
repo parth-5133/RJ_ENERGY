@@ -51,7 +51,6 @@ class ConsumerApplicationController extends Controller
             'solar_capacity'   => $request->solar_capacity,
             'roof_type'        => $request->roof_type,
             'roof_area'        => $request->roof_area,
-            'usage_pattern'    => $request->usage_pattern,
             'net_metering'     => $request->net_metering,
             'subsidy_claimed'  => $request->subsidy_claimed,
             'purchase_mode'    => $request->purchase_mode,

@@ -3,21 +3,21 @@
     <input type="hidden" id="clientId" name="clientId" value="{{ $clientId ?? '' }}">
     <h5 class="fw-bold mb-3 mt-4">👤 Customer Basic Details</h5>
     <div class="row">
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="text" class="form-control" name="customer_name" id="customer_name" placeholder="Name" />
                 <label for="customer_name">Name <span class="text-danger">*</span></label>
                 <span class="text-danger" id="customer_name-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="number" class="form-control" name="age" id="age" placeholder="Age" />
                 <label for="age">Age <span class="text-danger">*</span></label>
                 <span class="text-danger" id="age-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="gender" id="gender">
                     <option value="">Select Gender</option>
@@ -29,7 +29,7 @@
                 <span class="text-danger" id="gender-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="marital_status" id="marital_status">
                     <option value="">Select Marital Status</option>
@@ -41,7 +41,7 @@
                 <span class="text-danger" id="marital_status-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="tel" class="form-control" name="mobile" id="mobile" maxlength="10"
                     placeholder="Aadhar-linked Mobile" />
@@ -49,7 +49,7 @@
                 <span class="text-danger" id="mobile-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="tel" class="form-control" name="alternate_mobile" id="alternate_mobile" maxlength="10"
                     placeholder="Alternate Mobile" />
@@ -57,7 +57,7 @@
                 <span class="text-danger" id="alternate_mobile-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" id="PerAdd_state" name="PerAdd_state">
                     <option value="">Select State</option>
@@ -66,14 +66,14 @@
                 <span class="text-danger" id="PerAdd_state-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input class="form-control" type="text" id="district" name="district" placeholder="District" />
                 <label for="district">District <span style="color:red">*</span></label>
                 <span class="text-danger" id="district-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input class="form-control" type="text" id="PerAdd_city" name="PerAdd_city"
                     placeholder="City" />
@@ -81,7 +81,7 @@
                 <span class="text-danger" id="PerAdd_city-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input class="form-control" type="text" id="PerAdd_pin_code" name="PerAdd_pin_code"
                     placeholder="Pin Code" />
@@ -89,7 +89,7 @@
                 <span class="text-danger" id="PerAdd_pin_code-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <textarea class="form-control" name="customer_address" id="customer_address" placeholder="Enter Address"
                     style="height: 10px;"></textarea>
@@ -97,7 +97,7 @@
                 <span class="text-danger" id="customer_address-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <textarea class="form-control" name="customer_residential_address" id="customer_residential_address"
                     placeholder="Enter Address" style="height: 10px;"></textarea>
@@ -109,7 +109,7 @@
     </div>
     <h5 class="fw-bold mb-3 mt-4">🧾 Quotation</h5>
     <div class="row">
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="quotation_" id="quotation_">
                     <option value="No">No</option>
@@ -119,7 +119,7 @@
                 <span class="text-danger" id="quotation_-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4 quotation-dependent">
+        <div class="col-md-3 mb-4 quotation-dependent">
             <div class="form-floating form-floating-outline">
                 <input type="number" class="form-control" name="quotation_amount" id="quotation_amount"
                     placeholder="Quotation Amount">
@@ -127,7 +127,7 @@
                 <span class="text-danger" id="quotation_amount-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4 quotation-dependent">
+        <div class="col-md-3 mb-4 quotation-dependent">
             <div class="form-floating form-floating-outline">
                 <input type="date" class="form-control" name="quotation_date" id="quotation_date"
                     placeholder="Quotation Date">
@@ -135,7 +135,7 @@
                 <span class="text-danger" id="quotation_date-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="quotation_by" id="quotation_by">
                 </select>
@@ -143,7 +143,7 @@
                 <span class="text-danger" id="quotation_by-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="quotation_status" id="quotation_status">
                     <option value="Agreed">Agreed</option>
@@ -157,7 +157,20 @@
 
     <h5 class="fw-bold mb-3 mt-4">☀️ Solar Details</h5>
     <div class="row">
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <select class="form-select" name="solar_type" id="solar_type">
+                    <option value="">Solar Type</option>
+                    <option value="Residential">Residential</option>
+                    <option value="Commercial">Commercial</option>
+                    <option value="Industrial">Industrial</option>
+                    <option value="Other">Other</option>
+                </select>
+                <label for="solar_type">Solar Type <span class="text-danger">*</span></label>
+                <span class="text-danger" id="solar_type-error"></span>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="roof_type" id="roof_type">
                     <option value="">Select Roof Type</option>
@@ -170,47 +183,64 @@
                 <span class="text-danger" id="roof_type-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="number" class="form-control" name="roof_area" id="roof_area"
                     placeholder="Roof Area" />
-                <label for="roof_area">Roof Area (sq. ft) <span class="text-danger">*</span></label>
+                <label for="roof_area">Roof Top Area <span class="text-danger">*</span></label>
                 <span class="text-danger" id="roof_area-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
-            <div class="form-floating form-floating-outline">
-                <select class="form-select" name="usage_pattern" id="usage_pattern">
-                    <option value="">Select Usage Pattern</option>
-                    <option value="Domestic">Domestic</option>
-                    <option value="Commercial">Commercial</option>
-                </select>
-                <label for="usage_pattern">Usage Pattern <span class="text-danger">*</span></label>
-                <span class="text-danger" id="usage_pattern-error"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
         <!-- Capacity -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="text" class="form-control" name="solar_capacity" id="solar_capacity"
-                    placeholder="Capacity (e.g. 3KW)" />
-                <label for="solar_capacity">Capacity (e.g. 3KW)</label>
+                    placeholder="Solar Capacity" />
+                <label for="solar_capacity">Solar Capacity</label>
                 <span class="text-danger" id="solar_capacity-error"></span>
             </div>
         </div>
         <!-- Solar Company -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="text" class="form-control" name="solar_company" id="solar_company"
-                    placeholder="Solar Company Name" />
-                <label for="solar_company">Solar Company <span class="text-danger">*</span></label>
+                    placeholder="Solar Panel Company Name" />
+                <label for="solar_company">Solar Panel Company Name <span class="text-danger">*</span></label>
                 <span class="text-danger" id="solar_company-error"></span>
             </div>
         </div>
+        <!-- Panel Type -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <select class="form-select" name="panel_type" id="panel_type">
+                    <option value="">Panel Type</option>
+                    <option value="DCR">DCR</option>
+                    <option value="Non-DCR">Non-DCR</option>
+                </select>
+                <label for="panel_type">Panel Type <span class="text-danger">*</span></label>
+                <span class="text-danger" id="panel_type-error"></span>
+            </div>
+        </div>
+        <!-- Number of Panels -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="number" class="form-control" name="number_of_panels" id="number_of_panels"
+                    placeholder="Number of Panels" />
+                <label for="number_of_panels">Number of Panels <span class="text-danger">*</span></label>
+                <span class="text-danger" id="number_of_panels-error"></span>
+            </div>
+        </div>
+        <!-- Panel Voltage -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="number" class="form-control" name="panel_voltage" id="panel_voltage"
+                    placeholder="Panel Voltage" />
+                <label for="panel_voltage">Panel Voltage <span class="text-danger">*</span></label>
+                <span class="text-danger" id="panel_voltage-error"></span>
+            </div>
+        </div>
         <!-- Inverter Company -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="text" class="form-control" name="inverter_company" id="inverter_company"
                     placeholder="Inverter Company Name" />
@@ -218,10 +248,26 @@
                 <span class="text-danger" id="inverter_company-error"></span>
             </div>
         </div>
-    </div>
-    <div class="row">
+        <!-- Inverter Capacity -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="text" class="form-control" name="inverter_capacity" id="inverter_capacity"
+                    placeholder="Inverter Capacity" />
+                <label for="inverter_capacity">Inverter Capacity <span class="text-danger">*</span></label>
+                <span class="text-danger" id="inverter_capacity-error"></span>
+            </div>
+        </div>
+        <!-- Inverter Serial Number -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="text" class="form-control" name="inverter_serial_number" id="inverter_serial_number"
+                    placeholder="Inverter Serial Number" />
+                <label for="inverter_serial_number">Inverter Serial Number <span class="text-danger">*</span></label>
+                <span class="text-danger" id="inverter_serial_number-error"></span>
+            </div>
+        </div>
         <!-- Application Reference No -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="text" class="form-control" name="application_ref_no" id="application_ref_no"
                     placeholder="Application Reference No." />
@@ -229,7 +275,7 @@
             </div>
         </div>
         <!-- Jan-Samarth ID -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="text" class="form-control" name="jan_samarth_id" id="jan_samarth_id"
                     placeholder="Jan-Samarth ID" />
@@ -237,33 +283,8 @@
                 <span class="text-danger" id="jan_samarth_id-error"></span>
             </div>
         </div>
-        <!-- Acknowledge No. -->
-        <div class="col-md-4 mb-4">
-            <div class="form-floating form-floating-outline">
-                <input type="text" class="form-control" name="acknowledge_no" id="acknowledge_no"
-                    placeholder="Acknowledgement No." />
-                <label for="acknowledge_no">Acknowledge No. <span class="text-danger">*</span></label>
-                <span class="text-danger" id="acknowledge_no-error"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <!-- Cancelled Cheque -->
-        <div class="col-md-4 mb-4">
-            <div class="form-floating form-floating-outline">
-                <input type="file" class="form-control" name="cancel_cheque" id="cancel_cheque" />
-                <label for="cancel_cheque">Cancelled Cheque (Upload)</label>
-            </div>
-        </div>
-        <!-- Light Bill -->
-        <div class="col-md-4 mb-4">
-            <div class="form-floating form-floating-outline">
-                <input type="file" class="form-control" name="light_bill" id="light_bill" />
-                <label for="light_bill">Light Bill (Upload)</label>
-            </div>
-        </div>
         <!-- Light Bill No -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="text" class="form-control" name="light_bill_no" id="light_bill_no"
                     placeholder="Consumer No." />
@@ -271,10 +292,8 @@
                 <span class="text-danger" id="light_bill_no-error"></span>
             </div>
         </div>
-    </div>
-    <div class="row">
         <!-- Loan -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="loan_" id="loan_">
                     <option value="">Loan ?</option>
@@ -286,7 +305,7 @@
             </div>
         </div>
         <!-- Payment Mode -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="payment_mode" id="payment_mode">
                     <option value="">Select Payment Mode</option>
@@ -298,7 +317,7 @@
             </div>
         </div>
         <!-- Solar Total Amount -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="number" class="form-control" name="solar_total_amount" id="solar_total_amount"
                     placeholder="Total Amount" />
@@ -306,10 +325,8 @@
                 <span class="text-danger" id="solar_total_amount-error"></span>
             </div>
         </div>
-    </div>
-    <div class="row">
         <!-- Total Received Amount -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="number" class="form-control" name="total_received_amount" id="total_received_amount"
                     placeholder="Total Received Amount" />
@@ -319,7 +336,7 @@
             </div>
         </div>
         <!-- Date of Full Payment -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="date" class="form-control" name="date_full_payment" id="date_full_payment" />
                 <label for="date_full_payment">Date of Full Payment </label>
@@ -327,7 +344,7 @@
             </div>
         </div>
         <!-- Registration Date -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="date" class="form-control" name="registration_date" id="registration_date" />
                 <label for="registration_date">Registration Date <span class="text-danger">*</span></label>
@@ -335,7 +352,7 @@
             </div>
         </div>
         <!-- Channel Partner -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="channel_partner" id="channel_partner">
                     <option value="">Select Channel Partner</option>
@@ -351,7 +368,7 @@
     <h5 class="fw-bold mb-3 mt-4">💰 Subsidy Info</h5>
     <div class="row">
         <!-- Subsidy Amount -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="number" class="form-control" name="subsidy_amount" id="subsidy_amount"
                     placeholder="Subsidy Amount" />
@@ -359,7 +376,7 @@
             </div>
         </div>
         <!-- Subsidy Status -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="subsidy_status" id="subsidy_status">
                     <option value="">Select Subsidy Status</option>
@@ -369,12 +386,20 @@
                 <label for="subsidy_status">Subsidy Status</label>
             </div>
         </div>
+        <!-- Token ID No. -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="text" class="form-control" name="token_id" id="token_id"
+                    placeholder="Token ID No." />
+                <label for="token_id">Token ID No.</label>
+            </div>
+        </div>
     </div>
     <!-- Consumer Bank Details Section -->
     <div id="bankDetailsSection" class="mb-4">
         <h6 class="fw-bold mb-3">🏦 Customer Bank Details</h6>
         <div class="row">
-            <div class="col-md-4 mb-4">
+            <div class="col-md-3 mb-4">
                 <div class="form-floating form-floating-outline">
                     <select class="form-select" name="bank_name" id="bank_name">
                         <option value="">Select Bank</option>
@@ -383,7 +408,7 @@
                     <span class="text-danger" id="bank_name-error"></span>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
+            <div class="col-md-3 mb-4">
                 <div class="form-floating form-floating-outline">
                     <input type="text" class="form-control" name="bank_branch" id="bank_branch"
                         placeholder="Branch">
@@ -391,7 +416,7 @@
                     <span class="text-danger" id="bank_branch-error"></span>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
+            <div class="col-md-3 mb-4">
                 <div class="form-floating form-floating-outline">
                     <input type="text" class="form-control" name="account_number" id="account_number"
                         placeholder="Account Number">
@@ -399,9 +424,7 @@
                     <span class="text-danger" id="account_number-error"></span>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 mb-4">
+            <div class="col-md-3 mb-4">
                 <div class="form-floating form-floating-outline">
                     <input type="text" class="form-control" name="ifsc_code" id="ifsc_code"
                         placeholder="IFSC Code">
@@ -415,8 +438,7 @@
     <div id="loanBankDetailsSection" class="mb-4">
         <h6 class="fw-bold mb-3">🏦 Loan Applicants Bank Details</h6>
         <div class="row">
-            <!-- Bank Name -->
-            <div class="col-md-4 mb-4">
+            <div class="col-md-3 mb-4">
                 <div class="form-floating form-floating-outline">
                     <select class="form-select" name="bank_name_loan" id="bank_name_loan">
                         <option value="">Select Bank</option>
@@ -427,7 +449,7 @@
                 </div>
             </div>
             <!-- Branch -->
-            <div class="col-md-4 mb-4">
+            <div class="col-md-3 mb-4">
                 <div class="form-floating form-floating-outline">
                     <input type="text" class="form-control" name="bank_branch_loan" id="bank_branch_loan"
                         placeholder="Branch">
@@ -436,7 +458,7 @@
                 </div>
             </div>
             <!-- Account Number -->
-            <div class="col-md-4 mb-4">
+            <div class="col-md-3 mb-4">
                 <div class="form-floating form-floating-outline">
                     <input type="text" class="form-control" name="account_number_loan" id="account_number_loan"
                         placeholder="Account Number">
@@ -444,10 +466,8 @@
                     <span class="text-danger" id="account_number_loan-error"></span>
                 </div>
             </div>
-        </div>
-        <div class="row">
             <!-- IFSC Code -->
-            <div class="col-md-4 mb-4">
+            <div class="col-md-3 mb-4">
                 <div class="form-floating form-floating-outline">
                     <input type="text" class="form-control" name="ifsc_code_loan" id="ifsc_code_loan"
                         placeholder="IFSC Code">
@@ -456,7 +476,7 @@
                 </div>
             </div>
             <!-- Branch Manager Phone -->
-            <div class="col-md-4 mb-4">
+            <div class="col-md-3 mb-4">
                 <div class="form-floating form-floating-outline">
                     <input type="text" class="form-control" name="branch_manager_phone_loan"
                         id="branch_manager_phone_loan" placeholder="Branch Manager Phone">
@@ -466,7 +486,7 @@
                 </div>
             </div>
             <!-- Loan Manager Phone -->
-            <div class="col-md-4 mb-4">
+            <div class="col-md-3 mb-4">
                 <div class="form-floating form-floating-outline">
                     <input type="text" class="form-control" name="loan_manager_phone_loan"
                         id="loan_manager_phone_loan" placeholder="Loan Manager Phone">
@@ -474,10 +494,8 @@
                     <span class="text-danger" id="loan_manager_phone_loan-error"></span>
                 </div>
             </div>
-        </div>
-        <div class="row">
             <!-- Loan Status -->
-            <div class="col-md-4 mb-4">
+            <div class="col-md-3 mb-4">
                 <div class="form-floating form-floating-outline">
                     <select class="form-select" name="loan_status" id="loan_status">
                         <option value="">Select Loan Status</option>
@@ -491,7 +509,7 @@
                 </div>
             </div>
             <!-- Loan Sanction Date -->
-            <div class="col-md-4 mb-4">
+            <div class="col-md-3 mb-4">
                 <div class="form-floating form-floating-outline">
                     <input type="date" class="form-control" name="loan_sanction_date" id="loan_sanction_date" />
                     <label for="loan_sanction_date">Loan Sanction Date</label>
@@ -499,7 +517,7 @@
                 </div>
             </div>
             <!-- Loan Disbursal Date -->
-            <div class="col-md-4 mb-4">
+            <div class="col-md-3 mb-4">
                 <div class="form-floating form-floating-outline">
                     <input type="date" class="form-control" name="loan_disbursed_date"
                         id="loan_disbursed_date" />
@@ -507,10 +525,8 @@
                     <span class="text-danger" id="loan_disbursed_date-error"></span>
                 </div>
             </div>
-        </div>
-        <div class="row">
             <!-- Managed By -->
-            <div class="col-md-4 mb-4">
+            <div class="col-md-3 mb-4">
                 <div class="form-floating form-floating-outline">
                     <select class="form-select" name="managed_by" id="managed_by">
                         <option value="">Select Accountant</option>
@@ -529,7 +545,7 @@
     <h5 class="fw-bold mb-3 mt-4">🔧 Installation Details</h5>
     <div class="row">
         <!-- Installers -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <select class="form-select" name="installers" id="installers">
                     <option value="">Select Installers</option>
@@ -538,7 +554,7 @@
                 <span class="text-danger" id="installers-error"></span>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="date" class="form-control" name="installation_date" id="installation_date">
                 <label for="installation_date">Installation Date</label>
@@ -736,7 +752,6 @@
                     $("#age").val(response.data.age);
                     $("#gender").val(response.data.gender);
                     $("#marital_status").val(response.data.marital_status);
-
                     $("#mobile").val(response.data.mobile);
                     $("#alternate_mobile").val(response.data.alternate_mobile);
                     $("#PerAdd_state").val(response.data.PerAdd_state);
@@ -768,17 +783,14 @@
                     if (response.data.solar_detail) {
                         $("#roof_type").val(response.data.solar_detail.roof_type);
                         $("#roof_area").val(response.data.solar_detail.roof_area);
-                        $("#usage_pattern").val(response.data.solar_detail.usage_pattern);
                         $("#solar_capacity").val(response.data.solar_detail.capacity);
                         $("#solar_company").val(response.data.solar_detail.solar_company);
                         $("#inverter_company").val(response.data.solar_detail.inverter_company);
                         $("#installers").val(response.data.solar_detail.installers);
                         $("#installation_date").val(response.data.solar_detail.installation_date);
                         $("#jan_samarth_id").val(response.data.solar_detail.jan_samarth_id);
-                        $("#acknowledge_no").val(response.data.solar_detail.acknowledge_no);
                         $("#loan_").val(response.data.solar_detail.loan_required);
                         $("#payment_mode").val(response.data.solar_detail.payment_mode);
-                        $("#light_bill_no").val(response.data.solar_detail.consumer_no);
                         $("#application_ref_no").val(response.data.solar_detail.application_ref_no);
                         $("#channel_partner").val(response.data.solar_detail.channel_partner_id);
                         $("#registration_date").val(response.data.solar_detail.registration_date);
@@ -875,9 +887,6 @@
                 required: true,
                 number: true
             },
-            usage_pattern: {
-                required: true
-            },
             solar_capacity: {
                 required: true
             },
@@ -891,9 +900,6 @@
                 required: true
             },
             customer_residential_address: {
-                required: true
-            },
-            light_bill_no: {
                 required: true
             },
             channel_partner: {
@@ -937,12 +943,6 @@
             total_received_amount: {
                 required: true,
                 number: true
-            },
-            acknowledge_no: {
-                required: true
-            },
-            acknowledge_no: {
-                required: true
             },
             application_ref_no: {
                 required: true
@@ -997,9 +997,6 @@
                 required: "Roof area is required.",
                 number: "Please enter a valid number."
             },
-            usage_pattern: {
-                required: "Please select a usage pattern."
-            },
             solar_capacity: {
                 required: "Solar capacity is required."
             },
@@ -1011,9 +1008,6 @@
             },
             customer_address: {
                 required: "Customer address is required."
-            },
-            light_bill_no: {
-                required: "Light bill number is required."
             },
             channel_partner: {
                 required: "Channel partner selection is required."
@@ -1059,9 +1053,6 @@
             total_received_amount: {
                 required: "Total received amount is required.",
                 number: "Please enter a valid number."
-            },
-            acknowledge_no: {
-                required: "Acknowledgement number is required."
             },
             application_ref_no: {
                 required: "Application reference number is required."
