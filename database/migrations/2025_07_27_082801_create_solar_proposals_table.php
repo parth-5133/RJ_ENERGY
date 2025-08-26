@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('net_metering')->nullable();
             $table->string('subsidy_claimed')->nullable();
             $table->string('purchase_mode')->nullable();
-            $table->string('loan_required')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

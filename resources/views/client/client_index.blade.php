@@ -40,16 +40,18 @@
                     <thead>
                         <tr>
                             <th>Action</th>
-                            <th>Customer Number</th>
+                            <th>System Entry Date</th>
                             <th>Customer Name</th>
-                            <th>Solar Total Amount</th>
+                            <th>Consumer No</th>
+                            <th>Solar Capacity</th>
+                            <th>Mobile Number</th>
+                            <th>Customer Email</th>
+                            <th>Aadhar Linked Mobile Number</th>
+                            <th>DISCOM Name</th>
                             <th>Channel Partner</th>
-                            <th>Installer</th>
-                            <th>Assigned To</th>
-                            <th>Quotation Status</th>
-                            <th>Subsidy Status</th>
-                            <th>Loan Required</th>
-                            <th>Loan Status</th>
+                            <th>Installation Team</th>
+                            <th>Registrar</th>
+                            <th>Quotation Amount</th>
                             <th>Is Completed</th>
                         </tr>
                     </thead>
@@ -154,6 +156,12 @@
                         },
                     },
                     {
+                        data: "created_at",
+                    },
+                    {
+                        data: "customer_name",
+                    },
+                    {
                         data: "customer_number",
                         render: function(data, type, row) {
                             if ({{ $permissions['canEdit'] }}) {
@@ -164,10 +172,19 @@
                         }
                     },
                     {
-                        data: "customer_name",
+                        data: "capacity",
                     },
                     {
-                        data: "solar_total_amount",
+                        data: "alternate_mobile",
+                    },
+                    {
+                        data: "email",
+                    },
+                    {
+                        data: "mobile",
+                    },
+                    {
+                        data: "solar_company",
                     },
                     {
                         data: "channel_partner_name",
@@ -179,16 +196,7 @@
                         data: "assign_to_name",
                     },
                     {
-                        data: "status",
-                    },
-                    {
-                        data: "subsidy_status",
-                    },
-                    {
-                        data: "loan_required",
-                    },
-                    {
-                        data: "loan_status",
+                        data: "amount",
                     },
                     {
                         data: "is_completed",

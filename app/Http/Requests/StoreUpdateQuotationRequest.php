@@ -14,7 +14,12 @@ class StoreUpdateQuotationRequest extends FormRequest
     {
         return [
             'quotesId' => 'nullable|integer',
-            'customer_name'     => 'required|string|max:255',
+            'first_name'     => 'required|string|max:255',
+            'last_name'     => 'required|string|max:255',
+            'middle_name'     => 'required|string|max:255',
+            'email'     => 'required|email|max:255',
+            'pan_number'     => 'required',
+            'aadhar_number'     => 'required',
             'age'               => 'required|integer|min:1',
             'mobile'            => 'required|string|max:15',
             'quotation_'        => 'required|in:Yes,No',
@@ -30,7 +35,6 @@ class StoreUpdateQuotationRequest extends FormRequest
     public function messages()
     {
         return [
-            'customer_name.required'       => 'Customer name is required.',
             'age.required'                 => 'Age is required.',
             'mobile.required'              => 'Mobile number is required.',
             'quotation_.required'          => 'Quotation selection is required.',

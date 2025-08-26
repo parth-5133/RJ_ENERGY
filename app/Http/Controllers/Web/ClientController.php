@@ -45,9 +45,14 @@ class ClientController extends Controller
 
         $responseData = $response->getData(true);
 
-        $client = $responseData['data'] ?? [];
+        $client = $responseData['data']['customer'] ?? [];
+        $solar_detail = $responseData['data']['solar_detail'] ?? [];
+        $subsidy = $responseData['data']['subsidy'] ?? [];
+        $customer_bank_detail = $responseData['data']['customer_bank_detail'] ?? [];
+        $loan_bank_detail = $responseData['data']['loan_bank_detail'] ?? [];
+        $appDocument = $responseData['data']['appDocument'] ?? [];
 
-        return view('client.client_details', compact('client'));
+        return view('client.client_details', compact('client', 'solar_detail', 'subsidy', 'customer_bank_detail', 'loan_bank_detail', 'appDocument'));
     }
 
     public function uploadDocuments(Request $request)

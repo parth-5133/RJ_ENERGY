@@ -95,6 +95,7 @@ Route::middleware(['jwt.verify'])->group(function () {
         Route::get('/client-application/view', [ClientController::class, 'view']);
         Route::post('/client-application/update', [ClientController::class, 'update']);
         Route::post('/client-application/delete/{id}', [ClientController::class, 'delete']);
+        Route::post('/client-application/documents/upload', [ClientController::class, 'uploadDocuments']);
 
         Route::get('/client/details', [ClientController::class, 'showDetails']);
 

@@ -25,7 +25,7 @@ return [
         'INSTALLERS_UPDATE' => env('APP_URL') . env('API_BASE_PATH') . '/installers/update',
         'INSTALLERS_DELETE' => env('APP_URL') . env('API_BASE_PATH') . '/installers/delete',
     ],
-    
+
     'QUOTATION_URLS' => [
         'QUOTATION' => env('APP_URL') . env('API_BASE_PATH') . '/quotation',
         'QUOTATION_STORE' => env('APP_URL') . env('API_BASE_PATH') . '/quotation/create',
@@ -42,6 +42,7 @@ return [
         'CLIENT_VIEW' => env('APP_URL') . env('API_BASE_PATH') . '/client-application/view',
         'CLIENT_UPDATE' => env('APP_URL') . env('API_BASE_PATH') . '/client-application/update',
         'CLIENT_DELETE' => env('APP_URL') . env('API_BASE_PATH') . '/client-application/delete',
+        'CLIENT_UPLOAD_DOCUMENT' => env('APP_URL') . env('API_BASE_PATH') . '/client-application/documents/upload',
     ],
 
     'AUTH_URL' => [

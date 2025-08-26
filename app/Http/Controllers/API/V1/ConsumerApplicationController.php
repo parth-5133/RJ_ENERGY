@@ -54,22 +54,19 @@ class ConsumerApplicationController extends Controller
             'net_metering'     => $request->net_metering,
             'subsidy_claimed'  => $request->subsidy_claimed,
             'purchase_mode'    => $request->purchase_mode,
-            'loan_required'    => $request->loan_required,
         ]);
 
         Sequence::where('type', 'applicationId')->update(['sequenceNo' => $newSequenceNo]);
 
 
-        if ($request->loan_required === 'Yes') {
-            SolarLoan::create([
-                'proposal_id'    => $proposal->id,
-                'bank_name'      => $request->bank_name,
-                'bank_branch'    => $request->bank_branch,
-                'account_number' => $request->account_number,
-                'ifsc_code'      => $request->ifsc_code,
-                'loan_mode'      => $request->loan_mode,
-            ]);
-        }
+        SolarLoan::create([
+            'proposal_id'    => $proposal->id,
+            'bank_name'      => $request->bank_name,
+            'bank_branch'    => $request->bank_branch,
+            'account_number' => $request->account_number,
+            'ifsc_code'      => $request->ifsc_code,
+            'loan_mode'      => $request->loan_mode,
+        ]);
 
         $documentFields = [
             'aadhaar_card',

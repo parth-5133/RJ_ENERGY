@@ -13,6 +13,7 @@ class LoanBankDetail extends Model
     protected $fillable = [
         'customer_id',
         'solar_detail_id',
+        'loan_type',
         'bank_name',
         'bank_branch',
         'account_number',

@@ -12,7 +12,12 @@ class Customer extends Model
 
     protected $fillable = [
         'customer_number',
-        'customer_name',
+        'first_name',
+        'last_name',
+        'middle_name',
+        'email',
+        'pan_number',
+        'aadhar_number',
         'age',
         'gender',
         'marital_status',

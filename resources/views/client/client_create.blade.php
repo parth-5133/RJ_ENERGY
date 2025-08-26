@@ -3,11 +3,39 @@
     <input type="hidden" id="clientId" name="clientId" value="{{ $clientId ?? '' }}">
     <h5 class="fw-bold mb-3 mt-4">👤 Customer Basic Details</h5>
     <div class="row">
+        <!-- First Name -->
         <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
-                <input type="text" class="form-control" name="customer_name" id="customer_name" placeholder="Name" />
-                <label for="customer_name">Name <span class="text-danger">*</span></label>
-                <span class="text-danger" id="customer_name-error"></span>
+                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name" />
+                <label for="first_name">First Name <span class="text-danger">*</span></label>
+                <span class="text-danger" id="first_name-error"></span>
+            </div>
+        </div>
+
+        <!-- Middle Name -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="text" class="form-control" name="middle_name" id="middle_name"
+                    placeholder="Middle Name" />
+                <label for="middle_name">Middle Name</label>
+                <span class="text-danger" id="middle_name-error"></span>
+            </div>
+        </div>
+
+        <!-- Last Name -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name" />
+                <label for="last_name">Last Name <span class="text-danger">*</span></label>
+                <span class="text-danger" id="last_name-error"></span>
+            </div>
+        </div>
+        <!-- Email Address -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" />
+                <label for="email">Email Address <span class="text-danger">*</span></label>
+                <span class="text-danger" id="email-error"></span>
             </div>
         </div>
         <div class="col-md-3 mb-4">
@@ -41,6 +69,24 @@
                 <span class="text-danger" id="marital_status-error"></span>
             </div>
         </div>
+        <!-- PAN Number -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="text" class="form-control" name="pan_number" id="pan_number" maxlength="10"
+                    placeholder="PAN Number" />
+                <label for="pan_number">PAN Number <span class="text-danger">*</span></label>
+                <span class="text-danger" id="pan_number-error"></span>
+            </div>
+        </div>
+        <!-- Aadhar Number -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="text" class="form-control" name="aadhar_number" id="aadhar_number" maxlength="12"
+                    placeholder="Aadhar Number" />
+                <label for="aadhar_number">Aadhar Number <span class="text-danger">*</span></label>
+                <span class="text-danger" id="aadhar_number-error"></span>
+            </div>
+        </div>
         <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="tel" class="form-control" name="mobile" id="mobile" maxlength="10"
@@ -51,8 +97,8 @@
         </div>
         <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
-                <input type="tel" class="form-control" name="alternate_mobile" id="alternate_mobile" maxlength="10"
-                    placeholder="Alternate Mobile" />
+                <input type="tel" class="form-control" name="alternate_mobile" id="alternate_mobile"
+                    maxlength="10" placeholder="Alternate Mobile" />
                 <label for="alternate_mobile">Alternate Mobile</label>
                 <span class="text-danger" id="alternate_mobile-error"></span>
             </div>
@@ -274,15 +320,6 @@
                 <label for="application_ref_no">Application Reference No. <span class="text-danger">*</span></label>
             </div>
         </div>
-        <!-- Jan-Samarth ID -->
-        <div class="col-md-3 mb-4">
-            <div class="form-floating form-floating-outline">
-                <input type="text" class="form-control" name="jan_samarth_id" id="jan_samarth_id"
-                    placeholder="Jan-Samarth ID" />
-                <label for="jan_samarth_id">Jan-Samarth ID <span class="text-danger">*</span></label>
-                <span class="text-danger" id="jan_samarth_id-error"></span>
-            </div>
-        </div>
         <!-- Light Bill No -->
         <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
@@ -290,18 +327,6 @@
                     placeholder="Consumer No." />
                 <label for="light_bill_no">Light Bill No <span class="text-danger">*</span></label>
                 <span class="text-danger" id="light_bill_no-error"></span>
-            </div>
-        </div>
-        <!-- Loan -->
-        <div class="col-md-3 mb-4">
-            <div class="form-floating form-floating-outline">
-                <select class="form-select" name="loan_" id="loan_">
-                    <option value="">Loan ?</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                </select>
-                <label for="loan_">Loan ? <span class="text-danger">*</span></label>
-                <span class="text-danger" id="loan_-error"></span>
             </div>
         </div>
         <!-- Payment Mode -->
@@ -440,6 +465,35 @@
         <div class="row">
             <div class="col-md-3 mb-4">
                 <div class="form-floating form-floating-outline">
+                    <select class="form-select" name="loan_type" id="loan_type" required>
+                        <option value="finance">Finance</option>
+                        <option value="bank">Bank</option>
+                    </select>
+                    <label for="loan_type">Loan Type <span class="text-danger">*</span></label>
+                    <span class="text-danger" id="loan_type-error"></span>
+                </div>
+            </div>
+            <!-- Jan-Samarth ID -->
+            <div class="col-md-3 mb-4">
+                <div class="form-floating form-floating-outline">
+                    <input type="text" class="form-control" name="jan_samarth_id" id="jan_samarth_id"
+                        placeholder="Jan-Samarth ID" required />
+                    <label for="jan_samarth_id">Jan-Samarth ID <span class="text-danger">*</span></label>
+                    <span class="text-danger" id="jan_samarth_id-error"></span>
+                </div>
+            </div>
+            <!-- Jan-Samarth Registration Date -->
+            <div class="col-md-3 mb-4">
+                <div class="form-floating form-floating-outline">
+                    <input type="date" class="form-control" name="jan_samarth_registration_date"
+                        id="jan_samarth_registration_date" placeholder="Registration Date" required />
+                    <label for="jan_samarth_registration_date">Jan-Samarth Registration Date <span
+                            class="text-danger">*</span></label>
+                    <span class="text-danger" id="jan_samarth_registration_date-error"></span>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="form-floating form-floating-outline">
                     <select class="form-select" name="bank_name_loan" id="bank_name_loan">
                         <option value="">Select Bank</option>
                         <!-- Dynamic options -->
@@ -531,9 +585,6 @@
                     <select class="form-select" name="managed_by" id="managed_by">
                         <option value="">Select Accountant</option>
                         <!-- Example dynamic options -->
-                        <option value="Accountant1">Accountant 1</option>
-                        <option value="Accountant2">Accountant 2</option>
-                        <option value="Accountant3">Accountant 3</option>
                     </select>
                     <label for="managed_by">Managed By <span class="text-danger">*</span></label>
                     <span class="text-danger" id="managed_by-error"></span>
@@ -554,11 +605,83 @@
                 <span class="text-danger" id="installers-error"></span>
             </div>
         </div>
+        <!-- Installation Date -->
         <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="date" class="form-control" name="installation_date" id="installation_date">
                 <label for="installation_date">Installation Date</label>
                 <span class="text-danger" id="installation_date-error"></span>
+            </div>
+        </div>
+        <!-- Structure Department Name -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="text" class="form-control" name="structure_department_name"
+                    id="structure_department_name" placeholder="Structure Department Name" />
+                <label for="structure_department_name">Structure Department Name</label>
+                <span class="text-danger" id="structure_department_name-error"></span>
+            </div>
+        </div>
+        <!-- Wiring Department Name -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="text" class="form-control" name="wiring_department_name" id="wiring_department_name"
+                    placeholder="Wiring Department Name" />
+                <label for="wiring_department_name">Wiring Department Name</label>
+                <span class="text-danger" id="wiring_department_name-error"></span>
+            </div>
+        </div>
+        <!-- SR Number -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="text" class="form-control" name="sr_number" id="sr_number"
+                    placeholder="SR Number" />
+                <label for="sr_number">SR Number</label>
+                <span class="text-danger" id="sr_number-error"></span>
+            </div>
+        </div>
+        <!-- Meter Payment Receipt Number -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="text" class="form-control" name="meter_payment_receipt_number"
+                    id="meter_payment_receipt_number" placeholder="Receipt Number" />
+                <label for="meter_payment_receipt_number">Meter Payment Receipt No.</label>
+                <span class="text-danger" id="meter_payment_receipt_number-error"></span>
+            </div>
+        </div>
+        <!-- Meter Payment Date -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="date" class="form-control" name="meter_payment_date" id="meter_payment_date" />
+                <label for="meter_payment_date">Meter Payment Date</label>
+                <span class="text-danger" id="meter_payment_date-error"></span>
+            </div>
+        </div>
+        <!-- Meter Payment Amount -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="number" step="0.01" class="form-control" name="meter_payment_amount"
+                    id="meter_payment_amount" placeholder="Amount" />
+                <label for="meter_payment_amount">Meter Payment Amount</label>
+                <span class="text-danger" id="meter_payment_amount-error"></span>
+            </div>
+        </div>
+        <!-- Panel Serial Numbers -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="text" class="form-control" name="panel_serial_numbers" id="panel_serial_numbers"
+                    placeholder="Inverter Serial Number" />
+                <label for="panel_serial_numbers">Panel Serial Numbers</label>
+                <span class="text-danger" id="panel_serial_numbers-error"></span>
+            </div>
+        </div>
+        <!-- DCR Certificate Number -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="text" class="form-control" name="dcr_certificate_number" id="dcr_certificate_number"
+                    placeholder="DCR Certificate Number" />
+                <label for="dcr_certificate_number">DCR Certificate Number</label>
+                <span class="text-danger" id="dcr_certificate_number-error"></span>
             </div>
         </div>
     </div>
@@ -630,7 +753,6 @@
             }
         }
 
-        // Declare a variable to hold bank data
         var bankDataMap = {};
         var bankDataMap2 = {};
 
@@ -748,7 +870,12 @@
                 is_customer: 1
             }, true, true, function(response) {
                 if (response.status === 200 && response.data) {
-                    $("#customer_name").val(response.data.customer_name);
+                    $("#first_name").val(response.data.first_name);
+                    $("#last_name").val(response.data.last_name);
+                    $("#middle_name").val(response.data.middle_name);
+                    $("#email").val(response.data.email);
+                    $("#pan_number").val(response.data.pan_number);
+                    $("#aadhar_number").val(response.data.aadhar_number);
                     $("#age").val(response.data.age);
                     $("#gender").val(response.data.gender);
                     $("#marital_status").val(response.data.marital_status);
@@ -781,6 +908,26 @@
                 if (response.status === 200 && response.data) {
                     // Solar detail data
                     if (response.data.solar_detail) {
+                        $("#solar_type").val(response.data.solar_detail.solar_type);
+                        $("#inverter_capacity").val(response.data.solar_detail.inverter_capacity);
+                        $("#inverter_serial_number").val(response.data.solar_detail
+                            .inverter_serial_number);
+                        $("#number_of_panels").val(response.data.solar_detail.number_of_panels);
+                        $("#panel_type").val(response.data.solar_detail.panel_type);
+                        $("#roof_type").val(response.data.solar_detail.panel_voltage);
+                        $("#panel_voltage").val(response.data.solar_detail.panel_voltage);
+                        $("#structure_department_name").val(response.data.solar_detail
+                            .structure_department_name);
+                        $("#wiring_department_name").val(response.data.solar_detail
+                            .wiring_department_name);
+                        $("#sr_number").val(response.data.solar_detail.sr_number);
+                        $("#meter_payment_receipt_number").val(response.data.solar_detail
+                            .meter_payment_receipt_number);
+                        $("#meter_payment_date").val(response.data.solar_detail.meter_payment_date);
+                        $("#meter_payment_amount").val(response.data.solar_detail.meter_payment_amount);
+                        $("#panel_serial_numbers").val(response.data.solar_detail.panel_serial_numbers);
+                        $("#dcr_certificate_number").val(response.data.solar_detail
+                            .dcr_certificate_number);
                         $("#roof_type").val(response.data.solar_detail.roof_type);
                         $("#roof_area").val(response.data.solar_detail.roof_area);
                         $("#solar_capacity").val(response.data.solar_detail.capacity);
@@ -789,20 +936,23 @@
                         $("#installers").val(response.data.solar_detail.installers);
                         $("#installation_date").val(response.data.solar_detail.installation_date);
                         $("#jan_samarth_id").val(response.data.solar_detail.jan_samarth_id);
-                        $("#loan_").val(response.data.solar_detail.loan_required);
                         $("#payment_mode").val(response.data.solar_detail.payment_mode);
                         $("#application_ref_no").val(response.data.solar_detail.application_ref_no);
                         $("#channel_partner").val(response.data.solar_detail.channel_partner_id);
                         $("#registration_date").val(response.data.solar_detail.registration_date);
                         $("#solar_total_amount").val(response.data.solar_detail.solar_total_amount);
+                        $("#light_bill_no").val(response.data.solar_detail.light_bill_no);
                         $("#total_received_amount").val(response.data.solar_detail
                             .total_received_amount);
                         $("#date_full_payment").val(response.data.solar_detail.date_full_payment);
                         $("#is_completed").prop("checked", response.data.solar_detail.is_completed);
+                        $("#jan_samarth_registration_date").val(response.data.solar_detail
+                            .jan_samarth_registration_date);
                     }
 
                     // Subsidy data
                     if (response.data.subsidy) {
+                        $("#token_id").val(response.data.subsidy.token_id);
                         $("#subsidy_amount").val(response.data.subsidy.subsidy_amount);
                         $("#subsidy_status").val(response.data.subsidy.subsidy_status);
                     }
@@ -817,6 +967,7 @@
 
                     // Loan bank detail data
                     if (response.data.loan_bank_detail) {
+                        $("#loan_type").val(response.data.loan_bank_detail.loan_type);
                         $("#bank_name_loan").val(response.data.loan_bank_detail.bank_name);
                         $("#bank_branch_loan").val(response.data.loan_bank_detail.bank_branch);
                         $("#account_number_loan").val(response.data.loan_bank_detail.account_number);
@@ -842,8 +993,22 @@
     // jQuery Validation Setup
     $("#customerForm").validate({
         rules: {
-            customer_name: {
-                required: true
+            first_name: {
+                required: true,
+                maxlength: 50,
+            },
+            last_name: {
+                required: true,
+                maxlength: 50,
+            },
+            email: {
+                required: true,
+            },
+            aadhar_number: {
+                required: true,
+            },
+            pan_number: {
+                required: true,
             },
             age: {
                 required: true,
@@ -919,9 +1084,6 @@
             jan_samarth_id: {
                 required: true
             },
-            loan_: {
-                required: true
-            },
             payment_mode: {
                 required: true
             },
@@ -950,10 +1112,39 @@
             managed_by: {
                 required: true
             },
+            solar_type: {
+                required: true
+            },
+            panel_type: {
+                required: true
+            },
+            number_of_panels: {
+                required: true
+            },
+            panel_voltage: {
+                required: true
+            },
+            inverter_capacity: {
+                required: true
+            },
+            inverter_serial_number: {
+                required: true
+            },
         },
         messages: {
-            customer_name: {
-                required: "Name is required"
+            first_name: {
+                required: "First Name is required",
+                maxlength: "Name cannot be more than 50 characters",
+            },
+            last_name: {
+                required: "Last Name is required",
+                maxlength: "Name cannot be more than 50 characters",
+            },
+            aadhar_number: {
+                required: "Aadhar Number is required",
+            },
+            pan_number: {
+                required: "Pan Number is required",
             },
             age: {
                 required: "Age is required",
@@ -1041,9 +1232,6 @@
             jan_samarth_id: {
                 required: "Jan-Samarth ID is required."
             },
-            loan_: {
-                required: "Please specify if loan is applicable."
-            },
             payment_mode: {
                 required: "Payment mode is required."
             },
@@ -1059,7 +1247,25 @@
             },
             managed_by: {
                 required: "Managed by is required."
-            }
+            },
+            solar_type: {
+                required: "Solar Type is required."
+            },
+            panel_type: {
+                required: "Panel Type is required."
+            },
+            number_of_panels: {
+                required: "Number of panels is required."
+            },
+            panel_voltage: {
+                required: "Panel Voltage is required."
+            },
+            inverter_capacity: {
+                required: "Inverter Capacity is required."
+            },
+            inverter_serial_number: {
+                required: "Inverter Serial Number is required."
+            },
         },
         errorPlacement: function(error, element) {
             var errorId = element.attr("name") + "-error";

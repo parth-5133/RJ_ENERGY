@@ -10,6 +10,7 @@ use App\Models\CustomerBankDetail;
 use App\Models\Customer;
 use App\Models\Quotation;
 use App\Models\Sequence;
+use App\Models\AppDocument;
 use App\Helpers\ApiResponse;
 use App\Helpers\AccessLevel;
 use App\Constants\ResMessages;
@@ -40,17 +41,19 @@ class ClientController extends Controller
             ->select(
                 'customers.id',
                 'customers.customer_number',
-                'customers.customer_name',
+                DB::raw("CONCAT(customers.first_name, ' ', customers.last_name) as customer_name"),
                 'customers.mobile',
-                'customers.age',
+                'customers.alternate_mobile',
+                'customers.email',
                 DB::raw("CONCAT(assign_user.first_name, ' ', assign_user.last_name) as assign_to_name"),
-                'quotations.status',
-                'subsidies.subsidy_status',
-                'loan_bank_details.loan_status',
-                'solar_details.loan_required',
                 'installers.name as installer_name',
+                'solar_details.created_at',
+                'solar_details.is_completed',
+                'solar_details.capacity',
+                'solar_details.solar_company',
+                'solar_details.channel_partner_id',
                 'channel_partners.legal_name as channel_partner_name',
-                'solar_details.solar_total_amount',
+                'quotations.amount',
                 'solar_details.is_completed',
             )
             ->where('quotations.status', '=', 'Agreed')
@@ -118,7 +121,12 @@ class ClientController extends Controller
             // 1. Store customer data
             $customer = Customer::create([
                 'customer_number' => $customerNumber,
-                'customer_name'     => $request->input('customer_name'),
+                'first_name'     => $request->input('first_name'),
+                'middle_name'     => $request->input('middle_name'),
+                'last_name'     => $request->input('last_name'),
+                'email'     => $request->input('email'),
+                'pan_number'     => $request->input('pan_number'),
+                'aadhar_number'     => $request->input('aadhar_number'),
                 'age'               => $request->input('age'),
                 'gender'            => $request->input('gender'),
                 'marital_status'    => $request->input('marital_status'),
@@ -149,15 +157,21 @@ class ClientController extends Controller
             // 3. Store solar detail data
             $solarDetail = SolarDetail::create([
                 'customer_id'                => $customer->id,
+                'solar_type'                  => $request->input('solar_type'),
+                'panel_type'                  => $request->input('panel_type'),
+                'panel_voltage'                  => $request->input('panel_voltage'),
+                'number_of_panels'                  => $request->input('number_of_panels'),
+                'inverter_serial_number'                  => $request->input('inverter_serial_number'),
+                'inverter_capacity'                  => $request->input('inverter_capacity'),
+                'jan_samarth_id'             => $request->input('jan_samarth_id'),
+                'jan_samarth_registration_date'             => $request->input('jan_samarth_registration_date'),
                 'roof_type'                  => $request->input('roof_type'),
                 'roof_area'                  => $request->input('roof_area'),
                 'capacity'                   => $request->input('solar_capacity'),
                 'solar_company'              => $request->input('solar_company'),
                 'inverter_company'           => $request->input('inverter_company'),
-                'jan_samarth_id'             => $request->input('jan_samarth_id'),
-                'loan_required'              => $request->input('loan_'),
                 'payment_mode'               => $request->input('payment_mode'),
-                'consumer_no'                => $request->input('light_bill_no'),
+                'light_bill_no'                => $request->input('light_bill_no'),
                 'application_ref_no'         => $request->input('application_ref_no'),
                 'channel_partner_id'         => $request->input('channel_partner'),
                 'registration_date'          => $request->input('registration_date'),
@@ -166,6 +180,14 @@ class ClientController extends Controller
                 'installation_date'          => $request->input('installation_date'),
                 'total_received_amount'      => $request->input('total_received_amount'),
                 'date_full_payment'          => $request->input('date_full_payment'),
+                'structure_department_name'          => $request->input('structure_department_name'),
+                'wiring_department_name'          => $request->input('wiring_department_name'),
+                'sr_number'          => $request->input('sr_number'),
+                'meter_payment_receipt_number'          => $request->input('meter_payment_receipt_number'),
+                'meter_payment_date'          => $request->input('meter_payment_date'),
+                'meter_payment_amount'          => $request->input('meter_payment_amount'),
+                'panel_serial_numbers'          => $request->input('panel_serial_numbers'),
+                'dcr_certificate_number'          => $request->input('dcr_certificate_number'),
                 'is_completed'               => $request->input('is_completed'),
                 'created_at'  => now(),
             ]);
@@ -173,6 +195,7 @@ class ClientController extends Controller
             // 4. Store subsidy data
             $subsidy = Subsidy::create([
                 'customer_id'     => $customer->id,
+                'token_id'  => $request->input('token_id'),
                 'subsidy_amount'  => $request->input('subsidy_amount'),
                 'subsidy_status'  => $request->input('subsidy_status'),
                 'created_at'  => now(),
@@ -182,6 +205,7 @@ class ClientController extends Controller
             $loan = LoanBankDetail::create([
                 'customer_id'             => $customer->id,
                 'solar_detail_id'         => $solarDetail->id,
+                'loan_type'               => $request->input('loan_type'),
                 'bank_name'               => $request->input('bank_name_loan'),
                 'bank_branch'             => $request->input('bank_branch_loan'),
                 'account_number'          => $request->input('account_number_loan'),
@@ -261,7 +285,12 @@ class ClientController extends Controller
         try {
             // 1. Update customer data
             $customer->update([
-                'customer_name'     => $request->input('customer_name'),
+                'first_name'     => $request->input('first_name'),
+                'middle_name'     => $request->input('middle_name'),
+                'last_name'     => $request->input('last_name'),
+                'email'     => $request->input('email'),
+                'pan_number'     => $request->input('pan_number'),
+                'aadhar_number'     => $request->input('aadhar_number'),
                 'age'               => $request->input('age'),
                 'gender'            => $request->input('gender'),
                 'marital_status'    => $request->input('marital_status'),
@@ -292,15 +321,21 @@ class ClientController extends Controller
             $solarDetail = SolarDetail::where('customer_id', $customer->id)->first();
             if ($solarDetail) {
                 $updateData = [
+                    'solar_type'                  => $request->input('solar_type'),
+                    'panel_type'                  => $request->input('panel_type'),
+                    'panel_voltage'                  => $request->input('panel_voltage'),
+                    'number_of_panels'                  => $request->input('number_of_panels'),
+                    'inverter_serial_number'                  => $request->input('inverter_serial_number'),
+                    'inverter_capacity'                  => $request->input('inverter_capacity'),
                     'roof_type'                  => $request->input('roof_type'),
                     'roof_area'                  => $request->input('roof_area'),
                     'capacity'                   => $request->input('solar_capacity'),
                     'solar_company'              => $request->input('solar_company'),
                     'inverter_company'           => $request->input('inverter_company'),
                     'jan_samarth_id'             => $request->input('jan_samarth_id'),
-                    'loan_required'              => $request->input('loan_'),
+                    'jan_samarth_registration_date'             => $request->input('jan_samarth_registration_date'),
                     'payment_mode'               => $request->input('payment_mode'),
-                    'consumer_no'                => $request->input('light_bill_no'),
+                    'light_bill_no'                => $request->input('light_bill_no'),
                     'application_ref_no'         => $request->input('application_ref_no'),
                     'channel_partner_id'         => $request->input('channel_partner'),
                     'registration_date'          => $request->input('registration_date'),
@@ -309,6 +344,14 @@ class ClientController extends Controller
                     'installation_date'          => $request->input('installation_date'),
                     'total_received_amount'      => $request->input('total_received_amount'),
                     'date_full_payment'          => $request->input('date_full_payment'),
+                    'structure_department_name'          => $request->input('structure_department_name'),
+                    'wiring_department_name'          => $request->input('wiring_department_name'),
+                    'sr_number'          => $request->input('sr_number'),
+                    'meter_payment_receipt_number'          => $request->input('meter_payment_receipt_number'),
+                    'meter_payment_date'          => $request->input('meter_payment_date'),
+                    'meter_payment_amount'          => $request->input('meter_payment_amount'),
+                    'panel_serial_numbers'          => $request->input('panel_serial_numbers'),
+                    'dcr_certificate_number'          => $request->input('dcr_certificate_number'),
                     'is_completed'               => $request->input('is_completed'),
                     'updated_at'  => now(),
                 ];
@@ -319,6 +362,7 @@ class ClientController extends Controller
             Subsidy::updateOrCreate(
                 ['customer_id' => $customer->id],
                 [
+                    'token_id'  => $request->input('token_id'),
                     'subsidy_amount' => $request->input('subsidy_amount'),
                     'subsidy_status' => $request->input('subsidy_status'),
                     'updated_at'     => now(),
@@ -328,6 +372,7 @@ class ClientController extends Controller
                 ['customer_id' => $customer->id],
                 [
                     'solar_detail_id' => $solarDetail->id,
+                    'loan_type'               => $request->input('loan_type'),
                     'bank_name'              => $request->input('bank_name_loan'),
                     'bank_branch'            => $request->input('bank_branch_loan'),
                     'account_number'         => $request->input('account_number_loan'),
@@ -363,7 +408,6 @@ class ClientController extends Controller
     }
     public function ClientDetails(Request $request)
     {
-
         $customerId = $request->id;
 
         $customer = Customer::find($customerId);
@@ -372,33 +416,99 @@ class ClientController extends Controller
             return ApiResponse::error(ResMessages::NOT_FOUND, 404);
         }
 
-        $data = DB::table('customers')
-            ->leftJoin('quotations', 'quotations.customer_id', '=', 'customers.id')
-            ->leftJoin('subsidies', 'subsidies.customer_id', '=', 'customers.id')
-            ->leftJoin('loan_bank_details', 'loan_bank_details.customer_id', '=', 'customers.id')
-            ->leftJoin('solar_details', 'solar_details.customer_id', '=', 'customers.id')
+        $quotation = Quotation::where('customer_id', $customer->id)->first();
+        $appDocument = AppDocument::where('ref_primaryid', $customer->id)->get();
+
+        $solarDetail = SolarDetail::query()
             ->leftJoin('channel_partners', 'solar_details.channel_partner_id', '=', 'channel_partners.id')
             ->leftJoin('installers', 'solar_details.installers', '=', 'installers.id')
-            ->leftJoin('users as assign_user', 'customers.assign_to', '=', 'assign_user.id')
+            ->where('solar_details.customer_id', $customer->id)
+            ->select('solar_details.*', 'channel_partners.legal_name as channel_partner_name', 'installers.name as installer_name')
+            ->first();
+
+
+        $subsidy = Subsidy::where('customer_id', $customer->id)->first();
+
+        $loanBankDetail = LoanBankDetail::query()
+            ->leftJoin('banks', 'loan_bank_details.bank_name', '=', 'banks.id')
+            ->leftJoin('users', 'loan_bank_details.managed_by', '=', 'users.id')
+            ->where('loan_bank_details.customer_id', $customer->id)
             ->select(
-                'customers.id',
-                'customers.customer_number',
-                'customers.customer_name',
-                'customers.mobile',
-                'customers.age',
-                DB::raw("CONCAT(assign_user.first_name, ' ', assign_user.last_name) as assign_to_name"),
-                'quotations.status',
-                'subsidies.subsidy_status',
-                'loan_bank_details.loan_status',
-                'solar_details.loan_required',
-                'installers.name as installer_name',
-                'channel_partners.legal_name as channel_partner_name',
-                'solar_details.*',
+                'loan_bank_details.*',
+                'banks.bank_name as bank_name',
+                DB::raw("CONCAT(users.first_name, ' ', users.last_name) as managed_by_name")
             )
-            ->whereNull('customers.deleted_at')
-            ->where('customers.id', $customerId)
-            ->get();
+            ->first();
+
+        $customerBankDetail = CustomerBankDetail::query()
+            ->leftJoin('banks', 'customer_bank_details.bank_name', '=', 'banks.id')
+            ->where('customer_bank_details.customer_id', $customer->id)
+            ->select('customer_bank_details.*', 'banks.bank_name as bank_name')
+            ->first();
+
+        $data = [
+            'customer' => $customer,
+            'quotation' => $quotation,
+            'solar_detail' => $solarDetail,
+            'subsidy' => $subsidy,
+            'loan_bank_detail' => $loanBankDetail,
+            'customer_bank_detail' => $customerBankDetail,
+            'appDocument' => $appDocument,
+        ];
 
         return ApiResponse::success($data, ResMessages::RETRIEVED_SUCCESS);
+    }
+    public function uploadDocuments(Request $request)
+    {
+        $customerId = $request->input('clientId');
+
+        $documents = [
+            'aadhar'         => 'Aadhar',
+            'pan'            => 'PAN',
+            'light_bill'     => 'Light Bill',
+            'bank_details'   => 'Bank Details',
+            'bank_statement' => 'Bank Statement',
+        ];
+
+        $savedDocs = [];
+
+        foreach ($documents as $field => $label) {
+            if ($request->hasFile($field)) {
+                $file = $request->file($field);
+
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $filePath = $file->storeAs('uploads/client_documents/' . $customerId, $fileName, 'public');
+
+                $document = \App\Models\AppDocument::where('ref_primaryid', $customerId)
+                    ->where('file_display_name', $label)
+                    ->first();
+
+                if (!$document) {
+                    $document = new \App\Models\AppDocument();
+                    $document->ref_primaryid = $customerId;
+                    $document->user_id       = $customerId;
+                    $document->file_id       = uniqid();
+                    $document->created_by    = auth()->id() ?? 1;
+                } else {
+                    $document->updated_by = auth()->id() ?? 1;
+                }
+
+                // always update these fields
+                $document->document_type     = "client_documents";
+                $document->relative_path     = '/storage/' . $filePath;
+                $document->extension         = $file->getClientOriginalExtension();
+                $document->file_display_name = $label;
+                $document->is_active         = 1;
+                $document->save();
+
+                $savedDocs[] = $document;
+            }
+        }
+
+        if (count($savedDocs) > 0) {
+            return ApiResponse::success($savedDocs, ResMessages::CREATED_SUCCESS);
+        } else {
+            return ApiResponse::error(null,'No documents were uploaded.');
+        }
     }
 }

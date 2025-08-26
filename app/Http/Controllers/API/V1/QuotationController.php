@@ -22,7 +22,7 @@ class QuotationController extends Controller
             ->leftJoin('users', 'users.id', '=', 'quotations.by')
             ->select(
                 'quotations.id',
-                'customers.customer_name',
+                DB::raw("CONCAT(customers.first_name, ' ', customers.last_name) as customer_name"),
                 'quotations.required',
                 'quotations.amount',
                 'quotations.date',
@@ -46,7 +46,12 @@ class QuotationController extends Controller
             // 1. Store customer data
             $customer = Customer::create([
                 'customer_number'   => $customerNumber,
-                'customer_name'     => $request->input('customer_name'),
+                'first_name'     => $request->input('first_name'),
+                'middle_name'     => $request->input('middle_name'),
+                'last_name'     => $request->input('last_name'),
+                'email'     => $request->input('email'),
+                'pan_number'     => $request->input('pan_number'),
+                'aadhar_number'     => $request->input('aadhar_number'),
                 'age'               => $request->input('age'),
                 'gender'            => $request->input('gender'),
                 'marital_status'    => $request->input('marital_status'),
@@ -100,7 +105,12 @@ class QuotationController extends Controller
             ->leftJoin('solar_details', 'quotations.customer_id', '=', 'solar_details.customer_id')
             ->select(
                 'quotations.id',
-                'customers.customer_name',
+                'customers.first_name',
+                'customers.middle_name',
+                'customers.last_name',
+                'customers.email',
+                'customers.pan_number',
+                'customers.aadhar_number',
                 'customers.age',
                 'customers.gender',
                 'customers.marital_status',
@@ -148,7 +158,12 @@ class QuotationController extends Controller
 
             // 3. Update customer data
             $customer->update([
-                'customer_name'     => $request->input('customer_name'),
+                'first_name'     => $request->input('first_name'),
+                'middle_name'     => $request->input('middle_name'),
+                'last_name'     => $request->input('last_name'),
+                'email'     => $request->input('email'),
+                'pan_number'     => $request->input('pan_number'),
+                'aadhar_number'     => $request->input('aadhar_number'),
                 'age'               => $request->input('age'),
                 'gender'            => $request->input('gender'),
                 'marital_status'    => $request->input('marital_status'),

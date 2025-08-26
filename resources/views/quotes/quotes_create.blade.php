@@ -69,7 +69,7 @@
                 <span class="text-danger" id="pan_number-error"></span>
             </div>
         </div>
-            <!-- Aadhar Number -->
+        <!-- Aadhar Number -->
         <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="text" class="form-control" name="aadhar_number" id="aadhar_number" maxlength="12"
@@ -295,7 +295,12 @@
                 response) {
                 if (response.status === 200 && response.data) {
                     debugger
-                    $("#customer_name").val(response.data.customer_name);
+                    $("#first_name").val(response.data.first_name);
+                    $("#last_name").val(response.data.last_name);
+                    $("#middle_name").val(response.data.middle_name);
+                    $("#email").val(response.data.email);
+                    $("#pan_number").val(response.data.pan_number);
+                    $("#aadhar_number").val(response.data.aadhar_number);
                     $("#age").val(response.data.age);
                     $("#gender").val(response.data.gender);
                     $("#marital_status").val(response.data.marital_status);
@@ -323,9 +328,16 @@
 
     $("#customerForm").validate({
         rules: {
-            customer_name: {
+            first_name: {
                 required: true,
                 maxlength: 50,
+            },
+            last_name: {
+                required: true,
+                maxlength: 50,
+            },
+            email: {
+                required: true,
             },
             age: {
                 required: true,
@@ -350,15 +362,11 @@
                 minlength: 10,
                 maxlength: 15
             },
-            aadhar: {
+            aadhar_number: {
                 required: true,
-                digits: true,
-                minlength: 12,
-                maxlength: 12
             },
-            pan: {
-                required: false,
-                maxlength: 10
+            pan_number: {
+                required: true,
             },
             quotation_: {
                 required: true,
@@ -368,9 +376,16 @@
             }
         },
         messages: {
-            customer_name: {
-                required: "Name is required",
+            first_name: {
+                required: "First Name is required",
                 maxlength: "Name cannot be more than 50 characters",
+            },
+            last_name: {
+                required: "Last Name is required",
+                maxlength: "Name cannot be more than 50 characters",
+            },
+            email: {
+                required: "Email is required",
             },
             age: {
                 required: "Age is required",
@@ -394,6 +409,12 @@
                 digits: "Please enter a valid mobile number",
                 minlength: "Mobile number must be at least 10 digits long",
                 maxlength: "Mobile number must be at most 15 digits long"
+            },
+            aadhar_number: {
+                required: "Aadhar Number is required",
+            },
+            pan_number: {
+                required: "Pan Number is required",
             },
             quotation_: {
                 required: "Quotation selection is required",

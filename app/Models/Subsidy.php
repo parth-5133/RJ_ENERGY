@@ -13,6 +13,7 @@ class Subsidy extends Model
 
     protected $fillable = [
         'customer_id',
+        'token_id',
         'subsidy_amount',
         'subsidy_status',
         'created_at',
