@@ -60,33 +60,6 @@ class EmployeeController extends Controller
 
         $users = $usersQuery->orderByDesc('id')->get();
 
-        $usersData = DB::table('employee_jobs')
-            ->leftJoin('departments', 'employee_jobs.department', '=', 'departments.id')
-            ->leftJoin('employee_types', 'employee_jobs.employee_type', '=', 'employee_types.id')
-            ->leftJoin('employee_statuses', 'employee_jobs.employee_status', '=', 'employee_statuses.id')
-
-            ->select(
-                'employee_jobs.user_id',
-                DB::raw("DATE_FORMAT(employee_jobs.date_of_joining, '%d/%m/%Y') as date_of_joining"),
-                'departments.name as department_name',
-                'employee_types.name as employee_type_name',
-                'employee_statuses.name as employee_status_name'
-            )
-            ->whereNull('employee_jobs.deleted_at')
-            ->get()
-            ->keyBy('user_id');
-
-        $users = $users->map(function ($user) use ($usersData) {
-            $jobData = $usersData->get($user->id);
-
-            $user->date_of_joining = $jobData->date_of_joining ?? null;
-            $user->department_name = $jobData->department_name ?? null;
-            $user->employee_type_name = $jobData->employee_type_name ?? null;
-            $user->employee_status_name = $jobData->employee_status_name ?? null;
-
-            return $user;
-        });
-
         return ApiResponse::success($users, ResMessages::RETRIEVED_SUCCESS);
     }
     public function store(StoreUpdateUserRequest $request)

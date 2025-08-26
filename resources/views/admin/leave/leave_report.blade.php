@@ -25,22 +25,6 @@
                         <i class="mdi mdi-replay me-1"></i> Reset
                     </a>
                 </div>
-                <div class="col-md-6 col-12 d-flex align-items-center flex-nowrap justify-content-center justify-content-sm-end">
-                    <a href="javascript:void(0)"
-                        class="btn btn-sm btn-danger waves-effect waves-light mb-3 me-2 mb-xxl-0 mb-sm-0 rounded d-flex flex-wrap" id="btnPdf">
-                        <i class="mdi mdi-file-pdf-box me-1"></i> Export PDF
-                    </a>
-
-                    <a href="javascript:void(0)"
-                        class="btn btn-sm btn-info waves-effect waves-light mb-3 me-2 mb-xxl-0 mb-sm-0 rounded d-flex flex-wrap" id="btnCsv">
-                        <i class="mdi mdi-file-delimited-outline me-1"></i> Export CSV
-                    </a>
-
-                    <a href="javascript:void(0)"
-                        class="btn btn-sm btn-success waves-effect waves-light mb-3 mb-xxl-0 mb-sm-0 rounded d-flex flex-wrap" id="btnExcel">
-                        <i class="mdi mdi-file-excel-box me-1"></i> Export Excel
-                    </a>
-                </div>
             </div>
             <div class="card-datatable text-nowrap">
                 <table id="grid" class="table table-bordered">
@@ -52,10 +36,6 @@
                             <th>Employee Name</th>
                             <th>Remaining Leaves</th>
                             <th>Total Leaves</th>
-                            @if ($permissions['canDelete'] || $permissions['canEdit'])
-                                <th>Modified By</th>
-                                <th>Modified Date</th>
-                            @endif
                         </tr>
                     </thead>
                 </table>
@@ -65,17 +45,6 @@
     <script type="text/javascript">
         const currentDate = new Date();
         const currentYear = currentDate.getFullYear();
-
-        $('#btnExcel').click(function() {
-            $('#grid').DataTable().button('.buttons-excel').trigger();
-        });
-        $('#btnCsv').click(function() {
-            $('#grid').DataTable().button('.buttons-csv').trigger();
-        });
-        $('#btnPdf').click(function() {
-            $('#grid').DataTable().button('.buttons-pdf').trigger();
-        });
-
 
         $(document).ready(function() {
 
@@ -97,32 +66,6 @@
 
         function initializeDataTable() {
             $("#grid").DataTable({
-                buttons: [{
-                        extend: 'excelHtml5',
-                        title: 'Leave Report',
-                        className: 'buttons-excel d-none',
-                        exportOptions: {
-                            columns: [1, 2, 3]
-                        }
-                    },
-                    {
-                        extend: 'csvHtml5',
-                        title: 'Leave Report',
-                        className: 'buttons-csv d-none',
-                        exportOptions: {
-                            columns: [1, 2, 3]
-                        }
-                    },
-                    {
-                        extend: 'pdfHtml5',
-                        title: 'Leave Report',
-                        className: 'buttons-pdf d-none',
-                        exportOptions: {
-                            columns: [1, 2, 3]
-                        }
-                    }
-                ],
-
                 responsive: true,
                 autoWidth: false,
                 serverSide: false,
@@ -173,11 +116,7 @@
                             data: "remaining_leave_balance",
                         }, {
                             data: "total_days",
-                        }, {
-                            data: "updated_name",
-                        }, {
-                            data: "updated_at_formatted",
-                        }
+                        },
                     @else
                         {
                             data: "employee_name",

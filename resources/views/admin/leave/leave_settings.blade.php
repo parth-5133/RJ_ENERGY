@@ -26,10 +26,6 @@
                             <th>Carry Forward Max Balance</th>
                             <th>Expiry Date</th>
                             <th>Is CurrentYear</th>
-                            @if ($permissions['canDelete'] || $permissions['canEdit'])
-                                <th>Modified By</th>
-                                <th>Modified Date</th>
-                            @endif
                         </tr>
                     </thead>
                 </table>
@@ -124,10 +120,6 @@
                                     `<span class="badge rounded bg-label-success">Yes</span>` :
                                     `<span class="badge rounded bg-label-danger">No</span>`;
                             }
-                        }, {
-                            data: "updated_name",
-                        }, {
-                            data: "updated_at_formatted",
                         }
                     @else
                         {

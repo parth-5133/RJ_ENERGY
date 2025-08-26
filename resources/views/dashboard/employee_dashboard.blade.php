@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('content')
-    {{-- <div class="container-fluid flex-grow-1 container-p-y">
+    <div class="container-fluid flex-grow-1 container-p-y">
         <div class="row gy-5 gx-5">
             <div class="col-12 col-md-12 col-lg-6 col-xxl-4">
                 <div class="card">
@@ -257,7 +257,7 @@
 
             <div class="col-12 col-md-12 col-lg-12 col-xxl-12">
                 <div class="row gy-5 gx-5">
-                    <div class="col-12 col-md-12 col-lg-6 col-xxl-5">
+                    {{-- <div class="col-12 col-md-12 col-lg-6 col-xxl-5">
                         <div class="card overflow-hidden mb-0">
                             <div class="card-header d-flex align-items-center justify-content-between">
                                 <h5 class="card-title mb-0">Working hours</h5>
@@ -273,7 +273,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="col-12 col-md-12 col-lg-6 col-xxl-4">
                         <div class="card mb-0">
@@ -295,14 +295,11 @@
                                 <a href="{{ Route('Leave') }}" class="btn btn-sm border-primary bg-label-primary">
                                     Apply Leave <i class="mdi mdi-arrow-right"></i>
                                 </a>
-                                <a href="{{ Route('policy') }}" class="btn btn-sm border-primary bg-label-primary">
-                                    Leave Policy <i class="mdi mdi-arrow-right"></i>
-                                </a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-12 col-md-12 col-lg-6 col-xxl-3">
+                    {{-- <div class="col-12 col-md-12 col-lg-6 col-xxl-3">
                         <div class="card mb-0 overflow-hidden h-100 text-center">
                             <div class="card-header d-flex align-items-center justify-content-between">
                                 <h5 class="card-title m-0 me-2">Employees</h5>
@@ -342,7 +339,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -930,5 +927,5 @@
                 }
             });
         }
-    </script> --}}
+    </script>
 @endsection

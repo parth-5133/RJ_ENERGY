@@ -48,8 +48,6 @@
                             <th>Note</th>
                             <th>Status</th>
                             <th>Comment</th>
-                            <th>Modified By</th>
-                            <th>Modified Date</th>
                         </tr>
                     </thead>
                 </table>
@@ -179,12 +177,6 @@
                     },
                     {
                         data: "comment",
-                    },
-                    {
-                        data: "updated_name",
-                    },
-                    {
-                        data: "updated_at_formatted",
                     }
                 ]
             });

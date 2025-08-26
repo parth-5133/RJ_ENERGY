@@ -18,11 +18,9 @@ use App\Http\Controllers\Web\EmployeeController;
 use App\Http\Controllers\Web\AllowanceListController;
 use App\Http\Controllers\Web\DeductionController;
 use App\Http\Controllers\Web\EmployeeSalaryController;
-use App\Http\Controllers\Web\PolicyController;
 use App\Http\Controllers\Web\AppSettingsController;
 use App\Http\Controllers\Web\ClientController;
 use App\Http\Controllers\Web\LayoutController;
-use App\Http\Controllers\Web\EmployeeResignationController;
 use App\Http\Controllers\Web\ConsumerApplicationController;
 use App\Http\Controllers\Web\ChannelPartnersController;
 use App\Http\Controllers\Web\ManageBankController;
@@ -118,15 +116,6 @@ Route::middleware(['CheckAuth'])->group(function () {
     // Employee Salary
     Route::get('/employee-salary', [EmployeeSalaryController::class, 'index'])->name('employee-salary');
     Route::get('/employee-salary/create', [EmployeeSalaryController::class, 'create'])->name('employee-salary.create');
-
-    // Employee Resignation
-    Route::get('/resignation', [EmployeeResignationController::class, 'resignation'])->name('resignation');
-    Route::get('/resignation/create', [EmployeeResignationController::class, 'createResignation'])->name('resignation.create');
-
-    // Privacy Policy
-    Route::get('/policy', [PolicyController::class, 'index'])->name('policy');
-    Route::get('/policy/create', [PolicyController::class, 'create'])->name('policy.create');
-    Route::get('/policy/view', [PolicyController::class, 'view'])->name('policy.view');
 
     // App Settings
     Route::get('/email-settings', [AppSettingsController::class, 'index'])->name('email-settings');

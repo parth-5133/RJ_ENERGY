@@ -20,8 +20,6 @@
                         <tr>
                             <th>Action</th>
                             <th>Allowance</th>
-                            <th>Modified By</th>
-                            <th>Modified Date</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -92,12 +90,6 @@
                             }
                             return data;
                         }
-                    },
-                    {
-                        data: "updated_name",
-                    },
-                    {
-                        data: "updated_at_formatted",
                     },
                     {
                         data: "is_active",

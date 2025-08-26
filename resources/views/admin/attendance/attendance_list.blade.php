@@ -71,11 +71,6 @@
                     class="btn btn-sm btn-primary waves-effect waves-light mb-3 me-2 mb-xxl-0 mb-sm-0" id="reset">
                     <i class="mdi mdi-replay me-1"></i> Reset
                 </a>
-
-                <a href="javascript:void(0)"
-                    class="btn btn-sm btn-success waves-effect waves-light mb-3 me-2 mb-xxl-0 mb-sm-0" id="exportExcel">
-                    <i class="mdi mdi-file-excel me-1"></i> Export Excel
-                </a>
             </div>
             <div class="table-responsive text-nowrap">
                 <table class="table table-bordered attendance-table">

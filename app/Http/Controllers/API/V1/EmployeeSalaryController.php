@@ -33,7 +33,7 @@ class EmployeeSalaryController extends Controller
         $cookieData = json_decode(request()->cookie('user_data'), true);
         $role_code = $cookieData['role_code'] ?? null;
 
-        if ($role_code == $this->AdminRoleCode || $role_code == $this->superAdminRoleCode) {
+        if ($role_code == $this->AdminRoleCode || $role_code == $this->clientRoleCode) {
 
             $employeeSalaries = DB::table('employee_salaries')
                 ->leftJoin('users as updater', 'employee_salaries.updated_by', '=', 'updater.id')
@@ -47,7 +47,7 @@ class EmployeeSalaryController extends Controller
                     'employee_salaries.*',
                     DB::raw("CONCAT(updater.first_name, ' ', updater.last_name) as updated_name"),
                     DB::raw("CONCAT(employee.first_name, ' ', employee.last_name) as employee_name"),
-                    'sequence.employee_id',
+                    'employee.employee_id',
                     'departments.name as department_name',
                     DB::raw("CASE employee_salaries.salary_month
                     WHEN '01' THEN 'January'
@@ -82,7 +82,7 @@ class EmployeeSalaryController extends Controller
                     'employee_salaries.*',
                     DB::raw("CONCAT(updater.first_name, ' ', updater.last_name) as updated_name"),
                     DB::raw("CONCAT(employee.first_name, ' ', employee.last_name) as employee_name"),
-                    'sequence.employee_id',
+                    'employee.employee_id',
                     'departments.name as department_name',
                     DB::raw("CASE employee_salaries.salary_month
                     WHEN '01' THEN 'January'

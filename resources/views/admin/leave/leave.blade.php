@@ -61,8 +61,6 @@
                             <th>Number of days</th>
                             <th>Reason</th>
                             <th>Status</th>
-                            <th>Modified By</th>
-                            <th>Modified Date</th>
                         </tr>
                     </thead>
                 </table>
@@ -203,12 +201,6 @@
                                 return `<span class="badge rounded bg-label-success">${data}</span>`;
                             }
                         }
-                    },
-                    {
-                        data: "updated_name",
-                    },
-                    {
-                        data: "updated_at_formatted",
                     }
                 ]
             });

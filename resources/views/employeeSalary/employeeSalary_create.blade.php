@@ -2,18 +2,7 @@
     enctype="multipart/form-data">
     <input type="hidden" id="EMployeeRoleId" value="{{ $EMployeeRoleId ?? '' }}">
     <input type="hidden" id="isCopy" value="{{ $isCopy ?? '' }}">
-    <div class="row gy-4">
-        <!-- Department -->
-        <div class="col-md-4">
-            <div class="form-floating form-floating-outline mb-4">
-                <select class="form-select" id="department" name="department">
-                    <option value="">-- Select --</option>
-                </select>
-                <label for="department">Department <span style="color:red">*</span></label>
-                <span class="text-danger" id="department-error"></span>
-            </div>
-        </div>
-
+    <div class="row">
         <!-- Month Selection -->
         <div class="col-md-4">
             <div class="form-floating form-floating-outline mb-4">
@@ -47,9 +36,7 @@
                 <span class="text-danger" id="salary_year-error"></span>
             </div>
         </div>
-    </div>
 
-    <div class="row gy-4">
         <!-- Employee -->
         <div class="col-md-4">
             <div class="form-floating form-floating-outline mb-4">
@@ -68,9 +55,7 @@
                 <span class="text-danger" id="basic_salary-error"></span>
             </div>
         </div>
-    </div>
 
-    <div class="row gy-4">
         <!-- Allowances Section -->
         <div class="col-md-12 d-flex justify-content-between align-items-center">
             <div class="card border rounded p-1" style="background-color: #f9f9f9;">
@@ -158,7 +143,6 @@
     $(document).ready(function() {
 
         loadEmployeeDropdown('employee', '{{ config('apiConstants.USER_API_URLS.USER') }}', false, true);
-        renderDepartmentDropdown();
 
         // Populate year dropdown with current year and previous years
         populateYearDropdown('salary_year', -5, 1);
@@ -172,60 +156,6 @@
         $("#basic_salary, .allowance-input, .deduction-input").on("input", calculateTotalSalary);
     });
 
-    function renderDepartmentDropdown() {
-
-        let url =
-            `{{ config('apiConstants.PROFILE_URLS.PROFILE') }}?id={{ request()->get('id') }}&Params='Job'`;
-        fnCallAjaxHttpGetEvent(url, null, true, true, function(
-            response) {
-
-            if (response.status === 200 && response.data) {
-
-                const data = response.data.employeeDepartment;
-
-                // Set Department
-                data.forEach(function(department) {
-                    $('#department').append(
-                        `<option value="${department.id}">${department.name}</option>`
-                    );
-                });
-
-                if (EMployeeRoleId > 0) {
-                    let url = `{{ config('apiConstants.EMPLOYEE_SALARY_URLS.EMPLOYEE_SALARY_VIEW') }}`;
-                    fnCallAjaxHttpGetEvent(url, {
-                        id: EMployeeRoleId
-                    }, true, true, function(
-                        response) {
-                        if (response.status === 200 && response.data) {
-                            var data = response.data;
-
-                            $("#department").val(data.department_id);
-                            $("#employee").val(data.employee_id);
-                            $("#basic_salary").val(data.basic_salary);
-                            $("#total_allowances").val(data.total_allowances);
-                            $("#total_deductions").val(data.total_deductions);
-                            $("#total_salary").val(data.total_salary);
-                            $("#salary_month").val(data.salary_month);
-                            $("#salary_year").val(data.salary_year);
-
-                            // Set allowances and deductions
-                            data.allowances.forEach(function(allowance) {
-                                $(`#${allowance.allowance_id}`).val(allowance.amount);
-                            });
-
-                            data.deductions.forEach(function(deduction) {
-                                $(`#${deduction.deduction_id}`).val(deduction.amount);
-                            });
-                        }
-                    });
-
-                }
-
-            }
-
-        });
-
-    }
 
     function calculateTotalSalary() {
         let basicSalary = parseFloat($("#basic_salary").val()) || 0;
@@ -255,9 +185,6 @@
 
     $("#commonform").validate({
         rules: {
-            department: {
-                required: true,
-            },
             employee: {
                 required: true,
             },
@@ -273,9 +200,6 @@
             },
         },
         messages: {
-            department: {
-                required: "Please select a department.",
-            },
             employee: {
                 required: "Please select an employee.",
             },
@@ -306,7 +230,7 @@
             event.preventDefault();
 
             var postData = {
-                department: $("#department").val(),
+                department: 1,
                 employee: $("#employee").val(),
                 salary_month: $("#salary_month").val(),
                 salary_year: $("#salary_year").val(),

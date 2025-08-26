@@ -22,7 +22,7 @@
     }
 
     .header {
-        background-color: #891ab4;
+        background-color:#29a8df;
         color: white;
         text-align: center;
         font-weight: bold;
@@ -82,17 +82,6 @@
 
 <div class="salary-container">
     <table class="section-table equal-columns border-none">
-        <tr style="text-align: center">
-            <td colspan="4" class="border-none">
-                <img src="{{ $company->logo_url }}" alt="Company Logo"
-                    style="max-width: 100px" />
-            </td>
-        </tr>
-        <tr>
-            <td colspan="4" class="border-none" style="text-align: center">
-                {{ $company->address_line_1 }}
-            </td>
-        </tr>
         <tr class="border-none">
             <td colspan="4" class="header border-none">
                 SALARY SLIP - {{ $employeeSalary->month_name }} - {{ $employeeSalary->salary_year }}
@@ -104,7 +93,7 @@
                 {{ $employee->first_name }} {{ $employee->last_name }}
             </td>
             <td class="bold border-none">Designation</td>
-            <td class="border-none">{{ $employeeSalary->department_name }}</td>
+            <td class="border-none">Employee</td>
         </tr>
         <tr class="border-none">
             <td class="bold border-none">Month</td>

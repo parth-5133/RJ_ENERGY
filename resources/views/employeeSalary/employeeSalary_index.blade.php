@@ -29,8 +29,6 @@
                             <th>Total Salary</th>
                             <th>Salary Month</th>
                             <th>Salary Year</th>
-                            <th>Modified By</th>
-                            <th>Modified Date</th>
                         </tr>
                     </thead>
                 </table>
@@ -68,7 +66,7 @@
                         orderable: false,
                         render: function(data, type, row) {
                             var html = "<ul class='list-inline m-0'>";
-                            @if ($role_code == config('roles.ADMIN') || $role_code == config('roles.SUPERADMIN'))
+                            @if ($role_code == config('roles.ADMIN') || $role_code == config('roles.CLIENT'))
                                 // Copy Button
                                 html += "<li class='list-inline-item'>" +
                                     "<button class='btn btn-sm btn-text-success rounded btn-icon item-edit' " +
@@ -81,7 +79,7 @@
                             @endif
                             @if (
                                 $role_code == config('roles.ADMIN') ||
-                                    $role_code == config('roles.SUPERADMIN') ||
+                                    $role_code == config('roles.CLIENT') ||
                                     $role_code == config('roles.EMPLOYEE'))
                                 // Download Button
                                 html += "<li class='list-inline-item'>" +
@@ -92,7 +90,7 @@
                                     "</li>";
                             @endif
                             // Edit Button
-                            @if ($role_code == config('roles.ADMIN') || $role_code == config('roles.SUPERADMIN'))
+                            @if ($role_code == config('roles.ADMIN') || $role_code == config('roles.CLIENT'))
                                 html += "<li class='list-inline-item'>" +
                                     GetEditDeleteButton({{ $permissions['canEdit'] }},
                                         "{{ url('employee-salary/create') }}", "Edit",
@@ -100,7 +98,7 @@
                                     "</li>";
                             @endif
                             // Delete Button
-                            @if ($role_code == config('roles.ADMIN') || $role_code == config('roles.SUPERADMIN'))
+                            @if ($role_code == config('roles.ADMIN') || $role_code == config('roles.CLIENT'))
                                 html += "<li class='list-inline-item'>" +
                                     GetEditDeleteButton({{ $permissions['canDelete'] }},
                                         "fnShowConfirmDeleteDialog('" + row.employee_name +
@@ -119,7 +117,7 @@
                     },
                     {
                         data: "employee_name",
-                        @if ($role_code == config('roles.ADMIN') || $role_code == config('roles.SUPERADMIN'))
+                        @if ($role_code == config('roles.ADMIN') || $role_code == config('roles.CLIENT'))
                             render: function(data, type, row) {
                                 if ({{ $permissions['canEdit'] }}) {
                                     return `<a href="javascript:void(0);" onclick="fnAddEdit(this,'{{ url('employee-salary/create') }}',${row.id}, 'Edit Employee Salary',true)"
@@ -150,12 +148,6 @@
                     },
                     {
                         data: "salary_year"
-                    },
-                    {
-                        data: "updated_name"
-                    },
-                    {
-                        data: "updated_at_formatted"
                     }
                 ]
             });

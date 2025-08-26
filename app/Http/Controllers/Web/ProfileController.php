@@ -21,7 +21,6 @@ class ProfileController extends Controller
         )
             ->join('roles', 'users.role_id', '=', 'roles.id')
             ->leftJoin('employee_infos', 'users.id', '=', 'employee_infos.user_id')
-            ->leftJoin('employee_jobs', 'users.id', '=', 'employee_jobs.user_id')
             ->where('users.is_active', 1)
             ->where('users.id', $userId)
             ->first();

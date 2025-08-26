@@ -277,15 +277,6 @@ return [
         'EMPLOYEE_SALARY_DOWNLOAD' => env('APP_URL') . env('API_BASE_PATH') . '/employee/salary/download',
     ],
 
-    'POLICY_URLS' => [
-        'POLICY' => env('APP_URL') . env('API_BASE_PATH') . '/policy',
-        'POLICY_STORE' => env('APP_URL') . env('API_BASE_PATH') . '/policy/create',
-        'POLICY_VIEW' => env('APP_URL') . env('API_BASE_PATH') . '/policy/view',
-        'POLICY_UPDATE' => env('APP_URL') . env('API_BASE_PATH') . '/policy/update',
-        'POLICY_DELETE' => env('APP_URL') . env('API_BASE_PATH') . '/policy/delete',
-        'POLICY_DOWNLOAD' => env('APP_URL') . env('API_BASE_PATH') . '/policy/download',
-    ],
-
     'EMAIL_SETTINGS_URLS' => [
         'EMAIL_SETTINGS' => env('APP_URL') . env('API_BASE_PATH') . '/email-settings',
         'EMAIL_SETTINGS_STORE' => env('APP_URL') . env('API_BASE_PATH') . '/email-settings/create',
@@ -319,13 +310,6 @@ return [
         'SHIFT_DELETE' => env('APP_URL') . env('API_BASE_PATH') . '/shift/delete',
     ],
 
-    'EMPLOYEE_RESIGNATION_URLS' => [
-        'EMPLOYEE_RESIGNATION' => env('APP_URL') . env('API_BASE_PATH') . '/employee/resignation',
-        'EMPLOYEE_RESIGNATION_STORE' => env('APP_URL') . env('API_BASE_PATH') . '/employee/resignation/create',
-        'EMPLOYEE_RESIGNATION_VIEW' => env('APP_URL') . env('API_BASE_PATH') . '/employee/resignation/view',
-        'EMPLOYEE_RESIGNATION_UPDATE' => env('APP_URL') . env('API_BASE_PATH') . '/employee/resignation/update',
-        'EMPLOYEE_RESIGNATION_DELETE' => env('APP_URL') . env('API_BASE_PATH') . '/employee/resignation/delete',
-    ],
     'NOTIFICATION_SETTINGS_URLS' => [
         'NOTIFICATION_SETTINGS' => env('APP_URL') . env('API_BASE_PATH') . '/notification-settings',
         'NOTIFICATION_SETTINGS_UPDATE' => env('APP_URL') . env('API_BASE_PATH') . '/notification-settings/update',

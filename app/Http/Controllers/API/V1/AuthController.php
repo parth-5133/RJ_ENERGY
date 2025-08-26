@@ -61,11 +61,6 @@ class AuthController extends Controller
             ->select('profile_image')
             ->first();
 
-        $userData = DB::table('employee_jobs')
-            ->where('user_id', $user->id)
-            ->select('job_title', 'date_of_joining')
-            ->first();
-
         $userData = [
             'name' => $user->first_name . ' ' . $user->last_name,
             'email' => $user->email,
@@ -73,8 +68,6 @@ class AuthController extends Controller
             'role_code' => $role->code ?? null,
             'role_name' => $role->name ?? null,
             'profile_img' => $profile_image->profile_image ?? null,
-            'job_title' => $userData->job_title ?? null,
-            'date_of_joining' => $userData->date_of_joining ?? null,
             'company_name' => $user->company->legal_name ?? null,
             'company_id' => $user->company_id ?? null,
         ];

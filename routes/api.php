@@ -23,12 +23,7 @@ use App\Http\Controllers\API\V1\superAdminDashboardController;
 use App\Http\Controllers\API\V1\AllowanceListController;
 use App\Http\Controllers\API\V1\DeductionController;
 use App\Http\Controllers\API\V1\EmployeeSalaryController;
-use App\Http\Controllers\API\V1\PolicyController;
 use App\Http\Controllers\API\V1\EmailSettingsController;
-use App\Http\Controllers\API\V1\DepartmentController;
-use App\Http\Controllers\API\V1\DesignationController;
-use App\Http\Controllers\API\V1\ShiftController;
-use App\Http\Controllers\API\V1\EmployeeResignationController;
 use App\Http\Controllers\API\V1\NotificationSettingController;
 use App\Http\Controllers\API\V1\ConsumerApplicationController;
 use App\Http\Controllers\API\V1\ChannelPartnersController;
@@ -50,11 +45,8 @@ Route::prefix('V1')->group(function () {
     Route::get('/admin/Attendance/export', [AdminAttendanceController::class, 'exportAttendance']);
 });
 
-
 Route::middleware(['jwt.verify'])->group(function () {
     Route::prefix('V1')->group(function () {
-
-
 
         // Channel Partners
         Route::get('/channel-partners', [ChannelPartnersController::class, 'index']);
@@ -273,14 +265,6 @@ Route::middleware(['jwt.verify'])->group(function () {
         Route::post('/employee/salary/delete/{id}', [EmployeeSalaryController::class, 'salaryDelete']);
         Route::get('/employee/salary/download', [EmployeeSalaryController::class, 'downloadSalarySlip']);
 
-        // Policy
-        Route::get('/policy', [PolicyController::class, 'index']);
-        Route::post('/policy/create', [PolicyController::class, 'store']);
-        Route::get('/policy/view', [PolicyController::class, 'view']);
-        Route::post('/policy/update', [PolicyController::class, 'update']);
-        Route::post('/policy/delete/{id}', [PolicyController::class, 'delete']);
-        Route::get('/policy/download/{id}', [PolicyController::class, 'downloadPolicy']);
-
         // Email Settings API Routes
         Route::get('/email-settings', [EmailSettingsController::class, 'index']);
         Route::post('/email-settings/create', [EmailSettingsController::class, 'store']);
@@ -288,13 +272,6 @@ Route::middleware(['jwt.verify'])->group(function () {
         Route::post('/email-settings/update', [EmailSettingsController::class, 'update']);
         Route::post('/email-settings/delete/{id}', [EmailSettingsController::class, 'delete']);
         Route::post('/email-settings/test-connection', [EmailSettingsController::class, 'testConnection']);
-
-        // Employee Resignation API Routes
-        Route::get('/employee/resignation', [EmployeeResignationController::class, 'index']);
-        Route::post('/employee/resignation/create', [EmployeeResignationController::class, 'store']);
-        Route::get('/employee/resignation/view', [EmployeeResignationController::class, 'view']);
-        Route::post('/employee/resignation/update', [EmployeeResignationController::class, 'update']);
-        Route::post('/employee/resignation/delete/{id}', [EmployeeResignationController::class, 'delete']);
 
         // Notification Settings API Routes
         Route::post('/notification-settings/update', [NotificationSettingController::class, 'update']);

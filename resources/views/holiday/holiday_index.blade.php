@@ -24,10 +24,6 @@
                             <th>Name</th>
                             <th>Date</th>
                             <th>Day</th>
-                            @if ($permissions['canDelete'] || $permissions['canEdit'])
-                                <th>Modified By</th>
-                                <th>Modified Date</th>
-                            @endif
                         </tr>
                     </thead>
                 </table>
@@ -104,11 +100,7 @@
                             }
                         }, {
                             data: "day",
-                        }, {
-                            data: "updated_name",
-                        }, {
-                            data: "updated_at_formatted",
-                        }
+                        },
                     @else
                         {
                             data: "holiday_name",
