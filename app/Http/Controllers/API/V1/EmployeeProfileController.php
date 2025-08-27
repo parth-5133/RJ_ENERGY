@@ -17,7 +17,6 @@ use App\Models\EmployeeVehicle;
 use App\Models\AppDocument;
 use App\Models\EmployeeStatus;
 use App\Models\Department;
-use App\Models\EmployeeType;
 use App\Models\EmployeeJob;
 use App\Models\Designation;
 use App\Helpers\JWTUtils;
@@ -64,17 +63,7 @@ class EmployeeProfileController extends Controller
                 'marital_statuses' => MaritalStatus::select('id', 'name')->get(),
                 'nationalities' => Country::select('id', 'name')->get(),
                 'employeeDepartment' => Department::select('id', 'name')->where('is_active', 1)->get(),
-                'employeeType' => EmployeeType::select('id', 'name')->where('is_active', 1)->get(),
-                'employeeStatus' => EmployeeStatus::select('id', 'name')->where('is_active', 1)->get(),
                 'employeeDesignation' => Designation::select('id', 'name')->where('is_active', 1)->get(),
-                'employeeShift' => EmployeesShift::select(
-                    'id',
-                    'shift_name',
-                    DB::raw("DATE_FORMAT(from_time, '%h:%i %p') as from_time"),
-                    DB::raw("DATE_FORMAT(to_time, '%h:%i %p') as to_time")
-                )
-                    ->where('is_active', 1)
-                    ->get(),
                 'allUser' => User::select('id', 'first_name', 'last_name')
                     ->where('is_active', 1)
                     ->get()
@@ -90,15 +79,6 @@ class EmployeeProfileController extends Controller
         if ($params === 'Personal') {
             $employeeInfo = EmployeeInfo::where('user_id', $userId)->first();
         }
-        if ($params === 'Address') {
-            $employeeAddresses = EmployeeAddress::where('user_id', $userId)->get();
-        }
-        if ($params === 'Financial') {
-            $employeeFinancial = EmployeeFinancial::where('user_id', $userId)->first();
-        }
-        if ($params === 'Education') {
-            $employeeEducation = EmployeeEducation::where('user_id', $userId)->first();
-        }
         if ($params === 'Document') {
             $employeeDocument = AppDocument::where('user_id', $userId)->get();
 
@@ -108,21 +88,10 @@ class EmployeeProfileController extends Controller
                 return $document;
             });
         }
-        if ($params === 'Job') {
-            $employeeJob = EmployeeJob::where('user_id', $userId)->first();
-        }
-
         $data = [
             'user' => $userData,
             'state' => $cachedData['state'],
             'allUser' => $cachedData['allUser'],
-            'employeeType' => $cachedData['employeeType'],
-            'nationalities' => $cachedData['nationalities'],
-            'employeeStatus' => $cachedData['employeeStatus'],
-            'marital_statuses' => $cachedData['marital_statuses'],
-            'employeeDepartment' => $cachedData['employeeDepartment'],
-            'employeeDesignation' => $cachedData['employeeDesignation'],
-            'employeeShift' => $cachedData['employeeShift'],
             'employeeInfo' => $employeeInfo ?? null,
             'employeeAddresses' => $employeeAddresses ?? null,
             'employeeFinancial' => $employeeFinancial ?? null,

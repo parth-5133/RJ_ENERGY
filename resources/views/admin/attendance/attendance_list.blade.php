@@ -35,7 +35,7 @@
                 <div class="form-floating form-floating-outline col-md-3 col-12 me-4 mb-3 mb-xxl-0 mb-sm-0">
                     <select class="form-select" id="employeeId" aria-label="Default select example">
                     </select>
-                    <label for="exampleFormControlSelect1">Employee Name</label>
+                    <label for="exampleFormControlSelect1">Employee</label>
                 </div>
                 <div class="form-floating form-floating-outline col-md-3 col-12 me-4 mb-3 mb-xxl-0 mb-sm-0">
                     <select class="form-select" id="monthSelect" aria-label="Select Month">
@@ -71,9 +71,14 @@
                     class="btn btn-sm btn-primary waves-effect waves-light mb-3 me-2 mb-xxl-0 mb-sm-0" id="reset">
                     <i class="mdi mdi-replay me-1"></i> Reset
                 </a>
+
+                <a href="javascript:void(0)"
+                    class="btn btn-sm btn-success waves-effect waves-light mb-3 me-2 mb-xxl-0 mb-sm-0" id="exportExcel">
+                    <i class="mdi mdi-file-excel me-1"></i> Export Excel
+                </a>
             </div>
             <div class="table-responsive text-nowrap">
-                <table class="table table-bordered attendance-table">
+                <table class="table table-bordered attendance-table mb-1">
                     <thead>
                         <tr class="text-nowrap">
                             <th class="sticky-col">Employee</th>
@@ -95,11 +100,11 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="statusModalLabel">Attendance Info #<span class="text-primary fw-bold"
                             id="Employee_Id"></span> - <span class="text-primary fw-bold" id="Employee_Name"></span></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span class="mdi mdi-window-close"></span></button>
                 </div>
                 <div class="modal-body">
                     <!-- Timesheet Section -->
-                    <div class="row">
+                    <div class="row g-4">
                         <div class="col-12 col-md-6 col-xxl-8">
                             <div class="card punch-status mb-6 h-100">
                                 <div class="card-header d-flex align-items-center justify-content-between">

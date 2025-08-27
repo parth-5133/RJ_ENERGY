@@ -669,11 +669,11 @@ function loadEmployeeDropdown(
             var filteredUsers = response.data.filter(function (data) {
                 if (excludeAdmin) {
                     return (
-                        data.role_code !== "CLIENT" &&
+                        data.role_code !== "ACCOUNTANT" &&
                         data.role_code !== "ADMIN"
                     );
                 }
-                return data.role_code !== "CLIENT";
+                return data.role_code !== "ACCOUNTANT";
             });
 
             // Add options to dropdown

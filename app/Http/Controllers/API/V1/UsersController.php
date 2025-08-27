@@ -45,7 +45,6 @@ class usersController extends Controller
                 DB::raw("CONCAT(updater.first_name, ' ', updater.last_name) as updated_name"),
                 DB::raw("DATE_FORMAT(users.updated_at, '%d/%m/%Y') as updated_at_formatted")
             )
-            ->where('users.id', '!=', $userId)
             ->where('roles.access_level', '<=', $currentAccessLevel->access_level)
             ->whereNull('users.deleted_at');
 
@@ -61,6 +60,7 @@ class usersController extends Controller
 
         return ApiResponse::success($users, ResMessages::RETRIEVED_SUCCESS);
     }
+
     public function store(StoreUpdateUserRequest $request)
     {
         DB::beginTransaction();

@@ -10,9 +10,8 @@
             <div class="col-12 d-flex align-items-center flex-wrap p-4">
                 <div class="form-floating form-floating-outline col-lg-3 col-md-5 col-sm-6 col-12 me-2 mb-3">
                     <select class="form-select" id="employeeId" aria-label="Default select example">
-                        <option value="">Select Employee Name</option>
                     </select>
-                    <label for="exampleFormControlSelect1">Employee Name</label>
+                    <label for="exampleFormControlSelect1">Employee</label>
                 </div>
 
                 <div class="form-floating form-floating-outline col-lg-3 col-md-5 col-sm-6 col-12 me-2 mb-3">
@@ -45,9 +44,10 @@
                             <th>Attendance Status</th>
                             <th>Attendance Date</th>
                             <th>Attendance Time</th>
-                            <th>Note</th>
                             <th>Status</th>
                             <th>Comment</th>
+                            <th>Modified By</th>
+                            <th>Modified Date</th>
                         </tr>
                     </thead>
                 </table>
@@ -158,10 +158,6 @@
                         data: "formatted_attendance_time",
                     },
                     {
-                        data: "note",
-                        className: "text-wrap-custom"
-                    },
-                    {
                         data: "status",
                         render: function(data) {
                             if (data === "Pending") {
@@ -177,6 +173,12 @@
                     },
                     {
                         data: "comment",
+                    },
+                    {
+                        data: "updated_name",
+                    },
+                    {
+                        data: "updated_at_formatted",
                     }
                 ]
             });
