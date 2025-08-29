@@ -28,7 +28,7 @@ class AttendanceController extends Controller
             return response()->view('errors.401',);
         }
 
-        return $role_code === $this->superAdminRoleCode || $role_code === $this->AdminRoleCode ? view('admin.attendance.attendance_request_list', ['permissions' => $permissions, 'menuName' => $menuName]) :  view('employee.attendancrequest_list', ['permissions' => $permissions, 'menuName' => $menuName]);
+        return $role_code === $this->superAdminRoleCode || $role_code === $this->clientRoleCode || $role_code === $this->AdminRoleCode ? view('admin.attendance.attendance_request_list', ['permissions' => $permissions, 'menuName' => $menuName]) :  view('employee.attendancrequest_list', ['permissions' => $permissions, 'menuName' => $menuName]);
     }
 
     public function attendanceReport(Request $request)
@@ -52,7 +52,7 @@ class AttendanceController extends Controller
             return response()->view('errors.401',);
         }
 
-        return $role_code === $this->superAdminRoleCode || $role_code === $this->AdminRoleCode ? view('admin.attendance.attendance_list', ['permissions' => $permissions, 'menuName' => $menuName]) :  view('employee.attendancelist', ['permissions' => $permissions, 'menuName' => $menuName]);
+        return $role_code === $this->superAdminRoleCode || $role_code === $this->clientRoleCode || $role_code === $this->AdminRoleCode ? view('admin.attendance.attendance_list', ['permissions' => $permissions, 'menuName' => $menuName]) :  view('employee.attendancelist', ['permissions' => $permissions, 'menuName' => $menuName]);
     }
 
     public  function adminAttendanceRequest()
@@ -69,6 +69,6 @@ class AttendanceController extends Controller
     public function requestAttendance(Request $request)
     {
         $userId = $request->input('id');
-        return view('employee.attendanceRequest', compact('userId'));
+        return view('employee.attendancerequest', compact('userId'));
     }
 }

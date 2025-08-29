@@ -154,8 +154,38 @@
 
         // Trigger salary recalculation on value change
         $("#basic_salary, .allowance-input, .deduction-input").on("input", calculateTotalSalary);
-    });
 
+
+        if (EMployeeRoleId > 0) {
+            let url = `{{ config('apiConstants.EMPLOYEE_SALARY_URLS.EMPLOYEE_SALARY_VIEW') }}`;
+            fnCallAjaxHttpGetEvent(url, {
+                id: EMployeeRoleId
+            }, true, true, function(
+                response) {
+                if (response.status === 200 && response.data) {
+                    var data = response.data;
+
+                    $("#employee").val(data.employee_id);
+                    $("#basic_salary").val(data.basic_salary);
+                    $("#total_allowances").val(data.total_allowances);
+                    $("#total_deductions").val(data.total_deductions);
+                    $("#total_salary").val(data.total_salary);
+                    $("#salary_month").val(data.salary_month);
+                    $("#salary_year").val(data.salary_year);
+
+                    // Set allowances and deductions
+                    data.allowances.forEach(function(allowance) {
+                        $(`#${allowance.allowance_id}`).val(allowance.amount);
+                    });
+
+                    data.deductions.forEach(function(deduction) {
+                        $(`#${deduction.deduction_id}`).val(deduction.amount);
+                    });
+                }
+            });
+
+        }
+    });
 
     function calculateTotalSalary() {
         let basicSalary = parseFloat($("#basic_salary").val()) || 0;
