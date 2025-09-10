@@ -28,7 +28,7 @@ class LeaveController extends Controller
             return response()->view('errors.401',);
         }
 
-        return $role_code === $this->superAdminRoleCode || $role_code === $this->clientRoleCode || $role_code === $this->AdminRoleCode ? view('admin.leave.leave', ['permissions' => $permissions, 'menuName' => $menuName]) :  view('employee.leaves', ['permissions' => $permissions, 'menuName' => $menuName]);
+        return $role_code === $this->superAdminRoleCode || $role_code === $this->AdminRoleCode ? view('admin.leave.leave', ['permissions' => $permissions, 'menuName' => $menuName]) :  view('employee.leaves', ['permissions' => $permissions, 'menuName' => $menuName]);
     }
 
     public function leaveReportData(Request $request)
@@ -75,7 +75,7 @@ class LeaveController extends Controller
     public function employeeLeavesRequest(Request $request)
     {
         $LeaveId = $request->input('id');
-        return view('employee.leavesrequest', compact('LeaveId'));
+        return view('employee.leavesRequest', compact('LeaveId'));
     }
 
     public function adminLeaveReport(Request $request)

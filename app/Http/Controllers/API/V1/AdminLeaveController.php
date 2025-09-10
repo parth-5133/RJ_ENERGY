@@ -462,11 +462,7 @@ class AdminLeaveController extends Controller
             ->sum('max_days');
 
         $leaveDataQuery = DB::table('leave_balances')
-            ->join('users', function ($join) {
-                $join->on('leave_balances.employee_id', '=', 'users.id')
-                    ->where('users.is_active', '=', 1)
-                    ->where('users.role_id', '=', 3);
-            })
+            ->join('users', 'leave_balances.employee_id', '=', 'users.id')
             ->leftJoin('users as updated_users', 'leave_balances.updated_by', '=', 'updated_users.id')
             ->select(
                 'leave_balances.employee_id',
@@ -496,7 +492,7 @@ class AdminLeaveController extends Controller
                 'employee_name' => $item->employee_name,
                 'remaining_leave_balance' => $item->remaining_leave_balance,
                 'updated_at_formatted' => $item->updated_at_formatted,
-                'updated_name' => $item->updated_name ?? '',
+                'updated_name' => $item->updated_name ?? '', // Fallback to 'N/A' if updated_name is null
                 'total_days' => $total_leaves,
             ];
         });

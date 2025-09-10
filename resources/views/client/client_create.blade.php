@@ -38,7 +38,6 @@
                 <span class="text-danger" id="email-error"></span>
             </div>
         </div>
-        <!-- Customer Age -->
         <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <input type="number" class="form-control" name="age" id="age" placeholder="Age" />
@@ -244,6 +243,15 @@
                 <span class="text-danger" id="roof_area-error"></span>
             </div>
         </div>
+        <!-- Capacity -->
+        <div class="col-md-3 mb-4">
+            <div class="form-floating form-floating-outline">
+                <input type="text" class="form-control" name="solar_capacity" id="solar_capacity"
+                    placeholder="Solar Capacity" />
+                <label for="solar_capacity">Solar Capacity</label>
+                <span class="text-danger" id="solar_capacity-error"></span>
+            </div>
+        </div>
         <!-- Solar Company -->
         <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
@@ -274,7 +282,6 @@
                 <span class="text-danger" id="number_of_panels-error"></span>
             </div>
         </div>
-
         <!-- Panel Voltage -->
         <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
@@ -282,16 +289,6 @@
                     placeholder="Panel Voltage" />
                 <label for="panel_voltage">Panel Voltage <span class="text-danger">*</span></label>
                 <span class="text-danger" id="panel_voltage-error"></span>
-            </div>
-        </div>
-
-        <!-- Capacity -->
-        <div class="col-md-3 mb-4">
-            <div class="form-floating form-floating-outline">
-                <input type="text" class="form-control" name="solar_capacity" id="solar_capacity"
-                    placeholder="Solar Capacity" readonly />
-                <label for="solar_capacity">Solar Capacity (kW)</label>
-                <span class="text-danger" id="solar_capacity-error"></span>
             </div>
         </div>
         <!-- Inverter Company -->
@@ -468,7 +465,6 @@
             </div>
         </div>
     </div>
-
     <!-- Loan Bank Details Section -->
     <div id="loanBankDetailsSection" class="mb-4">
         <h6 class="fw-bold mb-3">🏦 Loan Applicants Bank Details</h6>
@@ -609,58 +605,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Co-Applicant Details (Hidden Initially) -->
-    <div id="coApplicantSection" class="mb-4" style="display: none;">
-        <h6 class="fw-bold mb-3">👥 Co-Applicant Details</h6>
-        <div class="row">
-            <!-- Full Name -->
-            <div class="col-md-3 mb-4">
-                <div class="form-floating form-floating-outline">
-                    <input type="text" class="form-control" name="co_full_name" id="co_full_name"
-                        placeholder="Full Name" />
-                    <label for="co_full_name">Full Name <span class="text-danger">*</span></label>
-                    <span class="text-danger" id="co_full_name-error"></span>
-                </div>
-            </div>
-            <!-- Age -->
-            <div class="col-md-3 mb-4">
-                <div class="form-floating form-floating-outline">
-                    <input type="number" class="form-control" name="co_age" id="co_age" placeholder="Age" />
-                    <label for="co_age">Age <span class="text-danger">*</span></label>
-                    <span class="text-danger" id="co_age-error"></span>
-                </div>
-            </div>
-            <!-- Aadhar -->
-            <div class="col-md-3 mb-4">
-                <div class="form-floating form-floating-outline">
-                    <input type="text" class="form-control" name="co_aadhar" id="co_aadhar"
-                        placeholder="Aadhar Number" />
-                    <label for="co_aadhar">Aadhar Number <span class="text-danger">*</span></label>
-                    <span class="text-danger" id="co_aadhar-error"></span>
-                </div>
-            </div>
-            <!-- PAN -->
-            <div class="col-md-3 mb-4">
-                <div class="form-floating form-floating-outline">
-                    <input type="text" class="form-control" name="co_pan" id="co_pan"
-                        placeholder="PAN Number" />
-                    <label for="co_pan">PAN Number <span class="text-danger">*</span></label>
-                    <span class="text-danger" id="co_pan-error"></span>
-                </div>
-            </div>
-            <!-- Mobile -->
-            <div class="col-md-3 mb-4">
-                <div class="form-floating form-floating-outline">
-                    <input type="text" class="form-control" name="co_mobile" id="co_mobile"
-                        placeholder="Mobile Number" />
-                    <label for="co_mobile">Mobile Number <span class="text-danger">*</span></label>
-                    <span class="text-danger" id="co_mobile-error"></span>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- INSTALLATION Details Section -->
     <h5 class="fw-bold mb-3 mt-4">🔧 Installation Details</h5>
     <div class="row">
@@ -776,51 +720,6 @@
 </form>
 <script type="text/javascript">
     var clientId = $("#clientId").val();
-
-    $(document).ready(function() {
-        function toggleLoanAndCoApplicant() {
-            const paymentMode = $("#payment_mode").val();
-            const age = parseInt($("#age").val()) || 0;
-
-            if (paymentMode === "loan") {
-                $("#loanBankDetailsSection").slideDown();
-
-                if (age > 60) {
-                    $("#coApplicantSection").slideDown();
-                    $("#coApplicantSection input").attr("required", true);
-                } else {
-                    $("#coApplicantSection").slideUp();
-                    $("#coApplicantSection input").removeAttr("required").val("");
-                }
-            } else {
-                $("#loanBankDetailsSection").slideUp();
-                $("#coApplicantSection").slideUp();
-                $("#coApplicantSection input").removeAttr("required").val("");
-            }
-        }
-
-        // Trigger on change of payment_mode and age
-        $("#payment_mode, #age").on("change input", toggleLoanAndCoApplicant);
-    });
-
-    $(document).ready(function() {
-        function updateCapacity() {
-            let panels = parseFloat($("#number_of_panels").val()) || 0;
-            let voltage = parseFloat($("#panel_voltage").val()) || 0;
-
-            let capacity = (panels * voltage) / 1000;
-
-            if (capacity > 0) {
-                $("#solar_capacity").val(capacity.toFixed(3) + " kW");
-            } else {
-                $("#solar_capacity").val("");
-            }
-        }
-
-        // Auto update when user types
-        $("#number_of_panels, #panel_voltage").on("input", updateCapacity);
-    });
-
     $(document).ready(function() {
 
         if (clientId > 0) {
@@ -1096,16 +995,6 @@
                         $("#loan_sanction_date").val(response.data.loan_bank_detail.loan_sanction_date);
                         $("#loan_disbursed_date").val(response.data.loan_bank_detail
                             .loan_disbursed_date);
-                        if (response.data.loan_bank_detail.co_full_name) {
-
-                            $("#coApplicantSection").slideDown();
-
-                            $("#co_full_name").val(response.data.loan_bank_detail.co_full_name);
-                            $("#co_age").val(response.data.loan_bank_detail.co_age);
-                            $("#co_aadhar").val(response.data.loan_bank_detail.co_aadhar);
-                            $("#co_pan").val(response.data.loan_bank_detail.co_pan);
-                            $("#co_mobile").val(response.data.loan_bank_detail.co_mobile);
-                        }
                     }
                 } else {
                     console.log('Failed to retrieve client data.');

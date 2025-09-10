@@ -13,39 +13,27 @@
                     </button>
                 @endif
             </div>
-            <div class="col-12 d-flex align-items-center flex-wrap p-4">
-                <!-- Registrar -->
-                <div class="form-floating form-floating-outline col-md-2 col-12 me-4 mb-3">
-                    <select class="form-select" id="registrarSelect" aria-label="Registrar">
-                        <option value="">Select Registrar</option>
-                    </select>
-                    <label for="registrarSelect">Registrar</label>
-                </div>
-                <!-- Channel Partner -->
-                <div class="form-floating form-floating-outline col-md-2 col-12 me-4 mb-3">
-                    <select class="form-select" id="channelPartnerSelect" aria-label="Channel Partner">
-                        <option value="">Select Channel Partner</option>
-                    </select>
-                    <label for="channelPartnerSelect">Channel Partner</label>
-                </div>
+            <div class="col-12 d-flex justify-content-between align-items-center">
+                {{-- <div
+                    class="col-12 d-flex align-items-center flex-nowrap px-5 py-4 justify-content-center justify-content-sm-end">
+                    <a href="javascript:void(0)"
+                        class="btn btn-sm btn-danger waves-effect waves-light mb-3 me-2 mb-xxl-0 mb-sm-0 rounded d-flex flex-wrap"
+                        id="btnPdf">
+                        <i class="mdi mdi-file-pdf-box me-1"></i> Export PDF
+                    </a>
 
-                <!-- Installer -->
-                <div class="form-floating form-floating-outline col-md-2 col-12 me-4 mb-3">
-                    <select class="form-select" id="installerSelect" aria-label="Installer">
-                        <option value="">Select Installer</option>
-                    </select>
-                    <label for="installerSelect">Installer</label>
-                </div>
+                    <a href="javascript:void(0)"
+                        class="btn btn-sm btn-info waves-effect waves-light mb-3 me-2 mb-xxl-0 mb-sm-0 rounded d-flex flex-wrap"
+                        id="btnCsv">
+                        <i class="mdi mdi-file-delimited-outline me-1"></i> Export CSV
+                    </a>
 
-                <!-- Buttons -->
-                <a href="javascript:void(0)" class="btn btn-sm btn-primary waves-effect waves-light mb-3 me-2"
-                    id="searchButton">
-                    <i class="mdi mdi-magnify"></i>
-                </a>
-                <a href="javascript:void(0)" class="btn btn-sm btn-primary waves-effect waves-light mb-3 me-2"
-                    id="reset">
-                    <i class="mdi mdi-replay me-1"></i> Reset
-                </a>
+                    <a href="javascript:void(0)"
+                        class="btn btn-sm btn-success waves-effect waves-light mb-3 mb-xxl-0 mb-sm-0 rounded d-flex flex-wrap"
+                        id="btnExcel">
+                        <i class="mdi mdi-file-excel-box me-1"></i> Export Excel
+                    </a>
+                </div> --}}
             </div>
             <div class="card-datatable text-nowrap">
                 <table id="grid" class="table table-bordered">
@@ -76,66 +64,45 @@
     <script type="text/javascript">
         $(document).ready(function() {
             initializeDataTable();
-
-            lodeData();
-
-            $("#searchButton").click(function() {
-                filterGrid();
-            });
-            $("#reset").click(function() {
-                lodeData()
-                const table = $('#grid').DataTable();
-                table.ajax.url("{{ config('apiConstants.CLIENT_URLS.CLIENT') }}").load();
-            });
         });
 
-        function lodeData() {
-            fnCallAjaxHttpGetEvent("{{ url('/api/V1/Get-filter') }}", null, true, true, function(response) {
-                if (response.status === 200 && response.data) {
-                    let data = response.data;
-
-                    // Registrar
-                    let $registrar = $("#registrarSelect");
-                    $registrar.empty().append(new Option("Select Registrar", ""));
-                    data.registrar.forEach(function(item) {
-                        $registrar.append(new Option(item.full_name, item.id));
-                    });
-
-                    // Channel Partners
-                    let $channelPartner = $("#channelPartnerSelect");
-                    $channelPartner.empty().append(new Option("Select Channel Partner", ""));
-                    data.channel_partners.forEach(function(item) {
-                        $channelPartner.append(new Option(item.legal_name, item.id));
-                    });
-
-                    // Installers
-                    let $installer = $("#installerSelect");
-                    $installer.empty().append(new Option("Select Installer", ""));
-                    data.installers.forEach(function(item) {
-                        $installer.append(new Option(item.name, item.id));
-                    });
-                } else {
-                    console.error("Failed to retrieve dropdown data.");
-                }
-            });
-        }
-
-        function filterGrid() {
-            const registrarSelect = $("#registrarSelect").val();
-            const channelPartnerSelect = $("#channelPartnerSelect").val();
-            const installerSelect = $("#installerSelect").val();
-
-            if (!registrarSelect && !channelPartnerSelect && !installerSelect) {
-                return;
-            }
-
-            $('#grid').DataTable().ajax.url(
-                `{{ config('apiConstants.CLIENT_URLS.CLIENT') }}?registrar=${registrarSelect}&channel_partner=${channelPartnerSelect}&installer=${installerSelect}`
-            ).load();
-        }
+        // $('#btnExcel').click(function() {
+        //     $('#grid').DataTable().button('.buttons-excel').trigger();
+        // });
+        // $('#btnCsv').click(function() {
+        //     $('#grid').DataTable().button('.buttons-csv').trigger();
+        // });
+        // $('#btnPdf').click(function() {
+        //     $('#grid').DataTable().button('.buttons-pdf').trigger();
+        // });
 
         function initializeDataTable() {
             $("#grid").DataTable({
+                buttons: [{
+                        extend: 'excelHtml5',
+                        title: 'Client Report',
+                        className: 'buttons-excel d-none',
+                        exportOptions: {
+                            columns: [1, 2, 3]
+                        }
+                    },
+                    {
+                        extend: 'csvHtml5',
+                        title: 'Client Report',
+                        className: 'buttons-csv d-none',
+                        exportOptions: {
+                            columns: [1, 2, 3]
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        title: 'Client Report',
+                        className: 'buttons-pdf d-none',
+                        exportOptions: {
+                            columns: [1, 2, 3]
+                        }
+                    }
+                ],
                 responsive: true,
                 autoWidth: false,
                 serverSide: false,

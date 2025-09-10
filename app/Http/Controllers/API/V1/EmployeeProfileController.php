@@ -59,14 +59,6 @@ class EmployeeProfileController extends Controller
             return [
                 'state' => State::select('id', 'name', 'country_id')->get(),
                 'nationalities' => Country::select('id', 'name')->get(),
-<<<<<<< HEAD
-=======
-                'employeeDepartment' => Department::select('id', 'name')->where('is_active', 1)->get(),
-                'employeeDesignation' => Designation::select('id', 'name')->where('is_active', 1)->get(),
-<<<<<<< Updated upstream
-=======
->>>>>>> ae0de8c0b3495c6af2b125eaedc8fc553ae5043e
->>>>>>> Stashed changes
                 'allUser' => User::select('id', 'first_name', 'last_name')
                     ->where('is_active', 1)
                     ->get()
@@ -82,35 +74,11 @@ class EmployeeProfileController extends Controller
         if ($params === 'Personal') {
             $employeeInfo = EmployeeInfo::where('user_id', $userId)->first();
         }
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
-        if ($params === 'Document') {
-            $employeeDocument = AppDocument::where('user_id', $userId)->get();
-
-            $employeeDocument = $employeeDocument->map(function ($document) {
-                $documentType = DocumentType::from($document->document_type);
-                $document->document_type_name = $documentType->name;
-                return $document;
-            });
-        }
-<<<<<<< Updated upstream
-=======
->>>>>>> ae0de8c0b3495c6af2b125eaedc8fc553ae5043e
->>>>>>> Stashed changes
         $data = [
             'user' => $userData,
             'state' => $cachedData['state'],
             'allUser' => $cachedData['allUser'],
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
             'nationalities' => $cachedData['nationalities'],
-=======
->>>>>>> ae0de8c0b3495c6af2b125eaedc8fc553ae5043e
->>>>>>> Stashed changes
             'employeeInfo' => $employeeInfo ?? null,
             'employeeFinancial' => $employeeFinancial ?? null,
             'employeeJob' => $employeeJob ?? null,

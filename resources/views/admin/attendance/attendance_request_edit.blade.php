@@ -25,11 +25,8 @@
                 <td class="px-0 py-2"><span id="attendanceStatusSelect" class="text-primary"></span></td>
             </tr>
             <tr>
-                <td class="fw-bold px-0 py-2 align-top">Note:</td>
-                <td class="px-0 py-2">
-                    <span id="note" class="text-primary"
-                        style="display:block; max-width: 216px; word-wrap: break-word; white-space: pre-wrap;"></span>
-                </td>
+                <td class="fw-bold px-0 py-2">Note:</td>
+                <td class="px-0 py-2"><span id="note" class="text-primary"></span></td>
             </tr>
         </tbody>
     </table>
@@ -66,10 +63,10 @@
     </div>
     <div class="offcanvas-footer justify-content-md-end position-absolute bottom-0 end-0 w-100">
         <button class="btn rounded btn-secondary me-2" type="button" data-bs-dismiss="offcanvas">
-            <span class="mdi mdi-cancel me-1"></span>Cancel
+            <span class="tf-icons mdi mdi-cancel me-1"></span>Cancel
         </button>
         <button type="submit" class="btn rounded btn-primary waves-effect waves-light">
-            <span class="mdi mdi-checkbox-marked-circle-outline">&nbsp;</span>Submit
+            <span class="tf-icons mdi mdi-checkbox-marked-circle-outline">&nbsp;</span>Submit
         </button>
     </div>
 </form>

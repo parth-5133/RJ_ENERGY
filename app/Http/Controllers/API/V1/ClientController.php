@@ -26,13 +26,12 @@ class ClientController extends Controller
 {
     public function index(Request $request)
     {
-        // Get role and user ID from cookie + token
+
         $cookieData = json_decode($request->cookie('user_data'), true);
         $roleCode = $cookieData['role_code'] ?? null;
         $currentUser = JWTUtils::getCurrentUserByUuid();
-        $userId = $currentUser->id ?? null;
+        $userId = $currentUser->id;
 
-        // Base query
         $quotationsQuery = DB::table('customers')
             ->leftJoin('quotations', 'quotations.customer_id', '=', 'customers.id')
             ->leftJoin('subsidies', 'subsidies.customer_id', '=', 'customers.id')
@@ -55,14 +54,14 @@ class ClientController extends Controller
                 'solar_details.capacity',
                 'solar_details.solar_company',
                 'solar_details.channel_partner_id',
-                'solar_details.installers',
                 'channel_partners.legal_name as channel_partner_name',
                 'quotations.amount',
-                'customers.assign_to',
+                'solar_details.is_completed',
             )
             ->where('quotations.status', '=', 'Agreed')
             ->whereNull('quotations.deleted_at');
 
+        // Role-based filter
         if ($roleCode === $this->employeeRoleCode && $userId) {
             $quotationsQuery->where(function ($query) use ($userId) {
                 $query->where('customers.assign_to', $userId)
@@ -73,20 +72,6 @@ class ClientController extends Controller
         $quotations = $quotationsQuery
             ->orderBy('quotations.id', 'desc')
             ->get();
-
-        if (!empty($request->registrar)) {
-            $quotations = $quotations->where('assign_to', $request->registrar);
-        }
-
-        if (!empty($request->channel_partner)) {
-            $quotations = $quotations->where('channel_partner_id', $request->channel_partner);
-        }
-
-        if (!empty($request->installer)) {
-            $quotations = $quotations->where('installers', $request->installer);
-        }
-        
-        $quotations = $quotations->values()->all();
 
         return ApiResponse::success($quotations, ResMessages::RETRIEVED_SUCCESS);
     }
@@ -232,11 +217,6 @@ class ClientController extends Controller
                 'loan_status'             => $request->input('loan_status'),
                 'loan_sanction_date'      => $request->input('loan_sanction_date'),
                 'loan_disbursed_date'     => $request->input('loan_disbursed_date'),
-                'co_full_name'     => $request->input('co_full_name'),
-                'co_age'     => $request->input('co_age'),
-                'co_aadhar'     => $request->input('co_aadhar'),
-                'co_pan'     => $request->input('co_pan'),
-                'co_mobile'     => $request->input('co_mobile'),
                 'managed_by'              => $request->input('managed_by'),
                 'created_at'  => now(),
             ]);
@@ -404,11 +384,6 @@ class ClientController extends Controller
                     'loan_status'            => $request->input('loan_status'),
                     'loan_sanction_date'     => $request->input('loan_sanction_date'),
                     'loan_disbursed_date'    => $request->input('loan_disbursed_date'),
-                    'co_full_name'     => $request->input('co_full_name'),
-                    'co_age'     => $request->input('co_age'),
-                    'co_aadhar'     => $request->input('co_aadhar'),
-                    'co_pan'     => $request->input('co_pan'),
-                    'co_mobile'     => $request->input('co_mobile'),
                     'managed_by'             => $request->input('managed_by'),
                     'updated_at'             => now(),
                 ]
@@ -538,9 +513,6 @@ class ClientController extends Controller
             return ApiResponse::error(null, 'No documents were uploaded.');
         }
     }
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
     public function downloadAnnexure2(Request $request)
     {
         $coustmerData = DB::table('customers')
@@ -571,42 +543,5 @@ class ClientController extends Controller
         $fileUrl = asset("storage/agreements/{$filename}");
 
         return ApiResponse::success($fileUrl, 'Annexure 2 generated successfully');
-=======
->>>>>>> Stashed changes
-    public function filterData(Request $request)
-    {
-        $channelPartners = DB::table('channel_partners')
-            ->select('id', 'legal_name')
-            ->whereNull('deleted_at')
-            ->get();
-
-        $installers = DB::table('installers')
-            ->select('id', 'name')
-            ->whereNull('deleted_at')
-            ->get();
-
-        $users = DB::table('users')
-            ->select('id', DB::raw("CONCAT(first_name, ' ', last_name) as full_name"))
-            ->where('role_id', 3)
-            ->whereNull('deleted_at')
-            ->get();
-
-        $accountant = DB::table('users')
-            ->select('id', DB::raw("CONCAT(first_name, ' ', last_name) as full_name"))
-            ->where('role_id', 4)
-            ->get();
-
-        $data = [
-            'channel_partners' => $channelPartners,
-            'installers'       => $installers,
-            'registrar'            => $users,
-            'accountant'            => $accountant,
-        ];
-
-        return ApiResponse::success($data, ResMessages::RETRIEVED_SUCCESS);
-<<<<<<< Updated upstream
-=======
->>>>>>> ae0de8c0b3495c6af2b125eaedc8fc553ae5043e
->>>>>>> Stashed changes
     }
 }

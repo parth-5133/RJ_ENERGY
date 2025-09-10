@@ -20,7 +20,7 @@ use App\Constants\ResMessages;
 use Illuminate\Http\Request;
 use App\Helpers\FinancialYearService;
 
-class usersController extends Controller
+class UsersController extends Controller
 {
     public function index(Request $request)
     {
@@ -45,6 +45,7 @@ class usersController extends Controller
                 DB::raw("CONCAT(updater.first_name, ' ', updater.last_name) as updated_name"),
                 DB::raw("DATE_FORMAT(users.updated_at, '%d/%m/%Y') as updated_at_formatted")
             )
+            ->where('users.id', '!=', $userId)
             ->where('roles.access_level', '<=', $currentAccessLevel->access_level)
             ->whereNull('users.deleted_at');
 
@@ -60,7 +61,6 @@ class usersController extends Controller
 
         return ApiResponse::success($users, ResMessages::RETRIEVED_SUCCESS);
     }
-
     public function store(StoreUpdateUserRequest $request)
     {
         DB::beginTransaction();
@@ -279,7 +279,10 @@ class usersController extends Controller
         $users = EmployeeInfo::whereMonth('date_of_birth', $today->month)
             ->whereDay('date_of_birth', $today->day)
             ->join('users', 'employee_infos.user_id', '=', 'users.id')
+            ->join('employee_jobs', 'employee_infos.user_id', '=', 'employee_jobs.user_id')
+            ->join('departments', 'employee_jobs.department', '=', 'departments.id')
             ->select(
+                'departments.name as department',
                 DB::raw("CONCAT(users.first_name, ' ', users.last_name) as name"),
                 'employee_infos.profile_image',
                 'employee_infos.date_of_birth'
@@ -296,12 +299,16 @@ class usersController extends Controller
         $query = DB::table('users')
             ->leftJoin('roles', 'users.role_id', '=', 'roles.id')
             ->leftJoin('employee_infos', 'users.id', '=', 'employee_infos.user_id')
+            ->leftJoin('employee_jobs', 'users.id', '=', 'employee_jobs.user_id')
+            ->leftJoin('departments', 'employee_jobs.department', '=', 'departments.id')
             ->whereNull('users.deleted_at')
             ->where('roles.code',  $this->employeeRoleCode)
             ->where('users.company_id', $companiesId)
             ->select(
+                'departments.name as department',
                 DB::raw("CONCAT(users.first_name, ' ', users.last_name) as name"),
-                'employee_infos.profile_image'
+                'employee_infos.profile_image',
+                'employee_jobs.date_of_joining'
             );
 
         if ($isEmployee) {

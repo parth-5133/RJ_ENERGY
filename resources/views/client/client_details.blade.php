@@ -577,39 +577,6 @@
                                     <p class="mb-0 fw-medium">{{ $loan_bank_detail['managed_by_name'] ?? 'N/A' }}</p>
                                 </div>
                             </div>
-                            @if (!empty($loan_bank_detail['co_full_name']))
-                                <h5 class="mb-3">Co-Loan Applicants Details</h5>
-                                <div class="list-group-item">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <span>Full Name</span>
-                                        <p class="mb-0 fw-medium">{{ $loan_bank_detail['co_full_name'] ?? 'N/A' }}</p>
-                                    </div>
-                                </div>
-                                <div class="list-group-item">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <span>Age</span>
-                                        <p class="mb-0 fw-medium">{{ $loan_bank_detail['co_age'] ?? 'N/A' }}</p>
-                                    </div>
-                                </div>
-                                <div class="list-group-item">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <span>Aadhar Number</span>
-                                        <p class="mb-0 fw-medium">{{ $loan_bank_detail['co_aadhar'] ?? 'N/A' }}</p>
-                                    </div>
-                                </div>
-                                <div class="list-group-item">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <span>PAN Number</span>
-                                        <p class="mb-0 fw-medium">{{ $loan_bank_detail['co_pan'] ?? 'N/A' }}</p>
-                                    </div>
-                                </div>
-                                <div class="list-group-item">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <span>Mobile No</span>
-                                        <p class="mb-0 fw-medium">{{ $loan_bank_detail['co_mobile'] ?? 'N/A' }}</p>
-                                    </div>
-                                </div>
-                            @endif
                         </div>
                     </div>
                 </div>
