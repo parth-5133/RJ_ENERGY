@@ -139,15 +139,21 @@
         <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <textarea class="form-control" name="customer_address" id="customer_address" placeholder="Enter Address"
-                    style="height: 10px;"></textarea>
+                    style="height: 50px;"></textarea>
                 <label for="customer_address">Permanent Address <span class="text-danger">*</span></label>
                 <span class="text-danger" id="customer_address-error"></span>
             </div>
         </div>
         <div class="col-md-3 mb-4">
+            <input class="form-check-input" type="checkbox" id="sameAsPermanent">
+            <label class="form-check-label" for="sameAsPermanent">
+                Same as Permanent Address
+            </label>
+        </div>
+        <div class="col-md-3 mb-4">
             <div class="form-floating form-floating-outline">
                 <textarea class="form-control" name="customer_residential_address" id="customer_residential_address"
-                    placeholder="Enter Address" style="height: 10px;"></textarea>
+                    placeholder="Enter Address" style="height: 50px;"></textarea>
                 <label for="customer_residential_address">Residential Address <span
                         class="text-danger">*</span></label>
                 <span class="text-danger" id="customer_residential_address-error"></span>
@@ -466,6 +472,13 @@
     <!-- Loan Bank Details Section -->
     <div id="loanBankDetailsSection" class="mb-4">
         <h6 class="fw-bold mb-3">🏦 Loan Applicants Bank Details</h6>
+        <!-- Copy Checkbox -->
+        <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="sameAsConsumerBank">
+            <label class="form-check-label" for="sameAsConsumerBank">
+                Same as Consumer Bank Details
+            </label>
+        </div>
         <div class="row">
             <div class="col-md-3 mb-4">
                 <div class="form-floating form-floating-outline">
@@ -1409,5 +1422,65 @@
                 }
             });
         }
+    });
+</script>
+<script>
+    document.getElementById("sameAsPermanent").addEventListener("change", function() {
+        let permanent = document.getElementById("customer_address");
+        let residential = document.getElementById("customer_residential_address");
+
+        if (this.checked) {
+            residential.value = permanent.value; // copy
+            residential.setAttribute("readonly", true); // lock field
+        } else {
+            residential.value = ""; // clear
+            residential.removeAttribute("readonly");
+        }
+    });
+
+    // Optional: Auto-update if user changes permanent address while checked
+    document.getElementById("customer_address").addEventListener("input", function() {
+        let checkbox = document.getElementById("sameAsPermanent");
+        let residential = document.getElementById("customer_residential_address");
+        if (checkbox.checked) {
+            residential.value = this.value;
+        }
+    });
+</script>
+<script>
+    document.getElementById("sameAsConsumerBank").addEventListener("change", function() {
+        let bankName = document.getElementById("bank_name");
+        let branch = document.getElementById("bank_branch");
+        let accNo = document.getElementById("account_number");
+        let ifsc = document.getElementById("ifsc_code");
+
+        let loanBankName = document.getElementById("bank_name_loan");
+        let loanBranch = document.getElementById("bank_branch_loan");
+        let loanAccNo = document.getElementById("account_number_loan");
+        let loanIfsc = document.getElementById("ifsc_code_loan");
+
+        if (this.checked) {
+            loanBankName.value = bankName.value;
+            loanBranch.value = branch.value;
+            loanAccNo.value = accNo.value;
+            loanIfsc.value = ifsc.value;
+
+            // Make read-only
+        } else {
+            // Clear values & re-enable
+            loanBankName.value = "";
+            loanBranch.value = "";
+            loanAccNo.value = "";
+            loanIfsc.value = "";
+        }
+    });
+
+    // Auto update loan fields if consumer bank fields change while checked
+    ["bank_name", "bank_branch", "account_number", "ifsc_code"].forEach(id => {
+        document.getElementById(id).addEventListener("input", function() {
+            if (document.getElementById("sameAsConsumerBank").checked) {
+                document.getElementById(id + "_loan").value = this.value;
+            }
+        });
     });
 </script>

@@ -52,6 +52,7 @@
                     <thead>
                         <tr>
                             <th>Action</th>
+                            <th>Form Download</th>
                             <th>System Entry Date</th>
                             <th>Customer Name</th>
                             <th>Consumer No</th>
@@ -189,6 +190,23 @@
                         },
                     },
                     {
+                        data: "id",
+                        orderable: false,
+                        render: function(data, type, row) {
+                            var html = "<ul class='list-inline m-0'>";
+
+                            html += "<li class='list-inline-item'>" +
+                                "<button class='btn btn-sm btn-text-info rounded btn-icon item-edit' " +
+                                "style='background-color: #c7e9ff !important; color:#009dff !important;' title='Download Consumer Agreement' " +
+                                "onClick=\"downloadSalarySlip(" + data + ")\">" +
+                                "<i class='mdi mdi-file-download-outline'></i></button>" +
+                                "</li>";
+
+                            html += "</ul>";
+                            return html;
+                        },
+                    },
+                    {
                         data: "created_at",
                     },
                     {
@@ -256,6 +274,18 @@
                     ShowMsg("bg-success", response.message);
                 } else {
                     ShowMsg("bg-warning", 'The record could not be processed.');
+                }
+            });
+        }
+
+        function downloadSalarySlip(id) {
+            let baseUrl = window.location.origin;
+            let url = `${baseUrl}/api/V1/download-annexure2`;
+            fnCallAjaxHttpGetEvent(url, {
+                id: id
+            }, true, true, function(response) {
+                if (response.status === 200 && response.data) {
+                    window.open(response.data, '_blank');
                 }
             });
         }

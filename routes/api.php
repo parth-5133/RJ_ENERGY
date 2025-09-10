@@ -89,6 +89,11 @@ Route::middleware(['jwt.verify'])->group(function () {
         Route::post('/client-application/delete/{id}', [ClientController::class, 'delete']);
         Route::post('/client-application/documents/upload', [ClientController::class, 'uploadDocuments']);
         Route::get('/Get-filter', [ClientController::class, 'filterData']);
+<<<<<<< Updated upstream
+=======
+
+        Route::get('/download-annexure2', [ClientController::class, 'downloadAnnexure2']);
+>>>>>>> Stashed changes
 
         Route::get('/client/details', [ClientController::class, 'showDetails']);
 

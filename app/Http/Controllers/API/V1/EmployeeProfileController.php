@@ -15,7 +15,6 @@ use App\Models\EmployeeEducation;
 use App\Models\EmployeeExperience;
 use App\Models\EmployeeVehicle;
 use App\Models\AppDocument;
-use App\Models\EmployeeStatus;
 use App\Models\Department;
 use App\Models\EmployeeJob;
 use App\Models\Designation;
@@ -23,7 +22,6 @@ use App\Helpers\JWTUtils;
 use App\Helpers\ApiResponse;
 use App\Helpers\UserHelper;
 use App\Constants\ResMessages;
-use App\Models\EmployeesShift;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePersonalInfoRequest;
 use App\Http\Requests\StoreAddressRequest;
@@ -60,10 +58,15 @@ class EmployeeProfileController extends Controller
         $cachedData = Cache::remember('employee_related_data', 60, function () {
             return [
                 'state' => State::select('id', 'name', 'country_id')->get(),
-                'marital_statuses' => MaritalStatus::select('id', 'name')->get(),
                 'nationalities' => Country::select('id', 'name')->get(),
+<<<<<<< HEAD
+=======
                 'employeeDepartment' => Department::select('id', 'name')->where('is_active', 1)->get(),
                 'employeeDesignation' => Designation::select('id', 'name')->where('is_active', 1)->get(),
+<<<<<<< Updated upstream
+=======
+>>>>>>> ae0de8c0b3495c6af2b125eaedc8fc553ae5043e
+>>>>>>> Stashed changes
                 'allUser' => User::select('id', 'first_name', 'last_name')
                     ->where('is_active', 1)
                     ->get()
@@ -79,6 +82,11 @@ class EmployeeProfileController extends Controller
         if ($params === 'Personal') {
             $employeeInfo = EmployeeInfo::where('user_id', $userId)->first();
         }
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
         if ($params === 'Document') {
             $employeeDocument = AppDocument::where('user_id', $userId)->get();
 
@@ -88,15 +96,23 @@ class EmployeeProfileController extends Controller
                 return $document;
             });
         }
+<<<<<<< Updated upstream
+=======
+>>>>>>> ae0de8c0b3495c6af2b125eaedc8fc553ae5043e
+>>>>>>> Stashed changes
         $data = [
             'user' => $userData,
             'state' => $cachedData['state'],
             'allUser' => $cachedData['allUser'],
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+            'nationalities' => $cachedData['nationalities'],
+=======
+>>>>>>> ae0de8c0b3495c6af2b125eaedc8fc553ae5043e
+>>>>>>> Stashed changes
             'employeeInfo' => $employeeInfo ?? null,
-            'employeeAddresses' => $employeeAddresses ?? null,
             'employeeFinancial' => $employeeFinancial ?? null,
-            'employeeEducation' => $employeeEducation ?? null,
-            'employeeDocument' => $employeeDocument ?? null,
             'employeeJob' => $employeeJob ?? null,
         ];
 

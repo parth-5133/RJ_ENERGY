@@ -19,6 +19,8 @@ use App\Helpers\JWTUtils;
 use App\Helpers\GetCompanyId;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\File;
 
 class ClientController extends Controller
 {
@@ -536,6 +538,41 @@ class ClientController extends Controller
             return ApiResponse::error(null, 'No documents were uploaded.');
         }
     }
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+    public function downloadAnnexure2(Request $request)
+    {
+        $coustmerData = DB::table('customers')
+            ->where('id', $request->id)
+            ->select(
+                'customers.*',
+                DB::raw("CONCAT(customers.first_name, ' ', customers.last_name) as full_name")
+            )
+            ->first(); // use first() instead of get()
+
+        if (!$coustmerData) {
+            return ApiResponse::error('Customer not found');
+        }
+
+        $pdf = Pdf::loadView('client.annexure2', compact('coustmerData'));
+
+        $directoryPath = storage_path('app/public/agreements');
+        if (!File::exists($directoryPath)) {
+            File::makeDirectory($directoryPath, 0755, true);
+        }
+
+        $date = now()->format('Y-m-d');
+        $filename = "Annexure-2-Agreement-{$date}.pdf";
+
+        $filePath = $directoryPath . "/{$filename}";
+        $pdf->save($filePath);
+
+        $fileUrl = asset("storage/agreements/{$filename}");
+
+        return ApiResponse::success($fileUrl, 'Annexure 2 generated successfully');
+=======
+>>>>>>> Stashed changes
     public function filterData(Request $request)
     {
         $channelPartners = DB::table('channel_partners')
@@ -567,5 +604,9 @@ class ClientController extends Controller
         ];
 
         return ApiResponse::success($data, ResMessages::RETRIEVED_SUCCESS);
+<<<<<<< Updated upstream
+=======
+>>>>>>> ae0de8c0b3495c6af2b125eaedc8fc553ae5043e
+>>>>>>> Stashed changes
     }
 }
